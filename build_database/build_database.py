@@ -61,8 +61,6 @@ def build_database(table,seq,output):
         target_sequence = query_sequence[query_start - 1:query_end]
         print('Target Seuqunce: %s\n' % target_sequence)
 
-        # Target_sequences.append(target_sequence)
-
         name_pattern = re.compile(r'(GH|GT|CBM|PL|AA|CE)(\d+)(_\d+)?')
         try:
             cazy_cat = re.search(name_pattern, family).group(1)
@@ -84,16 +82,16 @@ def build_database(table,seq,output):
                     cazy_sub_num = ''
                 level_5 = '%s%s%s' % (cazy_cat, cazy_num, cazy_sub_num)
                 with open(output_txt, 'a') as f:
-                    f.write('cazy_%04d_example\t%s;%s;%s;%s;%s\n' % (i, level_1, level_2, level_3, level_4, level_5))
+                    f.write('cazy_%04d_%s\t%s;%s;%s;%s;%s\n' % (i, query_id,level_1, level_2, level_3, level_4, level_5))
             else:
                 with open(output_txt, 'a') as f:
-                    f.write('cazy_%04d_example\t%s;%s;%s;%s\n' % (i, level_1, level_2, level_3, level_4))
+                    f.write('cazy_%04d_%s\t%s;%s;%s;%s\n' % (i, query_id,level_1, level_2, level_3, level_4))
         elif cazy_cat == 'CBM':
             level_2 = 'Associated_Modules'
             level_3 = CAZYme_family[cazy_cat]
             level_4 = '%s%s' % (cazy_cat, cazy_num)
             with open(output_txt, 'a') as f:
-                f.write('cazy_%04d_example\t%s;%s;%s;%s\n' % (i, level_1, level_2, level_3, level_4))
+                f.write('cazy_%04d_%s\t%s;%s;%s;%s\n' % (i, query_id, level_1, level_2, level_3, level_4))
 
 
 def main():
