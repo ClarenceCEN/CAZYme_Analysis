@@ -71,22 +71,24 @@ def build_database(table,seq,output):
         query_end = tab_file.loc[i, 'Query_end']
         query_length = tab_file.loc[i, 'Query_length']
         print('%d: %s' % (i + 1, family))
-        seq_pattern = re.compile(r'>' + query_id + '.*?\n(.*?)(>|\n$)', re.S)
+        seq_pattern = re.compile(r'^>' + query_id + '.*?\n(.*?)(>|\n$)', re.S)
         try:
-            query_sequence = re.search(seq_pattern, seq_file).group(1).replace('\n', '')  # does |n count as char?
+            query_sequence = re.search(seq_pattern, seq_file).group(1).replace('\n', '')  # does \n count as char?
         except:
             print('Did not find %s in sequence!' % family)
             continue
+
         if (len(query_sequence) != query_length):
             print("The length of %s did not match! Please check the input seqs!" % family)
             continue
         print('Query Sequence: %s' % query_sequence)
-
-        with open(output_fasta, 'a') as f:
-            f.write('>cazy_%04d_%s\n%s\n' % (i, query_id, query_sequence))
-
         target_sequence = query_sequence[query_start - 1:query_end]
         print('Target Seuqunce: %s\n' % target_sequence)
+
+        with open(output_fasta, 'a') as f:
+            f.write('>cazy_%04d_%s\n%s\n' % (i, query_id, target_sequence))
+
+
 
         name_pattern = re.compile(r'(GH|GT|CBM|PL|AA|CE)(\d+)(_\d+)?')
         try:
