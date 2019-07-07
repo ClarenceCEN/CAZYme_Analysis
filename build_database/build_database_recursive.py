@@ -71,7 +71,7 @@ def build_database(table,seq,output):
         query_end = tab_file.loc[i, 'Query_end']
         query_length = tab_file.loc[i, 'Query_length']
         print('%d: %s' % (i + 1, family))
-        seq_pattern = re.compile(r'^>' + query_id + '.*?\n(.*?)(>|\n$)', re.S)
+        seq_pattern = re.compile(r'>' + query_id + '.*?\n(.*?)(>|\n$)', re.S)
         try:
             query_sequence = re.search(seq_pattern, seq_file).group(1).replace('\n', '')  # does \n count as char?
         except:
