@@ -1,0 +1,7 @@
+L1	L2	L3	L4
+CAZyme	Enzyme_Classes	GlycosylTransferases	GT
+CAZyme	Enzyme_Classes	GlycosideHydrolases	GH
+CAZyme	Enzyme_Classes	CarbohydrateEsterases	CE
+CAZyme	Enzyme_Classes	PolysaccharideLyases	PL
+CAZyme	Enzyme_Classes	AuxiliaryActivities	AA
+CAZyme	Associated_Modules	Carbohydrate-BindingModules	CBM

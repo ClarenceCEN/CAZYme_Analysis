@@ -2,7 +2,6 @@ import re
 
 def find_value_recursive(cazy_dict,cazyme):
 
-
     global flag
     global levels
 

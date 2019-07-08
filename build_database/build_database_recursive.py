@@ -99,16 +99,30 @@ def build_database(table,seq,output):
             print("Interesting family! What is that?")
             continue
 
-        cazy_prefix = find_value_recursive(CAZYme_family, cazy_cat)
-        cazy_tax = cazy_prefix + cazy_num
-        print(n_level)
-
+        '''
+        # method 1    
+        cazy_prefix = find_value_recursive(CAZYme_family,cazy_cat)
+        cazy_tax = cazy_prefix+cazy_num
+        if cazy_cat == 'GH' and int(cazy_num) in [5,13,30,43]:
+            try:
+                cazy_sub_num = re.search(name_pattern,family).group(3)
+            except:
+                print('%s%s had no sub family.'%(cazy_cat,cazy_num))
+            cazy_tax = cazy_tax+';L'+str(n_level+1)+'_'+family
+        '''
+        
+        # method 2
+        temp = cazy_tab.loc[cazy_tab.loc[:, 'L4'] == cazy_cat, :]
+        cazy_tax = ''
+        for i in range(0, cazy_tab.shape[1]):
+            cazy_tax = cazy_tax + temp.columns[i] + '_' + temp.iloc[0, i] + ';'
+        cazy_tax = cazy_tax.strip(';') + cazy_num
         if cazy_cat == 'GH' and int(cazy_num) in [5, 13, 30, 43]:
             try:
                 cazy_sub_num = re.search(name_pattern, family).group(3)
             except:
                 print('%s%s had no sub family.' % (cazy_cat, cazy_num))
-            cazy_tax = cazy_tax + ';L' + str(n_level + 1) + '_' + family
+            cazy_tax = cazy_tax + ';L5_' + family
 
         print(cazy_tax)
         print('\n')
