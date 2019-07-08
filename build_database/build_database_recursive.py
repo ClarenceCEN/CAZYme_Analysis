@@ -110,7 +110,7 @@ def build_database(table,seq,output):
                 print('%s%s had no sub family.'%(cazy_cat,cazy_num))
             cazy_tax = cazy_tax+';L'+str(n_level+1)+'_'+family
         '''
-        
+
         # method 2
         temp = cazy_tab.loc[cazy_tab.loc[:, 'L4'] == cazy_cat, :]
         cazy_tax = ''
@@ -127,7 +127,7 @@ def build_database(table,seq,output):
         print(cazy_tax)
         print('\n')
 
-        with open('example_tax.txt', 'a') as f:
+        with open(output_txt, 'a') as f:
             f.write('cazy_%04d_%s\t%s\n' % (i, query_id, cazy_tax))
 
 def main():
