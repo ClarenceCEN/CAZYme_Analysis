@@ -1,7 +1,8 @@
 import re
 import os
 
-for f in os.listdir(os.getcwd()):
+files = os.listdir(os.getcwd())
+for f in files:
     if f.endswith('faa'):
         print(f)
         with open(f, 'r') as f1:

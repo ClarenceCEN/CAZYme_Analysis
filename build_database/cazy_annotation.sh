@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-for file in ./*.faa
+for file in ./*_modified.faa
 do
 name=`basename $file`
 output_name="${name%.*}.out"

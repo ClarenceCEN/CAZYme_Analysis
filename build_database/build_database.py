@@ -146,10 +146,10 @@ def main():
         os.makedirs(output_path)
 
     for f in os.listdir(input_path):
-        if f.endswith("faa"):
-            print(f)
-            pro_seq = f
-            dbCan_table = os.path.splitext(f)[0]+'.tab'
+        if os.path.splitext(f)[1]=='tab':
+            print(os.path.splitext(f)[0])
+            pro_seq = os.path.splitext(f)[0]+'.faa'
+            dbCan_table = f
             #try:
             build_database(dbCan_table, pro_seq, output_path, level_path)
             #except:
