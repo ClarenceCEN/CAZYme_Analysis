@@ -144,15 +144,16 @@ def main():
 
     if not os.path.exists(output_path):
         os.makedirs(output_path)
-    
+
     for f in os.listdir(input_path):
         if f.endswith("faa"):
+            print(f)
             pro_seq = f
             dbCan_table = os.path.splitext(f)[0]+'.tab'
-            try:
-                build_database(dbCan_table, pro_seq, output_path, level_path)
-            except:
-                print('File not found!')
+            #try:
+            build_database(dbCan_table, pro_seq, output_path, level_path)
+            #except:
+            #    print(e)
 
 
 
