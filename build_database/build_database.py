@@ -5,9 +5,10 @@ import argparse
 
 def make_agr_parser():
     parser = argparse.ArgumentParser(description='This is the commandline interface for building Cazymes database')
-    parser.add_argument('-i1', '--input_file1', help='The input dbCAN result table', required=True)
-    parser.add_argument('-i2', '--input_file2', help='The input assembled,annotated protein sequence file', required=True)
+    parser.add_argument('-i', '--input', help='The input dbCAN result tables and protein sequences, they should have the same file name.', required=True)
+    #parser.add_argument('-i2', '--input2', help='The input assembled,annotated protein sequence file', required=True)
     parser.add_argument('-o', '--output', help='The output directory of Cazyme databases', required=True,default=os.getcwd())
+    parser.add_argument('-l','--level',help='The level tab file.')
     return parser
 
 def find_value_recursive(cazy_dict,cazyme):
@@ -34,7 +35,7 @@ def find_value_recursive(cazy_dict,cazyme):
             n_level = n+1
             return
 
-def build_database(table,seq,output):
+def build_database(table,seq,output,level):
     tab_file = pd.read_csv(table, sep='\t', header=None)
     tab_file.columns = ['Family_HMM', 'HMM_length', 'Query_ID', 'Query_length', 'E_value',
                         'HMM_start', 'HMM_end', 'Query_start', 'Query_end', 'Coverage']
@@ -112,6 +113,7 @@ def build_database(table,seq,output):
         '''
 
         # method 2
+        cazy_tab = pd.read_csv(level,seq='\t')
         temp = cazy_tab.loc[cazy_tab.loc[:, 'L4'] == cazy_cat, :]
         cazy_tax = ''
         for i in range(0, cazy_tab.shape[1]):
@@ -134,14 +136,27 @@ def main():
     parser = make_agr_parser()
     args = parser.parse_args()
 
-    dbCan_table = args.input_file1
-    pro_seq = args.input_file2
+    #dbCan_table = args.input_file1
+    #pro_seq = args.input_file2
+    input_path = args.input
     output_path = args.output
+    level_path = args.level
 
     if not os.path.exists(output_path):
         os.makedirs(output_path)
+    
+    for f in os.listdir(input_path):
+        if f.endswith("faa"):
+            pro_seq = f
+            dbCan_table = os.path.splitext(f)[0]+'.tab'
+            try:
+                build_database(dbCan_table, pro_seq, output_path, level_path)
+            except:
+                print('File not found!')
 
-    build_database(dbCan_table,pro_seq,output_path)
+
+
+
 
 if __name__ == '__main__':
     main()
