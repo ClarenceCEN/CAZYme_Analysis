@@ -16,4 +16,4 @@ fi
 bash hmmscan-parser.sh ${name%.*}.out > ${name%.*}.tab
 done
 
-python build_database.py
+python build_database.py -i ./ -o output/ -l cazy_level_tab.txt
