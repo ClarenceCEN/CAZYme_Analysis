@@ -6,7 +6,6 @@ import argparse
 def make_agr_parser():
     parser = argparse.ArgumentParser(description='This is the commandline interface for building Cazymes database')
     parser.add_argument('-i', '--input', help='The input dbCAN result tables and protein sequences, they should have the same file name.', required=True)
-    #parser.add_argument('-i2', '--input2', help='The input assembled,annotated protein sequence file', required=True)
     parser.add_argument('-o', '--output', help='The output directory of Cazyme databases', required=True,default=os.getcwd())
     parser.add_argument('-l','--level',help='The level tab file.')
     return parser
@@ -127,15 +126,12 @@ def build_database(table,seq,output,level):
 
             #print(cazy_tax)
             #print('\n')
-
             f.write('cazy_%04d_%s\t%s\n' % (i, query_id, cazy_tax))
 
 def main():
     parser = make_agr_parser()
     args = parser.parse_args()
 
-    #dbCan_table = args.input_file1
-    #pro_seq = args.input_file2
     input_path = args.input
     output_path = args.output
     level_path = args.level
@@ -149,11 +145,7 @@ def main():
             print(os.path.splitext(f)[0])
             pro_seq = os.path.splitext(f)[0]+'.faa'
             dbCan_table = f
-            #try:
             build_database(dbCan_table, pro_seq, output_path, level_path)
-            #except:
-            #    print(e)
-
 
 
 
