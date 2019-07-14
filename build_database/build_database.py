@@ -117,8 +117,8 @@ def build_database(table,seq,output,level):
             cazy_tab = pd.read_csv(level,sep='\t')
             temp = cazy_tab.loc[cazy_tab.loc[:, 'L4'] == cazy_cat, :]
             cazy_tax = ''
-            for i in range(0, cazy_tab.shape[1]):
-                cazy_tax = cazy_tax + temp.columns[i] + '_' + temp.iloc[0, i] + ';'
+            for j in range(0, cazy_tab.shape[1]):
+                cazy_tax = cazy_tax + temp.columns[j] + '_' + temp.iloc[0, j] + ';'
             cazy_tax = cazy_tax.strip(';') + cazy_num
             if cazy_cat == 'GH' and int(cazy_num) in [5, 13, 30, 43]:
                 if re.search(name_pattern, family).group(3):
