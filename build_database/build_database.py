@@ -93,6 +93,7 @@ def build_database(table,seq,output,level):
     with open(output_txt,'a') as f:
         for i in range(0, tab_file.shape[0]):
             name_pattern = re.compile(r'(GH|GT|CBM|PL|AA|CE)(\d+)(_\d+)?')
+            query_id = tab_file.loc[i, 'Query_ID']
             family = tab_file.loc[i, 'Family_HMM'].replace('.hmm', '')
             try:
                 cazy_cat = re.search(name_pattern, family).group(1)

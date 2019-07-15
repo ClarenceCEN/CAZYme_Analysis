@@ -1,7 +1,24 @@
 #!/bin/bash
 
+
+for f in *.fasta;
+do
+mv $f ${f/_scaffolds.fasta/.fasta}
+done
+
+#The prediction part
+#I used GeneMark.
+for file in ./fasta
+do
+name=`basename $file`
+perl /plus/work/soft/genemark_suite_linux_64/gmsuite/gmsn.pl --prok --format GFF --fnn --faa ${name%.*}.fasta
+done
+
+
 python modify_header.py
 
+
+#download the hmm-parser.sh
 
 for file in ./*_modified.faa
 do
