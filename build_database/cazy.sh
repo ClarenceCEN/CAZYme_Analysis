@@ -6,7 +6,7 @@ do
 mv $f ${f/_scaffolds.fasta/.fasta}
 done
 
-#The prediction part
+#The protein prediction part.
 #I used GeneMark.
 for file in ./fasta
 do

@@ -99,7 +99,7 @@ def build_database(table,seq,output,level):
                 cazy_cat = re.search(name_pattern, family).group(1)
                 cazy_num = re.search(name_pattern, family).group(2)
             except:
-                print('Find %s! What is that?' % family)
+                print('Found %s! What is that?' % family)
                 continue   #Shall we continue?
 
             '''
