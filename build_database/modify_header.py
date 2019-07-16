@@ -5,7 +5,9 @@ def main():
     files = os.listdir(os.getcwd())
     for f in files:
         i = 1
-        if f.endswith('.faa'):
+        if f.endswith('_modified.faa') or f.endswith('_modified.fnn'):
+            os.remove(f)
+        elif f.endswith('.faa'):
             print(f)
             with open(f, 'r') as f1:
                 f_modified_path = f.replace('.faa','_modified.faa')
