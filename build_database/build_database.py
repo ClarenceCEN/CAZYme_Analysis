@@ -54,7 +54,7 @@ def build_database(table,seq,output,level):
     basename = os.path.splitext(os.path.basename(seq))[0]
 
     output_fasta = os.path.join(output,basename)+'.fasta'
-    output_txt = os.path.join(output, basename) + '.txt'
+    output_txt = os.path.join(output, basename) + '.tax'
 
     if os.path.exists(output_fasta):
         os.remove(output_fasta)

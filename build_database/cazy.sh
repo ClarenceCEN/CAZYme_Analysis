@@ -30,10 +30,10 @@ output_name="$name.out"
 if [ ! -f "$output_name" ]; then
 	echo $output_name
 	echo '----'$name'-----'
-	/plus/work/soft/hmmer-3.1/binaries/hmmscan --cpu 1 --domtblout ${name%.*}.out /plus/work/soft/CAZY/dbCAN-fam-HMMs.txt ${name%.*}.faa >${name%.*}.out2
-	rm ${name%.*}.out2
+	/plus/work/soft/hmmer-3.1/binaries/hmmscan --cpu 1 --domtblout $name.out /plus/work/soft/CAZY/dbCAN-fam-HMMs.txt $name.faa >$name.out2
+	rm $name.out2
 fi
-bash hmmscan-parser.sh ${name%.*}.out > ${name%.*}.tab
+bash hmmscan-parser.sh $name.out > $name.tab
 done
 
 python build_database.py -i ./ -o output/ -l cazy_level_tab.txt
@@ -47,8 +47,12 @@ done
 
 cd /project/flatiron2/cen/burst_output
 
-for f in /project/flatiron2/cen/cazy_database/output/*.txt;
+for file in /project/flatiron2/cen/cazy_database/output/*.tax;
 do
+name=`basename $file .tax`
+mkdir /project/flatiron2/cen/burst_output/$name
+cd /project/flatiron2/cen/burst_output/$name
+/project/flatiron2/cen/burst-v0.99.8-linux-64/burst15 -r /project/flatiron2/cen/cazy_database/output/$name.fasta -a $name.acx -o $name.edx -d DNA -s
+done
 
-mkdir 
 
