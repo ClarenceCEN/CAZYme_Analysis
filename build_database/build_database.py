@@ -5,7 +5,7 @@ import argparse
 
 def make_agr_parser():
     parser = argparse.ArgumentParser(description='This is the commandline interface for building Cazymes database')
-    parser.add_argument('-i', '--input', help='The input dbCAN result tables and protein sequences, they should have the same file name.', required=True)
+    parser.add_argument('-i', '--input', help='The input dbCAN result tables and DNA sequences, they should have the same file name.', required=True)
     parser.add_argument('-o', '--output', help='The output directory of Cazyme databases', required=True,default=os.getcwd())
     parser.add_argument('-l','--level',help='The level tab file.')
     return parser
@@ -42,7 +42,7 @@ def build_database(table,seq,output,level):
                         'HMM_start', 'HMM_end', 'Query_start', 'Query_end', 'Coverage']
 
     with open(seq, 'r') as f:
-        seq_file = f.read()
+        dna_seq_file = f.read()
 
     #CAZYme_family = {'CAZyme':{'Enzyme_Classes':{'GlycosylTransferases':'GT',
     #          'GlycosideHydrolases':'GH',
@@ -64,28 +64,38 @@ def build_database(table,seq,output,level):
 
     with open(output_fasta,'a') as f:
         for i in range(0, tab_file.shape[0]):
-            #global n, n_level
-            #n = 0
-            #n_level = 0
+            # global n,n_level
+            # n = 0
+            # n_level = 0
             family = tab_file.loc[i, 'Family_HMM'].replace('.hmm', '')
-            query_id = tab_file.loc[i, 'Query_ID']
-            query_start = tab_file.loc[i, 'Query_start']
-            query_end = tab_file.loc[i, 'Query_end']
-            query_length = tab_file.loc[i, 'Query_length']
-            #print('%d: %s' % (i + 1, family))
-            seq_pattern = re.compile(r'>' + query_id + '\n(.*?)(>|\n$)', re.S)  #we cannot replace . with [A-Z]
+            query_id = tab_file.loc[i, 'Query_ID']  # query gene name
+            aa_start = tab_file.loc[i, 'Query_start']
+            aa_end = tab_file.loc[i, 'Query_end']
+            aa_length = tab_file.loc[i, 'Query_length']  # the length of protein
+            # print('%d: %s'% (i+1,family))
+            dna_seq_pattern = re.compile(r'>' + query_id + '\n(.*?)(>|\n$)',re.S)  # find the header and the sequence. we cannot replace . with [A-Z]
             try:
-                query_sequence = re.search(seq_pattern, seq_file).group(1).replace('\n', '')
+                dna_sequence = re.search(dna_seq_pattern, dna_seq_file).group(1).replace('\n','')  # \n will be counted as char.
             except:
                 print('Did not find %s in sequence!' % family)
                 continue
 
-            if (len(query_sequence) != query_length):
-                print("The length of %s did not match! Please check the input seqs!" % family)
-                continue
-            #print('Query Sequence: %s' % query_sequence)
-            target_sequence = query_sequence[query_start - 1:query_end]
-            #print('Target Seuqunce: %s\n' % target_sequence)
+            if dna_sequence[-3:] in ['TAG', 'TAA', 'TGA']:  # if that is termination codon
+                if (len(dna_sequence) - 3 != aa_length * 3):  # check the length
+                    print("The length of %s did not match! Please check the input seqs!" % family)
+                    print("In %s, the length of query sequence is %d but it should be %d" % (
+                    query_id, len(dna_sequence) - 3, aa_length * 3))
+                    continue
+            else:
+                if (len(dna_sequence) != aa_length * 3):  # check the length
+                    print("The length of %s did not match! Please check the input seqs!" % family)
+                    print("In %s, the length of query sequence is %d but it should be %d" % (
+                    query_id, len(dna_sequence), aa_length * 3))
+                    continue
+
+            # print('Query Sequence: %s'%query_sequence)
+            target_sequence = dna_sequence[(aa_start - 1) * 3:aa_end * 3] #extract the sequence
+            # print('Target Seuqunce: %s\n'%target_sequence)
 
             f.write('>cazy_%04d_%s\n%s\n' % (i, query_id, target_sequence))
 
@@ -99,7 +109,7 @@ def build_database(table,seq,output,level):
                 cazy_cat = re.search(name_pattern, family).group(1)
                 cazy_num = re.search(name_pattern, family).group(2)
             except:
-                print('Found %s! What is that?' % family)
+                print('Find %s! What is that?' % family)
                 continue   #Shall we continue?
 
             '''
@@ -121,10 +131,10 @@ def build_database(table,seq,output,level):
             for j in range(0, cazy_tab.shape[1]):
                 cazy_tax = cazy_tax + temp.columns[j] + '_' + temp.iloc[0, j] + ';'
             cazy_tax = cazy_tax.strip(';') + cazy_num
-            if cazy_cat == 'GH' and int(cazy_num) in [5, 13, 30, 43]:
+            '''if cazy_cat == 'GH' and int(cazy_num) in [5, 13, 30, 43]:
                 if re.search(name_pattern, family).group(3):
                     cazy_tax = cazy_tax + ';L5_' + family
-
+            '''
             #print(cazy_tax)
             #print('\n')
             f.write('cazy_%04d_%s\t%s\n' % (i, query_id, cazy_tax))
@@ -144,9 +154,9 @@ def main():
         #print(os.path.splitext(f))
         if os.path.splitext(f)[1]=='.tab':
             print(os.path.splitext(f)[0])
-            pro_seq = os.path.splitext(f)[0]+'.faa'
+            dna_seq = os.path.splitext(f)[0]+'.fnn'
             dbCan_table = f
-            build_database(dbCan_table, pro_seq, output_path, level_path)
+            build_database(dbCan_table, dna_seq, output_path, level_path)
 
 
 

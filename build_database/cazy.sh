@@ -15,7 +15,7 @@ perl /plus/work/soft/genemark_suite_linux_64/gmsuite/gmsn.pl --prok --format GFF
 done
 
 
-python modify_header.py
+python modify_header.py   #change the header of faa and fnn files.
 
 
 #download the hmm-parser.sh
