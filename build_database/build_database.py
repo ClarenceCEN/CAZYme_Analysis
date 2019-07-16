@@ -83,14 +83,12 @@ def build_database(table,seq,output,level):
             if dna_sequence[-3:] in ['TAG', 'TAA', 'TGA']:  # if that is termination codon
                 if (len(dna_sequence) - 3 != aa_length * 3):  # check the length
                     print("The length of %s did not match! Please check the input seqs!" % family)
-                    print("In %s, the length of query sequence is %d but it should be %d" % (
-                    query_id, len(dna_sequence) - 3, aa_length * 3))
+                    print("In %s, the length of query sequence is %d but it should be %d" % (query_id, len(dna_sequence) - 3, aa_length * 3))
                     continue
             else:
                 if (len(dna_sequence) != aa_length * 3):  # check the length
                     print("The length of %s did not match! Please check the input seqs!" % family)
-                    print("In %s, the length of query sequence is %d but it should be %d" % (
-                    query_id, len(dna_sequence), aa_length * 3))
+                    print("In %s, the length of query sequence is %d but it should be %d" % (query_id, len(dna_sequence), aa_length * 3))
                     continue
 
             # print('Query Sequence: %s'%query_sequence)
