@@ -1,17 +1,22 @@
 import os
 import re
 import argparse
+import subprocess
 import pandas as pd
 
+
 def make_arg_parser():
-    parser = argparse.ArgumentParser(description='This is the commandline interface for combine_seqs',
-                                     usage='combine_seqs v0.0.1 -i <input> -o <output> ...')
+    parser = argparse.ArgumentParser(description='This is the commandline interface for burst_alignment',
+                                     usage='burst_alignment v0.0.1 -i <input> -o <output> ...')
     parser.add_argument('-i', '--input', help='Set the directory path of the fasta directory', required=True)
-    parser.add_argument('-d', '--database', help='Set the directory path of the fasta directory', required=True)
+    parser.add_argument('-d', '--database', help='Set the directory path of the database directory', required=True)
+    parser.add_argument('-t', '--tax', help='Set the directory path of the taxonomy tab-limited files', required=True)
     parser.add_argument('-o', '--output', help='Set the directory path of the output of b6 files', default=os.getcwd())
     parser.add_argument('--mapping_file', '-m', help='mapping file, required', required=True, type=str)
     parser.add_argument('--username', '-u', help='column name for usernames', required=True, type=str)
     parser.add_argument('--sampleid', '-id', help='column name for samples', required=True, type=str)
+
+
     return parser
 
 def read_mapping_file(mapping_file_path,username_col,sampleid_col):
@@ -24,13 +29,23 @@ def read_mapping_file(mapping_file_path,username_col,sampleid_col):
 
     return User_Sample_dict
 
+def burst_command(query,a,r,tax,output):
+    command = 'burst15 -q '+query+' -a '+a+' -r '+r+' -b '+tax+' -o ' + output
+    ret = subprocess.run(command,shell=True)
+    if ret.returncode==0:
+        print('Success:',ret)
+    else:
+        print('Error:',ret)
 
-def align_seqs(User_Sample_dict,output_path,paths):
+
+def align_seqs(User_Sample_dict,output_path,paths,database_path,tax_path):
 
     for username in User_Sample_dict.keys():
         sampleids = User_Sample_dict.get(username)  # e.g. MCT.f.0001, MCT.f.0002 etc
         pattern = re.compile(r"^(.*)[._]S[0-9]+.*(R1|R2)\.[0-9]+\.")
-
+        a_path = os.path.join(database_path,username+'.acx')
+        r_path = os.path.join(database_path,username+'.edx')
+        t_path = os.path.join(tax_path,username+'.tax')
         paths_for_user = []
         for path in paths:
             basename = os.path.splitext(os.path.split(path)[1])[0]
@@ -38,6 +53,13 @@ def align_seqs(User_Sample_dict,output_path,paths):
             if sampleid and sampleid.group(1) in sampleids:
                 print(sampleid.group(1))
                 paths_for_user.append(path)
+
+            if not os.path.exists(os.path.join(output_path,sampleid.group(1))):
+                os.makedirs(os.path.join(output_path,sampleid.group(1)))
+
+            o_path = os.path.join(output_path,sampleids+'.b6')
+            print('BURST on '+path+' of '+username)
+            burst_command(path,a_path,r_path,t_path,o_path)
         #print(paths_for_user)
 
 
@@ -56,7 +78,7 @@ def main():
 
     user_sample_dict = read_mapping_file(args.mapping_file, args.username, args.sampleid)
 
-    align_seqs(user_sample_dict,args.output,input_paths)
+    align_seqs(user_sample_dict,args.output,input_paths,args.database,args.tax)
 
 if __name__ == '__main__':
     main()
