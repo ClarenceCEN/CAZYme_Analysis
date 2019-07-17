@@ -1,0 +1,30 @@
+
+# queue this on ram1t on MSI because it needs a TON of memory:
+# this file runs spades on files one at a time (
+           #!/bin/bash -l
+           #PBS -l walltime=96:00:00,nodes=1:ppn=30,mem=998gb
+           #PBS -m abe
+           #PBS -M cen00005@umn.edu
+	   #PBS -o cat_spades_stdout.txt
+	   #PBS -e cat_spades_stderr.txt
+
+           module load python3
+	   module load intel
+	   module load ompi/intel
+
+           source ~/.bashrc
+
+           export PATH=$PATH:/home/knightsd/algh0022/sop
+
+           # work with fastq files that have already been shi7'd
+           cd ~/dietstudy/combinedfiles 
+
+	   #echo "starting spades run"
+           # consumes tons of memory, make sure to run this one by one
+           for file in *.fa; do
+               outfolder=${file/.*/}
+               echo "~/bin/SPAdes-3.13.1-Linux/bin/spades.py --meta -s $file -m 950 -t 30 -o ~/spades/output/$outfolder"
+                ~/bin/SPAdes-3.13.1-Linux/bin/spades.py -s $file -m 950 -t 30 -o ~/spades/output/$outfolder --only-assembler
+           done
+   ### end of run_spades.pbs
+

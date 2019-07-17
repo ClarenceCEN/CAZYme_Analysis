@@ -1,5 +1,18 @@
 import os
 import re
+import argparse
+import pandas as pd
+
+def make_arg_parser():
+    parser = argparse.ArgumentParser(description='This is the commandline interface for combine_seqs',
+                                     usage='combine_seqs v0.0.1 -i <input> -o <output> ...')
+    parser.add_argument('-i', '--input', help='Set the directory path of the fasta directory', required=True)
+    parser.add_argument('-d', '--database', help='Set the directory path of the fasta directory', required=True)
+    parser.add_argument('-o', '--output', help='Set the directory path of the output of b6 files', default=os.getcwd())
+    parser.add_argument('--mapping_file', '-m', help='mapping file, required', required=True, type=str)
+    parser.add_argument('--username', '-u', help='column name for usernames', required=True, type=str)
+    parser.add_argument('--sampleid', '-id', help='column name for samples', required=True, type=str)
+    return parser
 
 def read_mapping_file(mapping_file_path,username_col,sampleid_col):
 
@@ -12,22 +25,38 @@ def read_mapping_file(mapping_file_path,username_col,sampleid_col):
     return User_Sample_dict
 
 
-def combine_seqs(User_Sample_dict,output_path,run_type,paths):
+def align_seqs(User_Sample_dict,output_path,paths):
 
     for username in User_Sample_dict.keys():
         sampleids = User_Sample_dict.get(username)  # e.g. MCT.f.0001, MCT.f.0002 etc
-        if run_type == 'FASTQ.GZ' or run_type == 'FASTA.GZ':
-            pattern = re.compile(r"^(.*)[._]S[0-9]+.*(R1|R2)\.[0-9]+\.fast[aq]\.gz$")   #anything before 'S' or start with sample id?
-        else:
-            pattern = re.compile(r"^(.*)[._]S[0-9]+.*(R1|R2)\.[0-9]+\.fast[aq]$")
+        pattern = re.compile(r"^(.*)[._]S[0-9]+.*(R1|R2)\.[0-9]+\.")
+
         paths_for_user = []
         for path in paths:
-            basename = format_basename(path, run_type)
+            basename = os.path.splitext(os.path.split(path)[1])[0]
             sampleid = re.search(pattern, basename)
-
             if sampleid and sampleid.group(1) in sampleids:
                 print(sampleid.group(1))
                 paths_for_user.append(path)
+        #print(paths_for_user)
 
 
 def main():
+    parser = make_arg_parser()
+    args = parser.parse_args()
+
+    if not os.path.exists(args.input):
+        raise ValueError('Error: Input directory %s doesn\'t exist!' % args.input)
+
+    if not os.path.exists(args.output):
+        os.makedirs(args.output)
+
+    input_paths = [os.path.join(args.input, f) for f in os.listdir(args.input) if
+             f.endswith('fasta') or f.endswith('fna') or f.endswith('fa') or f.endswith('fn')]
+
+    user_sample_dict = read_mapping_file(args.mapping_file, args.username, args.sampleid)
+
+    align_seqs(user_sample_dict,args.output,input_paths)
+
+if __name__ == '__main__':
+    main()
