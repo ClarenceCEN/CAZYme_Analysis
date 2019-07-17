@@ -59,3 +59,8 @@ done
 mkdir /project/flatiron2/cen/burst_output
 
 python3 burst_alignment.py -i /project/flatiron2/cen/dietstudy -o /project/flatiron2/cen/burst_output -d /project/flatiron2/cen/burst_database -t /project/flatiron2/cen/cazy_database/output/ -m food_map.txt -u UserName -id SampleID
+
+mkdir /project/flatiron2/cen/diestudy_output
+cd /project/flatiron2/cen
+
+python3 count_cazymes.py -i burst_output/ -o Cazyme_output/
