@@ -49,17 +49,18 @@ def align_seqs(User_Sample_dict,output_path,paths,database_path,tax_path):
         paths_for_user = []
         for path in paths:
             basename = os.path.splitext(os.path.split(path)[1])[0]
-            sampleid = re.search(pattern, basename)
-            if sampleid and sampleid.group(1) in sampleids:
-                print(sampleid.group(1))
+            find_sampleid = re.search(pattern, basename)
+            if find_sampleid and find_sampleid.group(1) in sampleids:
+                print(find_sampleid.group(1))
+                sampleid = find_sampleid.group(1)
                 paths_for_user.append(path)
 
-            if not os.path.exists(os.path.join(output_path,sampleid.group(1))):
-                os.makedirs(os.path.join(output_path,sampleid.group(1)))
+                if not os.path.exists(os.path.join(output_path,username)):
+                    os.makedirs(os.path.join(output_path,username))
 
-            o_path = os.path.join(output_path,sampleids+'.b6')
-            print('BURST on '+path+' of '+username)
-            burst_command(path,a_path,r_path,t_path,o_path)
+                o_path = os.path.join(output_path,username,sampleid+'.b6')
+                print('BURST on '+path+' of '+username)
+                burst_command(path,a_path,r_path,t_path,o_path)
         #print(paths_for_user)
 
 
