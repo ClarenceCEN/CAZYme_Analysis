@@ -42,7 +42,7 @@ def align_seqs(User_Sample_dict,output_path,paths,database_path,tax_path):
 
     for username in User_Sample_dict.keys():
         sampleids = User_Sample_dict.get(username)  # e.g. MCT.f.0001, MCT.f.0002 etc
-        pattern = re.compile(r"^(.*)[._]S[0-9]+.*(R1|R2)\.[0-9]+\.")
+        pattern = re.compile(r"^(.*)[._]S[0-9]+.*(R1|R2)\.[0-9]+\.")  # string before S
         a_path = os.path.join(database_path,username+'.acx')
         r_path = os.path.join(database_path,username+'.edx')
         t_path = os.path.join(tax_path,username+'.tax')
