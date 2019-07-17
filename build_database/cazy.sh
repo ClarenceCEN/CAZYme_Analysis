@@ -18,7 +18,7 @@ perl /plus/work/soft/genemark_suite_linux_64/gmsuite/gmsn.pl --prok --format GFF
 done
 
 
-python modify_header.py   #change the header of faa and fnn files.
+python3 modify_header.py   #change the header of faa and fnn files.
 
 
 #download the hmm-parser.sh
@@ -36,7 +36,7 @@ fi
 bash hmmscan-parser.sh $name.out > $name.tab
 done
 
-python build_database.py -i ./ -o output/ -l cazy_level_tab.txt
+python3 build_database.py -i ./ -o output/ -l cazy_level_tab.txt
 
 cd output/
 
@@ -53,9 +53,9 @@ do
 name=`basename $file .tax`
 #mkdir /project/flatiron2/cen/burst_database/$name
 #cd /project/flatiron2/cen/burst_database/$name
-/project/flatiron2/cen/burst-v0.99.8-linux-64/burst15 -r /project/flatiron2/cen/cazy_database/output/$name.fasta -a $name.acx -o $name.edx -d DNA -s
+burst15 -r /project/flatiron2/cen/cazy_database/output/$name.fasta -a $name.acx -o $name.edx -d DNA -s
 done
 
 mkdir /project/flatiron2/cen/burst_output
-cd /project/flatiron2/cen/burst_output
 
+python3 burst_alignment.py -i /project/flatiron2/cen/dietstudy -o /project/flatiron2/cen/burst_output -d /project/flatiron2/cen/burst_database -t /project/flatiron2/cen/cazy_database/output/ -m food_map.txt -u UserName -id SampleID
