@@ -38,11 +38,11 @@ def main():
                     temp = pd.concat([temp,f_table],axis=0,ignore_index=True)
             except:
                 continue
-        temp.columns = ['CAZyme', 'SampleID']
+        temp.columns = ['#CAZyme', 'SampleID']
         temp['count'] = 1
         print(temp)
 
-        temp_wide = temp.pivot_table(index='SampleID', columns='CAZyme', values='count', aggfunc='sum')
+        temp_wide = temp.pivot_table(index='SampleID', columns='#CAZyme', values='count', aggfunc='sum')
         temp_wide[temp_wide.isnull()] = 0.0
         temp_wide.T.to_csv(os.path.join(output_path,dir)+'.txt',sep='\t')
 
