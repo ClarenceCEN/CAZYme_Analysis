@@ -22,7 +22,8 @@ def main():
     input_path = os.path.abspath(args.input)
     output_path = os.path.abspath(args.output)
 
-    #temp_mean = pd.DataFrame()
+    temp_mean = pd.DataFrame()
+    temp_total = pd.DataFrame()
 
     for dir in os.listdir(input_path):
         #print(dirs)
@@ -46,10 +47,11 @@ def main():
         temp_wide[temp_wide.isnull()] = 0.0
         temp_wide.T.to_csv(os.path.join(output_path,dir)+'.txt',sep='\t')
 
-        #temp_wide_mean = temp_wide.mean()
-        #temp_wide_mean.columns = ['CAZyme',dir]
+        temp_wide_mean = temp_wide.mean()
+        temp_wide_mean.columns = ['CAZyme',dir]
 
-        #temp_mean = pd.concat([temp_mean, temp_wide_mean], axis=1, ignore_index=True)
+        temp_mean = pd.merge([temp_mean, temp_wide_mean], on='#CAZyme')
+        temp_total = pd.merge([temp_total, temp.T], on='#CAZyme')
 
     #temp_mean.to_csv(os.path.join(output_path,'CAzyme_mean.txt'))
 
