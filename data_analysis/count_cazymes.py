@@ -22,6 +22,8 @@ def main():
     input_path = os.path.abspath(args.input)
     output_path = os.path.abspath(args.output)
 
+    #temp_mean = pd.DataFrame()
+
     for dir in os.listdir(input_path):
         #print(dirs)
         temp = pd.DataFrame()
@@ -42,7 +44,18 @@ def main():
 
         temp_wide = temp.pivot_table(index='SampleID', columns='CAZyme', values='count', aggfunc='sum')
         temp_wide[temp_wide.isnull()] = 0.0
-        temp_wide.to_csv(os.path.join(output_path,dir)+'.txt',sep='\t')
+        temp_wide.T.to_csv(os.path.join(output_path,dir)+'.txt',sep='\t')
+
+        #temp_wide_mean = temp_wide.mean()
+        #temp_wide_mean.columns = ['CAZyme',dir]
+
+        #temp_mean = pd.concat([temp_mean, temp_wide_mean], axis=1, ignore_index=True)
+
+    #temp_mean.to_csv(os.path.join(output_path,'CAzyme_mean.txt'))
+
+
+
+
 
 
 
