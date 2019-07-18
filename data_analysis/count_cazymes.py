@@ -45,7 +45,19 @@ def main():
 
         temp_wide = temp.pivot_table(index='SampleID', columns=['taxonomy','#queryid'], values='count', aggfunc='sum')
         temp_wide[temp_wide.isnull()] = 0.0
-        temp_wide.T.to_csv(os.path.join(output_path,dir)+'.txt',sep='\t')
+
+        temp_wide_T = temp_wide.T.reset_index()
+
+        temp_wide_T = temp_wide_T.join(temp_wide_T.pop('taxonomy'))
+
+        temp_wide_T.to_csv(os.path.join(output_path, dir) + '.txt', sep='\t', index=None)
+
+        #temp_wide_T = temp_wide_T.groupby('#queryid').sum()
+        #temp_wide_T_taxonomy = temp_wide_T.taxonomy
+        #temp_wide_T_taxonomy.index = temp_wide_T['#queryid']
+
+        #temp_wide_T_final = pd.concat([temp_wide_T,temp_wide_T_taxonomy],axis=1)
+        #temp_wide_T_final.to_csv(os.path.join(output_path,dir)+'.txt',sep='\t',index=None)
 
         #temp_wide_mean = temp_wide.mean()
         #temp_wide_mean.columns = ['CAZyme',dir]
