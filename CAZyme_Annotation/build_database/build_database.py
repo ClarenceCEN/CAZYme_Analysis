@@ -152,8 +152,9 @@ def main():
         #print(os.path.splitext(f))
         if os.path.splitext(f)[1]=='.tab':
             print(os.path.splitext(f)[0])
-            dna_seq = os.path.splitext(f)[0]+'.fnn'
-            dbCan_table = f
+            dna_seq = os.path.join(input_path,os.path.splitext(f)[0]+'.fnn')
+            dbCan_table = os.path.join(input_path,f)
+            #print(dbCan_table)
             build_database(dbCan_table, dna_seq, output_path, level_path)
 
 
