@@ -1,5 +1,4 @@
 #queryid	MCT.f.0089	MCT.f.0091	MCT.f.0094	MCT.f.0095	MCT.f.0096	MCT.f.0098	MCT.f.0099	MCT.f.0102	MCT.f.0417	taxonomy
-cazy_0181_gene_4354	0.0	0.0	1.0	0.0	0.0	0.0	0.0	0.0	0.0	L1_CAZyme
 cazy_0059_gene_19	0.0	0.0	0.0	0.0	0.0	2.0	0.0	0.0	0.0	L1_CAZyme;L2_Associated_Modules;L3_Carbohydrate-BindingModules;L4_CBM12
 cazy_0131_gene_3281	0.0	0.0	0.0	4.0	0.0	1.0	1.0	0.0	1.0	L1_CAZyme;L2_Associated_Modules;L3_Carbohydrate-BindingModules;L4_CBM20
 cazy_0132_gene_3281	0.0	0.0	0.0	1.0	1.0	0.0	2.0	0.0	3.0	L1_CAZyme;L2_Associated_Modules;L3_Carbohydrate-BindingModules;L4_CBM20
@@ -56,7 +55,6 @@ cazy_0042_gene_1759	0.0	1.0	2.0	9.0	1.0	0.0	11.0	0.0	21.0	L1_CAZyme;L2_Associate
 cazy_0103_gene_2592	0.0	0.0	0.0	2.0	0.0	0.0	2.0	0.0	1.0	L1_CAZyme;L2_Associated_Modules;L3_Carbohydrate-BindingModules;L4_CBM77
 cazy_0210_gene_4936	2.0	3.0	0.0	0.0	0.0	0.0	1.0	0.0	1.0	L1_CAZyme;L2_Associated_Modules;L3_Carbohydrate-BindingModules;L4_CBM9
 cazy_0361_gene_9341	18.0	3.0	4.0	23.0	2.0	0.0	9.0	0.0	20.0	L1_CAZyme;L2_Associated_Modules;L3_Carbohydrate-BindingModules;L4_CBM9
-cazy_0216_gene_5164	1.0	0.0	1.0	7.0	1.0	0.0	4.0	0.0	4.0	L1_CAZyme;L2_Enzyme_Classes;L3_CarbohydrateEsterases
 cazy_0017_gene_1049	6.0	0.0	0.0	5.0	0.0	0.0	7.0	0.0	7.0	L1_CAZyme;L2_Enzyme_Classes;L3_CarbohydrateEsterases;L4_CE1
 cazy_0122_gene_3001	1.0	0.0	1.0	7.0	0.0	0.0	8.0	0.0	11.0	L1_CAZyme;L2_Enzyme_Classes;L3_CarbohydrateEsterases;L4_CE1
 cazy_0159_gene_3935	1.0	0.0	0.0	18.0	0.0	0.0	26.0	0.0	15.0	L1_CAZyme;L2_Enzyme_Classes;L3_CarbohydrateEsterases;L4_CE1

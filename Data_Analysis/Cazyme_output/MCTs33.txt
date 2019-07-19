@@ -463,8 +463,6 @@ cazy_0738_gene_20787	2.0	0.0	0.0	1.0	4.0	0.0	3.0	5.0	1.0	2.0	0.0	3.0	0.0	1.0	0.0
 cazy_0904_gene_23843	3.0	5.0	10.0	17.0	36.0	6.0	7.0	2.0	2.0	3.0	0.0	2.0	13.0	7.0	7.0	2.0	3.0	L1_CAZyme;L2_Enzyme_Classes;L3_CarbohydrateEsterases;L4_CE9
 cazy_1177_gene_29781	1.0	0.0	1.0	0.0	4.0	0.0	1.0	5.0	0.0	7.0	1.0	5.0	2.0	3.0	6.0	1.0	0.0	L1_CAZyme;L2_Enzyme_Classes;L3_CarbohydrateEsterases;L4_CE9
 cazy_1411_gene_35044	0.0	0.0	0.0	0.0	4.0	0.0	1.0	0.0	0.0	1.0	1.0	2.0	0.0	0.0	0.0	1.0	0.0	L1_CAZyme;L2_Enzyme_Classes;L3_CarbohydrateEsterases;L4_CE9
-cazy_1745_gene_7562	0.0	0.0	1.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	L1_CAZyme;L2_Enzyme_Classes;L3_GlycosideHydrolases
-cazy_1746_gene_7562	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	1.0	1.0	0.0	5.0	0.0	1.0	0.0	0.0	0.0	L1_CAZyme;L2_Enzyme_Classes;L3_GlycosideHydrolases
 cazy_0708_gene_20380	1.0	0.0	1.0	3.0	11.0	1.0	3.0	3.0	6.0	9.0	1.0	5.0	2.0	0.0	3.0	3.0	0.0	L1_CAZyme;L2_Enzyme_Classes;L3_GlycosideHydrolases;L4_GH1
 cazy_1123_gene_28439	0.0	0.0	0.0	1.0	6.0	2.0	0.0	0.0	0.0	0.0	0.0	2.0	0.0	0.0	0.0	1.0	0.0	L1_CAZyme;L2_Enzyme_Classes;L3_GlycosideHydrolases;L4_GH10
 cazy_1163_gene_29422	1.0	0.0	0.0	1.0	2.0	0.0	3.0	2.0	1.0	5.0	0.0	4.0	2.0	7.0	1.0	0.0	0.0	L1_CAZyme;L2_Enzyme_Classes;L3_GlycosideHydrolases;L4_GH10

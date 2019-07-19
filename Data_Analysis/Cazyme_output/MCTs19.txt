@@ -1,5 +1,4 @@
 #queryid	MCT.f.0307	MCT.f.0308	MCT.f.0310	MCT.f.0311	MCT.f.0312	MCT.f.0313	MCT.f.0314	MCT.f.0315	MCT.f.0316	MCT.f.0318	MCT.f.0319	MCT.f.0320	MCT.f.0321	MCT.f.0322	MCT.f.0323	taxonomy
-cazy_0039_gene_10569	0.0	0.0	0.0	0.0	0.0	0.0	1.0	0.0	2.0	0.0	0.0	0.0	1.0	0.0	1.0	L1_CAZyme
 cazy_0216_gene_1292	3.0	3.0	4.0	2.0	2.0	0.0	1.0	2.0	0.0	4.0	11.0	0.0	3.0	3.0	1.0	L1_CAZyme;L2_Associated_Modules;L3_Carbohydrate-BindingModules;L4_CBM13
 cazy_0692_gene_2167	1.0	2.0	6.0	6.0	1.0	3.0	0.0	0.0	0.0	0.0	18.0	0.0	0.0	3.0	1.0	L1_CAZyme;L2_Associated_Modules;L3_Carbohydrate-BindingModules;L4_CBM13
 cazy_1045_gene_5155	0.0	0.0	3.0	1.0	7.0	1.0	1.0	3.0	2.0	3.0	2.0	0.0	0.0	6.0	2.0	L1_CAZyme;L2_Associated_Modules;L3_Carbohydrate-BindingModules;L4_CBM13
