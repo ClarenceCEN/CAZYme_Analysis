@@ -31,6 +31,7 @@ def read_mapping_file(mapping_file_path,username_col,sampleid_col):
 
 def burst_command(query,a,r,tax,output):
     command = 'burst15 -q '+query+' -a '+a+' -r '+r+' -b '+tax+' -o ' + output
+    print(command)
     ret = subprocess.run(command,shell=True)
     if ret.returncode==0:
         print('Success:',ret)
