@@ -50,3 +50,10 @@ merge_otu_tables.py -i merged_otu_table.biom,MCTs37.biom -o merged_otu_table.bio
 #merge_otu_tables.py -i merged_otu_table.biom,'$name'.biom -o merged_otu_table.biom
 #fi
 #done
+
+
+beta_diversity_through_plots.py -i merged_otu_table.biom -o cazy_beta_plots -m temp_Mapping_File.txt -p beta_params.txt
+
+summarize_taxa_through_plots.py -i merged_otu_table.biom -o summary -m temp_Mapping_File.txt -c Group
+
+alpha_diversity.py -i merged_otu_table.biom -o cazy_alpha -m shannon,chao1,simpson
