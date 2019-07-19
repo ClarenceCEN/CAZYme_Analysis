@@ -9,6 +9,14 @@ def make_arg_parser():
 
     return parser
 
+
+def find_L4_missing(s):
+    #print(s)
+    if s.find(';L4_') == -1:
+        return False
+    else:
+        return True
+
 def main():
     parser = make_arg_parser()
     args = parser.parse_args()
@@ -49,6 +57,8 @@ def main():
         temp_wide_T = temp_wide.T.reset_index()
 
         temp_wide_T = temp_wide_T.join(temp_wide_T.pop('taxonomy'))
+
+        temp_wide_T = temp_wide_T[temp_wide_T['taxonomy'].apply(find_L4_missing)]
 
         temp_wide_T.to_csv(os.path.join(output_path, dir) + '.txt', sep='\t', index=None)
 
