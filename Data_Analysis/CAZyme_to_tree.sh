@@ -41,12 +41,12 @@ merge_otu_tables.py -i merged_otu_table.biom,MCTs36.biom -o merged_otu_table.bio
 merge_otu_tables.py -i merged_otu_table.biom,MCTs37.biom -o merged_otu_table.biom
 
 
-for f in ./*.biom
-do
-name=`basename $f .biom`
-echo $name
-if [$name != 'MCTs01' && $name != 'MCTs03'];then
+#for f in ./*.biom
+#do
+#name=`basename $f .biom`
+#echo $name
+#if [$name != 'MCTs01' && $name != 'MCTs03'];then
 #echo ${name}
-merge_otu_tables.py -i merged_otu_table.biom,'$name'.biom -o merged_otu_table.biom
-fi
-done
+#merge_otu_tables.py -i merged_otu_table.biom,'$name'.biom -o merged_otu_table.biom
+#fi
+#done
