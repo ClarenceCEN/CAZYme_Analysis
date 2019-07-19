@@ -95,7 +95,7 @@ def build_database(table,seq,output,level):
             target_sequence = dna_sequence[(aa_start - 1) * 3:aa_end * 3] #extract the sequence
             # print('Target Seuqunce: %s\n'%target_sequence)
 
-            f.write('>cazy_%04d_%s\n%s\n' % (i, query_id, target_sequence))
+            f.write('>%s_cazy_%04d_%s\n%s\n' % (basename, i, query_id, target_sequence))
 
 
     with open(output_txt,'a') as f:
@@ -135,7 +135,7 @@ def build_database(table,seq,output,level):
             '''
             #print(cazy_tax)
             #print('\n')
-            f.write('cazy_%04d_%s\t%s\n' % (i, query_id, cazy_tax))
+            f.write('%s_cazy_%04d_%s\t%s\n' % (basename, i, query_id, cazy_tax))
 
 def main():
     parser = make_agr_parser()
