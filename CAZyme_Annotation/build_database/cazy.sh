@@ -22,6 +22,7 @@ python3 modify_header.py   #change the header of faa and fnn files.
 
 
 #download the hmm-parser.sh
+cd /project/flatiron2/cen/cazy_database
 
 for file in ./*_modified.faa
 do
@@ -36,14 +37,18 @@ fi
 bash hmmscan-parser.sh $name.out > $name.tab
 done
 
-python3 build_database.py -i ./ -o output/ -l cazy_level_tab.txt
+mkdir modified
+
+for f in *_modified.*;
+do
+mv $f ./modified/${f/_modified/}
+done
+
+cd /project/flatiron2/cen/
+
+python3 build_database.py -i /project/flatiron2/cen/cazy_database/modified -o /project/flatiron2/cen/cazy_database/output/ -l /project/flatiron2/cen/cazy_database/cazy_level_tab.txt
 
 cd output/
-
-for f in *.*;
-do
-mv $f ${f/_modified/}
-done
 
 mkdir /project/flatiron2/cen/burst_database
 cd /project/flatiron2/cen/burst_database
@@ -53,7 +58,7 @@ do
 name=`basename $file .tax`
 #mkdir /project/flatiron2/cen/burst_database/$name
 #cd /project/flatiron2/cen/burst_database/$name
-burst15 -r /project/flatiron2/cen/cazy_database/output/$name.fasta -a $name.acx -o $name.edx -d DNA -s
+burst15 -r /project/flatiron2/cen/cazy_database/output/$name.fasta -a /project/flatiron2/cen/burst_database/$name.acx -o /project/flatiron2/cen/burst_database/$name.edx -d DNA -s
 done
 
 mkdir /project/flatiron2/cen/burst_output
