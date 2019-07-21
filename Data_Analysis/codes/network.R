@@ -1,7 +1,7 @@
 
 setwd('G:/Dan_Lab/codes/CAZyme/CAZYme_Analysis/Data_Analysis/Cazyme_output/')
 
-file_path <- list.files(pattern='*.txt')
+file_path <- list.files(pattern='MCT.*.txt')
 
 file_path <- file_path[grep("MCTs05", file_path, invert = T)]
 file_path <- file_path[grep("MCTs06", file_path, invert = T)]
