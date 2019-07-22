@@ -30,9 +30,6 @@ def main():
     input_path = os.path.abspath(args.input)
     output_path = os.path.abspath(args.output)
 
-    #temp_mean = pd.DataFrame()
-    #temp_total = pd.DataFrame()
-
     for dir in os.listdir(input_path):
         #print(dir)
         temp = pd.DataFrame()
@@ -61,25 +58,6 @@ def main():
         temp_wide_T = temp_wide_T[temp_wide_T['taxonomy'].apply(find_L4_missing)]
 
         temp_wide_T.to_csv(os.path.join(output_path, dir) + '.txt', sep='\t', index=None)
-
-        #temp_wide_T = temp_wide_T.groupby('#queryid').sum()
-        #temp_wide_T_taxonomy = temp_wide_T.taxonomy
-        #temp_wide_T_taxonomy.index = temp_wide_T['#queryid']
-
-        #temp_wide_T_final = pd.concat([temp_wide_T,temp_wide_T_taxonomy],axis=1)
-        #temp_wide_T_final.to_csv(os.path.join(output_path,dir)+'.txt',sep='\t',index=None)
-
-        #temp_wide_mean = temp_wide.mean()
-        #temp_wide_mean.columns = ['CAZyme',dir]
-
-        #print(temp_wide_mean)
-
-        #temp_mean = pd.concat([temp_mean, temp_wide_mean],axis=1)
-        #temp_total = pd.concat([temp_total, temp.T],axis=1)
-
-    #temp_mean.to_csv(os.path.join(output_path,'CAzyme_mean.txt'),sep='\t')
-    #temp_mean.to_csv(os.path.join(output_path, 'CAzyme_total.txt'),sep='\t')
-
 
 if __name__ == '__main__':
     main()
