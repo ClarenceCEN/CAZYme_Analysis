@@ -71,7 +71,7 @@ def build_database(table,seq,output,level):
             query_id = tab_file.loc[i, 'Query_ID']  # query gene name
             aa_start = tab_file.loc[i, 'Query_start']
             aa_end = tab_file.loc[i, 'Query_end']
-            aa_length = tab_file.loc[i, 'Query_length']  # the length of protein
+            aa_length = tab_file.loc[i, 'Query_length']  # the length of amino acid
             # print('%d: %s'% (i+1,family))
             dna_seq_pattern = re.compile(r'>' + query_id + '\n(.*?)(>|\n$)',re.S)  # find the header and the sequence. we cannot replace . with [A-Z]
             try:
