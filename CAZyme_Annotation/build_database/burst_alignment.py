@@ -16,7 +16,6 @@ def make_arg_parser():
     parser.add_argument('--username', '-u', help='column name for usernames', required=True, type=str)
     parser.add_argument('--sampleid', '-id', help='column name for samples', required=True, type=str)
 
-
     return parser
 
 def read_mapping_file(mapping_file_path,username_col,sampleid_col):
