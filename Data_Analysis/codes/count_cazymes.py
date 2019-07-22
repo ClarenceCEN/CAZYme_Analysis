@@ -81,9 +81,5 @@ def main():
     #temp_mean.to_csv(os.path.join(output_path, 'CAzyme_total.txt'),sep='\t')
 
 
-
-
-
-
 if __name__ == '__main__':
     main()
