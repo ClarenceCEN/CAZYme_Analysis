@@ -7,6 +7,7 @@ require(reshape2)
 require(ggdendro)
 require(vegan)
 require(gridExtra)
+require(pheatmap)
 
 
 
@@ -21,6 +22,39 @@ pal <- rev(c("#ff40f2", "#ff0000", "#008c4b", "#00138c", "#8c235b", "#ffbfbf", "
 
 
 rownames(cazyme) <- gsub(".*;L4_",'',rownames(cazyme))
+
+
+#draw the heatmap
+heat1 <- as.data.frame(t(cazyme))
+heat1 <- rownames_to_column(heat1,var='X.SampleID')
+heat1 <- merge(heat1,map,by = 'X.SampleID')
+
+cazyme_family <- rownames(cazyme)
+
+for(i in unique(heat1$UserName)){
+  print(i)
+  heat_temp <- heat1[heat1$UserName==i,] %>% select('StudyDayNo',cazyme_family)
+  rownames(heat_temp) <- heat_temp$StudyDayNo
+  heat_temp <- heat_temp[-1]
+  heat_temp[heat_temp>0] <- 1
+  heat_temp <- as.data.frame(t(heat_temp))
+  pdf(paste0('./result/',i,'.pdf'),width = 5,height = 12)
+  pheatmap(heat_temp,cluster_cols = F)
+  dev.off()
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #nomalization
 cazyme <- sweep(cazyme,2,colSums(cazyme),'/')
@@ -70,4 +104,7 @@ cazyme_plot <- ggplot(data = plot1, aes(x=StudyDayNo, y = value, fill=cazyme)) +
 
 cazyme_plot
 
-ggsave("./result/cazy.tiff",width=20,height=10,dpi = 600)
+ggsave("./result/cazy.pdf",width=20,height=10,dpi = 600)
+
+
+
