@@ -48,8 +48,6 @@ cd /project/flatiron2/cen/
 
 python3 build_database.py -i /project/flatiron2/cen/cazy_database/modified -o /project/flatiron2/cen/cazy_database/output/ -l /project/flatiron2/cen/cazy_database/cazy_level_tab.txt
 
-cd output/
-
 mkdir /project/flatiron2/cen/burst_database
 cd /project/flatiron2/cen/burst_database
 

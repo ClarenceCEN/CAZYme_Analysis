@@ -62,7 +62,7 @@ def build_database(table,seq,output,level):
     if os.path.exists(output_txt):
         os.remove(output_txt)
 
-    with open(output_fasta,'a') as f:
+    with open(output_fasta,'w') as f:
         for i in range(0, tab_file.shape[0]):
             # global n,n_level
             # n = 0
@@ -98,17 +98,31 @@ def build_database(table,seq,output,level):
             f.write('>%s_cazy_%04d_%s\n%s\n' % (basename, i, query_id, target_sequence))
 
 
-    with open(output_txt,'a') as f:
+    with open(output_txt,'w') as f:
         for i in range(0, tab_file.shape[0]):
             name_pattern = re.compile(r'(GH|GT|CBM|PL|AA|CE)(\d+)(_\d+)?')
             query_id = tab_file.loc[i, 'Query_ID']
             family = tab_file.loc[i, 'Family_HMM'].replace('.hmm', '')
+            cazy_tax = ''
             try:
                 cazy_cat = re.search(name_pattern, family).group(1)
                 cazy_num = re.search(name_pattern, family).group(2)
+                # method 2
+                cazy_tab = pd.read_csv(level, sep='\t')
+                temp = cazy_tab.loc[cazy_tab.loc[:, 'L4'] == cazy_cat, :]
+
+                for j in range(0, cazy_tab.shape[1]):
+                    cazy_tax = cazy_tax + temp.columns[j] + '_' + temp.iloc[0, j] + ';'
+                cazy_tax = cazy_tax.strip(';') + cazy_num
+                '''if cazy_cat == 'GH' and int(cazy_num) in [5, 13, 30, 43]:
+                    if re.search(name_pattern, family).group(3):
+                        cazy_tax = cazy_tax + ';L5_' + family
+                '''
             except:
                 print('Find %s! What is that?' % family)
-                continue   #Shall we continue?
+                #continue   #Shall we continue?
+                cazy_tax = 'L1_Others'
+
 
             '''
             # method 1    
@@ -122,17 +136,6 @@ def build_database(table,seq,output,level):
                 cazy_tax = cazy_tax+';L'+str(n_level+1)+'_'+family
             '''
 
-            # method 2
-            cazy_tab = pd.read_csv(level,sep='\t')
-            temp = cazy_tab.loc[cazy_tab.loc[:, 'L4'] == cazy_cat, :]
-            cazy_tax = ''
-            for j in range(0, cazy_tab.shape[1]):
-                cazy_tax = cazy_tax + temp.columns[j] + '_' + temp.iloc[0, j] + ';'
-            cazy_tax = cazy_tax.strip(';') + cazy_num
-            '''if cazy_cat == 'GH' and int(cazy_num) in [5, 13, 30, 43]:
-                if re.search(name_pattern, family).group(3):
-                    cazy_tax = cazy_tax + ';L5_' + family
-            '''
             #print(cazy_tax)
             #print('\n')
             f.write('%s_cazy_%04d_%s\t%s\n' % (basename, i, query_id, cazy_tax))
