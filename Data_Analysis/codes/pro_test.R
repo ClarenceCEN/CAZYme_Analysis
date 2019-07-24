@@ -63,7 +63,7 @@ mytest
 
 
 cazyme_all_plot_one_color <- ggplot(cazyme_all_pcoa, aes(x = Axis.1, y = Axis.2, fill = UserName)) +
-  geom_point(color =  "#5f86b7", alpha=0.75, size = 2, alpha = 0.6) +
+  geom_point(color =  "#5d47ff", alpha=0.75, size = 2, alpha = 0.6) +
   stat_ellipse(color = "dark grey", type = "norm", linetype = 2, level = 0.95, alpha = 0.5) +
   xlab(paste0("PC 1 [",percent_var[1],"%]")) +
   ylab(paste0("PC 2 [",percent_var[2],"%]")) +
@@ -73,11 +73,11 @@ cazyme_all_plot_one_color <- ggplot(cazyme_all_pcoa, aes(x = Axis.1, y = Axis.2,
         legend.text = element_text(size = 9),
         axis.text = element_text(size = 4),
         axis.title = element_text(size=9)) +
-  guides(color = guide_legend(ncol = 4))
-#annotate("text", x = 15, y = -30, label = paste0("p-value = ",plot_p))
+  guides(color = guide_legend(ncol = 4)) +
+annotate("text", x = 40, y = -50, label = paste0("p-value = ",plot_p))
 
 cazyme_all_plot_one_color + theme(legend.position = 'none')
-
+ggsave('./result/ado_test.pdf')
 
 #### MAKE 2E #####
 
