@@ -2,7 +2,9 @@
 title: "cazyme_analysis"
 author: "ShiCen"
 date: "2019/7/24"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
