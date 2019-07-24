@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 import argparse
+import re
 
 def make_arg_parser():
     parser = argparse.ArgumentParser(description='This is the commandline interface for cazyme_counts')
@@ -12,7 +13,8 @@ def make_arg_parser():
 
 def find_L4_missing(s):
     #print(s)
-    if s.find(';L4_') == -1:
+    pattern = re.compile(r'\S*?;\S*?;\S*?;\S*')
+    if re.search(pattern,s) is None:
         return False
     else:
         return True

@@ -121,7 +121,7 @@ def build_database(table,seq,output,level):
             except:
                 print('Find %s! What is that?' % family)
                 #continue   #Shall we continue?
-                cazy_tax = 'L1_Others'
+                cazy_tax = 'L1_Others;Others;Others;Others'
 
 
             '''
