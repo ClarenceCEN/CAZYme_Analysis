@@ -1,0 +1,52 @@
+---
+title: "cazyme_analysis"
+author: "ShiCen"
+date: "2019/7/24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = 'G:/Dan_Lab/codes/CAZyme/CAZYme_Analysis/Data_Analysis/')
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r import packages, echo=TRUE,message=FALSE,results='hide',warning=FALSE}
+require(robCompositions)
+require(tibble)
+require(dplyr)
+```
+
+
+```{r load data}
+cazyme <- read.table('./data/Cazyme_total.txt',sep='\t',header = T,row.names = 1)
+map <- read.table("./maps/SampleID_map.txt", sep = "\t", header = T, comment = "")
+```
+
+
+```{r do clr}
+cazyme_clr <- cenLR(cazyme+0.001)$x
+cazyme_filter <- as.data.frame(t(cazyme_clr))
+cazyme_filter <- rownames_to_column(cazyme_filter,var = 'X.SampleID')
+cazyme_filter <- merge(cazyme_filter,map[c('X.SampleID','UserName','StudyDayNo')],by = 'X.SampleID')
+```
+
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r plot the hist}
+co_vars <- aggregate(cazyme_filter[,!names(cazyme_filter)%in%c('X.SampleID','UserName','StudyDayNo')],by=list(cazyme_filter$UserName),FUN=function(x){sd(x)/mean(x)})
+
+co_vars_cazyme <- colMeans(co_vars[-1])
+
+hist(co_vars_cazyme)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

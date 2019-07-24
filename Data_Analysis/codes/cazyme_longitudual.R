@@ -10,8 +10,6 @@ require(gridExtra)
 require(pheatmap)
 
 
-
-
 setwd('G:/Dan_Lab/codes/CAZyme/CAZYme_Analysis/Data_Analysis/')
 
 load("./codes/order.RData")
