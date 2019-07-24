@@ -52,7 +52,7 @@ cazyme_plot <- ggplot(data = plot2, aes(x=StudyDayNo, y = cazyme)) +
   theme_classic() + scale_x_continuous(breaks = seq(1,17,1))+
   theme(strip.text.x = element_text(angle = 0, size = 15, face = "italic"),
         axis.text.x = element_text(size = 9),
-        axis.text.y = element_text(size = 9),
+        axis.text.y = element_text(size = 15),
         axis.title = element_text(size = 9),
         plot.title = element_text(hjust = 0.5),
         axis.title.x = element_blank(),
@@ -68,7 +68,7 @@ cazyme_plot <- ggplot(data = plot2, aes(x=StudyDayNo, y = cazyme)) +
 
 cazyme_plot
 
-ggsave("./result/cazy_pre.pdf",width=120,height=60,dpi = 600,limitsize = F)
+ggsave("./result/cazy_pre.pdf",width=150,height=80,dpi = 600,limitsize = F)
 
 
 
