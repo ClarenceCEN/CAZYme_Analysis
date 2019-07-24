@@ -32,11 +32,13 @@ no_tree_dist <- dist(t(food))
 setwd('G:/Dan_Lab/codes/CAZyme/CAZYme_Analysis/Data_Analysis/')
 load('./data/cazyme_mean_clr.RData')
 cazyme <- cazyme_mean_clr_trans
+cazyme <- t(cazyme_mean)
 cazyme <- cazyme[,colnames(cazyme)%in%colnames(food_un)]
 cazyme_dist <- dist(t(cazyme))
 
 
 load('./data/cazyme_clr.RData')
+cazyme_all <- t(cazyme_cleaned)
 cazyme_all <- as.data.frame(cazyme_clr_trans)
 cazyme_all <- cazyme_all[,!colnames(cazyme_all)%in%soylent]
 cazyme_all_dist <- dist(t(cazyme_all))
