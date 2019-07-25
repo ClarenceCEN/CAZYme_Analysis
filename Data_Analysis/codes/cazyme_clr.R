@@ -31,6 +31,8 @@ myimpR = impRZilr(cazyme_mean, maxit = 3, method = "lm", dl = rep(0.00000000001,
 cazyme_mean_clr <- cenLR(myimpR$x)$x
 rownames(cazyme_mean_clr) <- rownames(cazyme_mean)
 
+cazymes_to_keep <- colnames(cazyme_mean)
+save(cazymes_to_keep,file='./data/cazymes_to_keep.RData')
 #co_vars <- aggregate(cazyme_filter[,!names(cazyme_filter)%in%c('X.SampleID','UserName','StudyDayNo')],by=list(cazyme_filter$UserName),FUN=function(x){sd(x)/mean(x)})
 #cazyme_sum <- aggregate(cazyme_filter[,!names(cazyme_filter)%in%c('X.SampleID','UserName','StudyDayNo')],by=list(cazyme_filter$UserName),FUN=sum)
 #cazyme_sum[cazyme_sum>0] <- 1
