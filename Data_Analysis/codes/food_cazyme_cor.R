@@ -58,6 +58,7 @@ for(i in unique(food_c$UserName)){
   temp_cor_r <- corr.test(temp_food,temp_cazyme,adjust = 'fdr',method = 'spearman')$r
   temp_cor_p <- corr.test(temp_food,temp_cazyme,adjust = 'fdr',method = 'spearman')$p
   for(a in 1:nrow(temp_cor_p)){
+    print(a)
     for (b in 1:ncol(temp_cor_p)){
       if(!is.na(temp_cor_p[a,b])){
         coef_v <- c(coef_v,temp_cor_r)
