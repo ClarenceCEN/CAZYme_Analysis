@@ -28,13 +28,22 @@ food <- read.delim("data/diet/processed_food/dhydrt.smry.no.soy.txt", row = 1)
 food <- food[,colnames(food) %in% colnames(food_un)]
 no_tree_dist <- dist(t(food))
 
+###############nutrients############
+# load nutrition data
+nutr <- read.delim("data/diet/processed_nutr/nutr_65_smry_no_soy.txt", row = 1)
+
+# normalize nutrition data across features (rows)
+nutr_n <- sweep(nutr, 1, rowSums(nutr), "/")
+
+# make nutrition distance matrix (euclidean)
+nutr_dist <- dist(t(nutr_n))
+
 
 setwd('G:/Dan_Lab/codes/CAZyme/CAZYme_Analysis/Data_Analysis/')
 load('./data/cazyme_mean_clr.RData')
-cazyme <- cazyme_mean_clr_trans
-cazyme <- t(cazyme_mean)
-cazyme <- cazyme[,colnames(cazyme)%in%colnames(food_un)]
-cazyme_dist <- dist(t(cazyme))
+cazyme_pro <- as.data.frame(t(cazyme_mean_clr))
+cazyme_pro <- cazyme_pro[,colnames(cazyme_pro)%in%colnames(food_un)]
+cazyme_dist <- dist(t(cazyme_pro))
 
 
 load('./data/cazyme_clr.RData')
@@ -135,4 +144,56 @@ food_cazyme + theme(legend.position = "none")
 
 ggsave('./result/pro_test.pdf')
 
+
+# make pcoas 
+pcoa_n <- as.data.frame(pcoa(nutr_dist)$vectors)
+pcoa_c <- as.data.frame(pcoa(cazyme_dist)$vectors)
+
+# procrustes
+pro <- procrustes(pcoa_n, pcoa_c)
+pro_test <- protest(pcoa_n, pcoa_c, perm = 999)
+mantel_test <- mantel(nutr_dist,cazyme_dist,method = 'spearman')
+
+eigen <- sqrt(pro$svd$d)
+percent_var <- signif(eigen/sum(eigen), 4)*100
+
+beta_pro <- data.frame(pro$X)
+trans_pro <- data.frame(pro$Yrot)
+beta_pro$UserName <- rownames(beta_pro)
+beta_pro$type <- "Nutrition (Euclidean)"
+trans_pro$UserName <- rownames(trans_pro)
+trans_pro$type <- "Cazyme (Aitchison's)"
+
+colnames(trans_pro) <- colnames(beta_pro)
+
+pval <- signif(pro_test$signif, 1)
+
+plot <- rbind(beta_pro, trans_pro)
+
+nutr_cazyme <- ggplot(plot) +
+  geom_point(size = 3, alpha=0.75, aes(x = Axis.1, y = Axis.2, color = type)) +
+  scale_color_manual(values = c("#1a661a", "#00becc")) +
+  theme_classic() +
+  geom_line(aes(x= Axis.1, y=Axis.2, group=UserName), col = "darkgrey", alpha = 0.6) +
+  theme(panel.background = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        legend.title = element_blank(),
+        legend.text = element_text(size=9),
+        legend.position = 'bottom',
+        axis.text = element_text(size=4),
+        axis.title = element_text(size=9),
+        aspect.ratio = 1) +
+  guides(color = guide_legend(ncol = 1)) +
+  annotate("text", x = 0.2, y = -0.2, label = paste0("p-value=",pval), size = 2) +
+  xlab(paste0("PC 1 [",percent_var[1],"%]")) +
+  ylab(paste0("PC 2 [",percent_var[2],"%]")) 
+
+
+nutr_cazyme_leg <- get_legend(nutr_cazyme)
+
+
+nutr_cazyme + theme(legend.position = "none")
+
+ggsave('./result/pro_test_nutr.pdf')
 
