@@ -72,11 +72,11 @@ def build_database(table,seq,output,level,flag):
             # global n,n_level
             # n = 0
             # n_level = 0
-            family = tab_file.loc[i, 'Family_HMM'].replace('.hmm', '')
-            query_id = tab_file.loc[i, 'Query_ID']  # query gene name
-            aa_start = tab_file.loc[i, 'Query_start']
-            aa_end = tab_file.loc[i, 'Query_end']
-            aa_length = tab_file.loc[i, 'Query_length']  # the length of amino acid
+            family = tab_file.iloc[i]['Family_HMM'].replace('.hmm', '')
+            query_id = tab_file.iloc[i]['Query_ID']  # query gene name
+            aa_start = tab_file.iloc[i]['Query_start']
+            aa_end = tab_file.iloc[i]['Query_end']
+            aa_length = tab_file.iloc[i]['Query_length']  # the length of amino acid
             # print('%d: %s'% (i+1,family))
             dna_seq_pattern = re.compile(r'>' + query_id + '\n(.*?)(>|\n$)',re.S)  # find the header and the sequence. we cannot replace . with [A-Z]
             try:
@@ -106,8 +106,8 @@ def build_database(table,seq,output,level,flag):
     with open(output_txt,'w') as f:
         for i in range(0, tab_file.shape[0]):
             name_pattern = re.compile(r'(GH|GT|CBM|PL|AA|CE)(\d+)(_\d+)?')
-            query_id = tab_file.loc[i, 'Query_ID']
-            family = tab_file.loc[i, 'Family_HMM'].replace('.hmm', '')
+            query_id = tab_file.iloc[i]['Query_ID']
+            family = tab_file.iloc[i]['Family_HMM'].replace('.hmm', '')
             cazy_tax = ''
             try:
                 cazy_cat = re.search(name_pattern, family).group(1)
