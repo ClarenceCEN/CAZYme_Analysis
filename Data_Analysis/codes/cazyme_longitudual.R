@@ -14,22 +14,19 @@ require(pheatmap)
 
 setwd('G:/Dan_Lab/codes/CAZyme/CAZYme_Analysis/Data_Analysis/')
 
-load("./codes/order.RData")
+load("./data/order.RData")
 
-cazyme <- read.table('./data/Cazyme_total.txt',sep='\t',header = T,row.names = 1)
+cazyme <- read.table('./data/Cazyme_total2.txt',sep='\t',header = T,row.names = 1)
 map <- read.table("./maps/SampleID_map.txt", sep = "\t", header = T, comment = "")
 pal <- rev(c("#ff40f2", "#ff0000", "#008c4b", "#00138c", "#8c235b", "#ffbfbf", "#8c7723", "#468c75", "#8091ff", "#ff80c4", "#8c3123", "#fff2bf", "#40fff2", "#69698c", "#ff0044", "#ff9180", "#e5ff80", "#bffbff", "#5940ff", "#8c696e", "#8c7369", "#858c69", "#40d9ff", "#c480ff", "#ff8c40", "#4b8c00", "#23698c", "#69238c", "#8c4b00", "#bfffbf", "#004b8c", "#eabfff", "#ffc480", "#40ff59", "#80c4ff", "#ffd940" ))
 pal <- c("#e54545", "#735050", "#731406", "#ff4400", "#cc8970", "#f27724", "#331c03", "#ffe7cc", "#664605", "#e5b85c", "#8c8169", "#cad900", "#3c400a", "#668000", "#bce6a1", "#40f224", "#1d7334", "#40ffa6", "#1d402f", "#7ee6d1", "#7ca6a3", "#00add9", "#1b4d59", "#00294d", "#3d9df2", "#cce7ff", "#0c63e6", "#69778c", "#15358c", "#333640", "#00008c", "#070033", "#6026ff", "#695980", "#dcc2f2", "#b56cd9", "#3c0640", "#ff26d4", "#b33e7c", "#ff1a75", "#590929", "#e6a1b3", "#331418")
 
 
-# get right number of colors for plotting
-no_cols <- length(unique(plot1$cazyme))
-#colors_func <- sample(cols_func(no_cols))
-colors_func <- sample(pal, no_cols,replace = T)
-colors_func <- sample(colors(),no_cols)   
+
 
 
 rownames(cazyme) <- gsub(".*;L4_",'',rownames(cazyme))
+rownames(cazyme) <- gsub("L1_Others;Others;Others;",'',rownames(cazyme))
 #order by mean value
 cazyme <- cazyme[order(rowMeans(cazyme),decreasing = F),]
 
@@ -43,6 +40,13 @@ plot2$present <- ifelse(plot2$value>0,1,0)
 
 #change the order
 plot2$UserName <- factor(plot2$UserName, levels = ord_factor)
+
+# get right number of colors for plotting
+no_cols <- length(unique(plot2$cazyme))
+#colors_func <- sample(cols_func(no_cols))
+colors_func <- sample(pal, no_cols,replace = T)
+colors_func <- sample(colors(),no_cols)   
+
 
 cazyme_plot <- ggplot(data = plot2, aes(x=StudyDayNo, y = cazyme)) +
   geom_point(aes(size=present,color=cazyme)) +
@@ -94,7 +98,7 @@ plot1$UserName <- factor(plot1$UserName, levels = ord_factor)
 cazyme_plot <- ggplot(data = plot1, aes(x=StudyDayNo, y = value, fill=cazyme)) +
   geom_area(stat = "identity") +
   facet_grid(.~UserName, scales = "free") +
-  scale_fill_manual(values = mycols) +
+  scale_fill_manual(values = colors_func) +
   scale_x_discrete(drop = FALSE) +
   theme_classic() +
   theme(strip.text.x = element_blank(),

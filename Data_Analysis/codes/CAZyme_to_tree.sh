@@ -7,6 +7,8 @@ name=`basename $f .txt`
 biom convert -i $f -o $name.biom --to-json --table-type "OTU table" --process-obs-metadata=taxonomy
 done
 
+echo "complete transformation"
+
 merge_otu_tables.py -i MCTs01.biom,MCTs03.biom -o merged_otu_table.biom
 merge_otu_tables.py -i merged_otu_table.biom,MCTs04.biom -o merged_otu_table.biom
 merge_otu_tables.py -i merged_otu_table.biom,MCTs05.biom -o merged_otu_table.biom
@@ -34,12 +36,14 @@ merge_otu_tables.py -i merged_otu_table.biom,MCTs27.biom -o merged_otu_table.bio
 merge_otu_tables.py -i merged_otu_table.biom,MCTs28.biom -o merged_otu_table.biom
 merge_otu_tables.py -i merged_otu_table.biom,MCTs29.biom -o merged_otu_table.biom
 merge_otu_tables.py -i merged_otu_table.biom,MCTs32.biom -o merged_otu_table.biom
+merge_otu_tables.py -i merged_otu_table.biom,MCTs31.biom -o merged_otu_table.biom
 merge_otu_tables.py -i merged_otu_table.biom,MCTs33.biom -o merged_otu_table.biom
 merge_otu_tables.py -i merged_otu_table.biom,MCTs34.biom -o merged_otu_table.biom
 merge_otu_tables.py -i merged_otu_table.biom,MCTs35.biom -o merged_otu_table.biom
 merge_otu_tables.py -i merged_otu_table.biom,MCTs36.biom -o merged_otu_table.biom
 merge_otu_tables.py -i merged_otu_table.biom,MCTs37.biom -o merged_otu_table.biom
 
+echo "complete merging"
 
 #for f in ./*.biom
 #do
@@ -54,6 +58,6 @@ merge_otu_tables.py -i merged_otu_table.biom,MCTs37.biom -o merged_otu_table.bio
 
 beta_diversity_through_plots.py -i merged_otu_table.biom -o cazy_beta_plots -m temp_Mapping_File.txt -p beta_params.txt
 
-summarize_taxa_through_plots.py -i merged_otu_table.biom -o summary -m temp_Mapping_File.txt -c Group
+summarize_taxa.py -i merged_otu_table.biom -o summary -a
 
-alpha_diversity.py -i merged_otu_table.biom -o cazy_alpha -m shannon,chao1,simpson
+alpha_diversity.py -i merged_otu_table.biom -o cazy_alpha.txt -m shannon,chao1,simpson
