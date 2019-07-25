@@ -8,6 +8,7 @@ def make_agr_parser():
     parser.add_argument('-i', '--input', help='The input dbCAN result tables and DNA sequences, they should have the same file name.', required=True)
     parser.add_argument('-o', '--output', help='The output directory of Cazyme databases', required=True,default=os.getcwd())
     parser.add_argument('-l','--level',help='The level tab file.')
+    parser.add_argument('--multi',help='Whether keep multiple blast results?',default=False,const=True,nargs='?')
     return parser
 
 '''
@@ -36,10 +37,14 @@ def find_value_recursive(cazy_dict,cazyme):
             return
 '''
 
-def build_database(table,seq,output,level):
+def build_database(table,seq,output,level,flag):
     tab_file = pd.read_csv(table, sep='\t', header=None)
     tab_file.columns = ['Family_HMM', 'HMM_length', 'Query_ID', 'Query_length', 'E_value',
                         'HMM_start', 'HMM_end', 'Query_start', 'Query_end', 'Coverage']
+
+    if not flag:
+        tab_file = tab_file.sort_values('Coverage')
+        tab_file = tab_file.drop_duplicates('Query_ID', keep='last')
 
     with open(seq, 'r') as f:
         dna_seq_file = f.read()
@@ -158,7 +163,7 @@ def main():
             dna_seq = os.path.join(input_path,os.path.splitext(f)[0]+'.fnn')
             dbCan_table = os.path.join(input_path,f)
             #print(dbCan_table)
-            build_database(dbCan_table, dna_seq, output_path, level_path)
+            build_database(dbCan_table, dna_seq, output_path, level_path, args.multi)
 
 
 
