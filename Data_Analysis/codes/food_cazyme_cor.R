@@ -2,6 +2,7 @@
 require(robCompositions)
 require(tibble)
 require(psych)
+require(reshape2)
 
 setwd('G:/Dan_Lab/codes/CAZyme/CAZYme_Analysis/Data_Analysis/')
 
@@ -49,24 +50,174 @@ food_list <- list()
 cazyme_list <- list()
 
 for(i in unique(food_c$UserName)){
+  print(i)
   coef_v <- c()
   fdr_v <- c()
   food_v <- c()
   cazyme_v <- c()
+  p_v <- c()
+  id <- c()
   temp_food <- food_c[food_c$UserName==i,!colnames(food_c)%in%c('X.SampleID','UserName')]
   temp_cazyme <- cazyme_c[cazyme_c$UserName==i,!colnames(cazyme_c)%in%c('X.SampleID','UserName')]
   temp_cor_r <- corr.test(temp_food,temp_cazyme,adjust = 'fdr',method = 'spearman')$r
   temp_cor_p <- corr.test(temp_food,temp_cazyme,adjust = 'fdr',method = 'spearman')$p
   for(a in 1:nrow(temp_cor_p)){
-    print(a)
+    #print(a)
     for (b in 1:ncol(temp_cor_p)){
       if(!is.na(temp_cor_p[a,b])){
-        coef_v <- c(coef_v,temp_cor_r)
-        fdr_v <- c(fdr_v,temp_cor_p)
+        coef_v <- c(coef_v,temp_cor_r[a,b])
+        fdr_v <- c(fdr_v,temp_cor_p[a,b])
         food_v <- c(food_v,colnames(temp_food)[a])
         cazyme_v <- c(cazyme_v,colnames(temp_cazyme)[b])
+        id <- c(id,i)
       }
     }
   }
-  
+  #fdr_v <- p.adjust(p_v,method = 'fdr')
+  temp_cor_df <- data.frame(food=food_v,cazyme=cazyme_v,coef=coef_v,id=id,fdr_p=fdr_v)
+  cazyme_food_list[[i]] <- temp_cor_df
 }
+
+save(cazyme_food_list,file = './data/cazyme_food_cor.RData')
+
+load('./data/cazyme_food_cor.RData')
+sigs <- lapply(cazyme_food_list, function(x) subset(x, fdr_p <= 0.1))
+allsigs <- do.call("rbind", sigs)
+
+allsigs$cazy_cat <- ifelse(grepl('AA',allsigs$cazyme),'AA',
+                           ifelse(grepl('CBM',allsigs$cazyme),'CBM',
+                                  ifelse(grepl('GT',allsigs$cazyme),'GT',
+                                         ifelse(grepl('GH',allsigs$cazyme),'GH',
+                                                ifelse(grepl('PL',allsigs$cazyme),'PL','CE')))))
+
+allsigs$bin <- ifelse(allsigs$coef < 0, "Negative (+/-)", 
+                      ifelse(allsigs$coef > 0, "Positive (+/+ or -/-)", "NA"))
+allsigs$bin <- factor(allsigs$bin, levels = c("Positive (+/+ or -/-)", "Negative (+/-)"))
+
+allsigs$food <- gsub("Dry_Beans_Peas_Other_Legumes_Nuts_and_Seeds", "Legumes", allsigs$food)
+allsigs$food <- gsub("Fats_Oils_and_Salad_Dressings", "Fats", allsigs$food)
+allsigs$food <- gsub("Grain_Product", "Grains", allsigs$food)
+allsigs$food <- gsub("Milk_and_Milk_Products", "Milks", allsigs$food)
+allsigs$food <- gsub("Meat_Poultry_Fish_and_Mixtures", "Meats", allsigs$food)
+allsigs$food <- gsub("Sugars_Sweets_and_Beverages", "Sweets and Beverages", allsigs$food)
+allsigs$food <- gsub("Cereals_not_cooked_or_NS_as_to_cooked", "Grains", allsigs$food)
+allsigs$food <- gsub("Grain_mixtures_frozen_plate_meals_soups", "Grains", allsigs$food)
+allsigs$food <- gsub("Nuts_nut_butters_and_nut_mixtures", "Nuts", allsigs$food)
+allsigs$food <- gsub("Darkgreen_vegetables", "Vegetables", allsigs$food)
+allsigs$food <- gsub("Alcoholic_beverages", "Sweets and Beverages", allsigs$food)
+allsigs$food <- gsub("Citrus_fruits_juices", "Fruits", allsigs$food)
+allsigs$food <- gsub("Deepyellow_vegetables", "Vegetables", allsigs$food)
+allsigs$food <- gsub("Cakes_cookies_pies_pastries_bars", "Grains", allsigs$food)
+allsigs$food <- gsub("Crackers_and_salty_snacks_from_grain", "Grains", allsigs$food)
+allsigs$food <- gsub("Creams_and_cream_substitutes", "Milks", allsigs$food)
+allsigs$food <- gsub("Organ_meats_sausages_and_lunchmeats", "Meats", allsigs$food)
+allsigs$food <- gsub("Meatpoultry_fish_with_nonmeat", "Meats", allsigs$food)
+allsigs$food <- gsub("Fish_and_shellfish", "Meats", allsigs$food)
+allsigs$food <- gsub("Other_vegetables", "Vegetables", allsigs$food)
+allsigs$food <- gsub("Other_fruits", "Fruits", allsigs$food)
+allsigs$food <- gsub("Formulated_nutrition_beverages_energy_drinks_sports_drinks_function", "Sweets and Beverages", allsigs$food)
+allsigs$food <- gsub("Nonalcoholic_beverages", "Sweets and Beverages", allsigs$food)
+allsigs$food <- gsub("Pancakes_waffles_French_toast_other", "Grains", allsigs$food)
+allsigs$food <- gsub("Fruit_juices_and_nectars_excluding_citrus", "Fruits", allsigs$food)
+allsigs$food <- gsub("Frozen_and_shelfstable_plate_meals_soups_and_gravies", "Meats", allsigs$food)
+allsigs$food <- gsub("Milk_desserts_sauces_gravies", "Milks", allsigs$food)
+allsigs$food <- gsub("Milks_and_milk_drinks", "Milks", allsigs$food)
+allsigs$food <- gsub("Lamb_veal_game_other", "Meats", allsigs$food)
+allsigs$food <- gsub("Pastas_cooked_cereals_rice", "Grains", allsigs$food)
+allsigs$food <- gsub("Quick_breads", "Grains", allsigs$food)
+allsigs$food <- gsub("Salad_dressings", "Fats", allsigs$food)
+allsigs$food <- gsub("Sugars_and_sweets", "Sweets and Beverages", allsigs$food)
+allsigs$food <- gsub("Seeds_and_seed_mixtures", "Legumes", allsigs$food)
+allsigs$food <- gsub("Tomatoes_and_tomato_mixtures", "Vegetables", allsigs$food)
+allsigs$food <- gsub("Egg_mixtures", "Eggs", allsigs$food)
+allsigs$food <- gsub("Dried_fruits", "Fruits", allsigs$food)
+allsigs$food <- gsub("Yeast", "Grains", allsigs$food)
+allsigs$food <- gsub("White_potatoes_and_Puerto_Rican_starchy_vegetables", "Vegetables", allsigs$food)
+allsigs$food <- gsub("Vegetables_with_meat_poultry_fish", "Vegetables", allsigs$food)
+allsigs$food <- gsub("Water_noncarbonated", "Sweets and Beverages", allsigs$food)
+allsigs$food <- gsub("Poultry", "Meats", allsigs$food)
+allsigs$food <- gsub("Pork", "Meats", allsigs$food)
+allsigs$food <- gsub("Cheeses", "Milks", allsigs$food)
+allsigs$food <- gsub("Beef", "Meats", allsigs$food)
+allsigs$food <- gsub("Fruits_and_juices_baby_food", "Fruits", allsigs$food)
+
+
+
+# load colors
+source(file = "G:/Dan_Lab/dietstudy_analyses-master/lib/colors/UserNameColors.R")
+UserNameColors['MCTs05'] <- '#99ff00'
+
+## get information to label key values repeated in more than one person for labeling
+allsigs_names <- allsigs[colnames(allsigs) %in% c("food", "cazyme")]
+allsigs_names_pairs <- paste(allsigs_names$food, allsigs_names$cazyme)
+
+names_repeated<-as.data.frame(table(allsigs_names_pairs))
+names_repeated<- subset(names_repeated, names_repeated$Freq >2)
+table(names_repeated$Freq)
+names_repeated <- colsplit(names_repeated$allsigs_names_pairs, " ", c("food", "cazyme"))
+names_repeated$label <- "*"
+
+
+
+
+allsigs <- merge(allsigs, names_repeated, all.x = T)
+
+allsigs$id <- gsub("MCTs", "", allsigs$id)
+
+table(allsigs$id)
+
+length(table(allsigs$id))
+
+
+names(UserNameColors) <- gsub("MCTs", "", names(UserNameColors))
+
+require(ggplot2)
+myplot <- ggplot(data = allsigs, aes(x = coef, y = id, size = -log(fdr_p), color = cazy_cat)) +
+  geom_point(alpha = 0.8) +
+  #geom_point(alpha = 0.8, color = "darkgrey", pch = 21) +
+  facet_grid(food~bin, scales = "free", space = "free_y")+
+  scale_color_manual(values = as.character(sample(UserNameColors,6))) +
+  theme_classic() +
+  guides(color = guide_legend(nrow = 10, title = "Cazyme Catgory", title.position = "top"),
+         size = guide_legend(title.position = "top", title = "-log(FDR p-value)")) +
+  theme(legend.position = "right",
+        axis.text.y = element_text(size = 12, color = "black"),
+        axis.text.x = element_text(size = 10, color = "black"),
+        panel.grid.major = element_line(colour = "lightgrey"),
+        strip.text = element_text(size = 10, color = "black"),
+        axis.title = element_text(size = 12),
+        legend.text = element_text(size = 7),
+        legend.title = element_text(size = 8)) +
+  ylab("Subjects") +
+  xlab("Spearman correlation") +
+  scale_x_continuous(trans = "reverse") 
+
+
+myplot
+
+ggsave('./result/food_cor3.pdf',height = 12,width = 10,limitsize = F)
+
+myplot <- ggplot(data = allsigs, aes(x = coef, y = cazyme, size = -log(fdr_p), color = id)) +
+  geom_point(alpha = 0.8) +
+  #geom_point(alpha = 0.8, color = "darkgrey", pch = 21) +
+  facet_grid(food~bin, scales = "free", space = "free_y")+
+  scale_color_manual(values = UserNameColors) +
+  theme_classic() +
+  guides(color = guide_legend(nrow = 10, title = "Subject", title.position = "top"),
+         size = guide_legend(title.position = "top", title = "-log(FDR p-value)")) +
+  theme(legend.position = "right",
+        axis.text.y = element_text(size = 9, color = "black"),
+        axis.text.x = element_text(size = 9, color = "black"),
+        panel.grid.major = element_line(colour = "lightgrey"),
+        strip.text = element_text(size = 10, color = "black"),
+        axis.title = element_text(size = 12),
+        legend.text = element_text(size = 7),
+        legend.title = element_text(size = 8)) +
+  ylab("Cazyme") +
+  xlab("Spearman correlation") +
+  scale_x_continuous(trans = "reverse")
+
+
+myplot
+
+ggsave('./result/food_cor.pdf',height = 90,width = 8,limitsize = F)
