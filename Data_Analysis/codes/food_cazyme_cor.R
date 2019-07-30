@@ -173,13 +173,14 @@ length(table(allsigs$id))
 
 
 names(UserNameColors) <- gsub("MCTs", "", names(UserNameColors))
+pal <- rev(c("#ff40f2", "#ff0000", "#008c4b", "#00138c", "#8c235b", "#ffbfbf", "#8c7723", "#468c75", "#8091ff", "#ff80c4", "#8c3123", "#fff2bf", "#40fff2", "#69698c", "#ff0044", "#ff9180", "#e5ff80", "#bffbff", "#5940ff", "#8c696e", "#8c7369", "#858c69", "#40d9ff", "#c480ff", "#ff8c40", "#4b8c00", "#23698c", "#69238c", "#8c4b00", "#bfffbf", "#004b8c", "#eabfff", "#ffc480", "#40ff59", "#80c4ff", "#ffd940" ))
 
 require(ggplot2)
-myplot <- ggplot(data = allsigs, aes(x = coef, y = id, size = -log(fdr_p), color = cazy_cat)) +
-  geom_point(alpha = 0.2) +
+myplot <- ggplot(data = allsigs, aes(x = coef, y = food, size = -log(fdr_p), color = cazy_cat)) +
+  geom_point(alpha = 0.5) +
   #geom_point(alpha = 0.8, color = "darkgrey", pch = 21) +
-  facet_grid(food~bin, scales = "free", space = "free_y")+
-  scale_color_manual(values = as.character(sample(UserNameColors,6))) +
+  facet_grid(id~bin, scales = "free", space = "free_y")+
+  scale_color_manual(values = as.character(sample(pal,6))) +
   theme_classic() +
   guides(color = guide_legend(nrow = 10, title = "Cazyme Catgory", title.position = "top"),
          size = guide_legend(title.position = "top", title = "-log(FDR p-value)")) +
@@ -191,14 +192,41 @@ myplot <- ggplot(data = allsigs, aes(x = coef, y = id, size = -log(fdr_p), color
         axis.title = element_text(size = 12),
         legend.text = element_text(size = 7),
         legend.title = element_text(size = 8)) +
-  ylab("Subjects") +
+  ylab("Food") +
   xlab("Spearman correlation") +
   scale_x_continuous(trans = "reverse") 
 
 
 myplot
 
-ggsave('./result/food_cor3.pdf',height = 10,width = 10,limitsize = F)
+ggsave('./result/food_cor4.pdf',height = 8,width = 10,limitsize = F)
+
+myplot <- ggplot(data = allsigs, aes(x = coef, y = id, size = -log(fdr_p), color = cazy_cat)) +
+  geom_point(alpha = 0.5) +
+  #geom_point(alpha = 0.8, color = "darkgrey", pch = 21) +
+  facet_grid(food~bin, scales = "free", space = "free_y")+
+  scale_color_manual(values = as.character(sample(pal,6))) +
+  theme_classic() +
+  guides(color = guide_legend(nrow = 10, title = "Cazyme Catgory", title.position = "top"),
+         size = guide_legend(title.position = "top", title = "-log(FDR p-value)")) +
+  theme(legend.position = "right",
+        axis.text.y = element_text(size = 12, color = "black"),
+        axis.text.x = element_text(size = 10, color = "black"),
+        panel.grid.major = element_line(colour = "lightgrey"),
+        strip.text = element_text(size = 10, color = "black"),
+        axis.title = element_text(size = 12),
+        legend.text = element_text(size = 7),
+        legend.title = element_text(size = 8)) +
+  ylab("Subject") +
+  xlab("Spearman correlation") +
+  scale_x_continuous(trans = "reverse") 
+
+
+myplot
+
+ggsave('./result/food_cor3.pdf',height = 12,width = 10,limitsize = F)
+
+
 
 myplot <- ggplot(data = allsigs, aes(x = coef, y = cazyme, size = -log(fdr_p), color = id)) +
   geom_point(alpha = 0.8) +
@@ -209,7 +237,7 @@ myplot <- ggplot(data = allsigs, aes(x = coef, y = cazyme, size = -log(fdr_p), c
   guides(color = guide_legend(nrow = 10, title = "Subject", title.position = "top"),
          size = guide_legend(title.position = "top", title = "-log(FDR p-value)")) +
   theme(legend.position = "right",
-        axis.text.y = element_text(size = 9, color = "black"),
+        axis.text.y = element_blank(),
         axis.text.x = element_text(size = 9, color = "black"),
         panel.grid.major = element_line(colour = "lightgrey"),
         strip.text = element_text(size = 10, color = "black"),
@@ -223,4 +251,4 @@ myplot <- ggplot(data = allsigs, aes(x = coef, y = cazyme, size = -log(fdr_p), c
 
 myplot
 
-ggsave('./result/food_cor.pdf',height = 90,width = 8,limitsize = F)
+ggsave('./result/food_cor.pdf',height = 15,width = 8,limitsize = F)

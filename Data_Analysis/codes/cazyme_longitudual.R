@@ -17,6 +17,7 @@ setwd('G:/Dan_Lab/codes/CAZyme/CAZYme_Analysis/Data_Analysis/')
 load("./data/order.RData")
 
 cazyme <- read.table('./data/Cazyme_total2.txt',sep='\t',header = T,row.names = 1)
+cazyme <- read.table('./data/Cazyme_total_try.txt',sep='\t',header = T,row.names = 1)
 map <- read.table("./maps/SampleID_map.txt", sep = "\t", header = T, comment = "")
 pal <- rev(c("#ff40f2", "#ff0000", "#008c4b", "#00138c", "#8c235b", "#ffbfbf", "#8c7723", "#468c75", "#8091ff", "#ff80c4", "#8c3123", "#fff2bf", "#40fff2", "#69698c", "#ff0044", "#ff9180", "#e5ff80", "#bffbff", "#5940ff", "#8c696e", "#8c7369", "#858c69", "#40d9ff", "#c480ff", "#ff8c40", "#4b8c00", "#23698c", "#69238c", "#8c4b00", "#bfffbf", "#004b8c", "#eabfff", "#ffc480", "#40ff59", "#80c4ff", "#ffd940" ))
 pal <- c("#e54545", "#735050", "#731406", "#ff4400", "#cc8970", "#f27724", "#331c03", "#ffe7cc", "#664605", "#e5b85c", "#8c8169", "#cad900", "#3c400a", "#668000", "#bce6a1", "#40f224", "#1d7334", "#40ffa6", "#1d402f", "#7ee6d1", "#7ca6a3", "#00add9", "#1b4d59", "#00294d", "#3d9df2", "#cce7ff", "#0c63e6", "#69778c", "#15358c", "#333640", "#00008c", "#070033", "#6026ff", "#695980", "#dcc2f2", "#b56cd9", "#3c0640", "#ff26d4", "#b33e7c", "#ff1a75", "#590929", "#e6a1b3", "#331418")
@@ -89,7 +90,11 @@ plot1 <- rownames_to_column(plot1,var='X.SampleID')
 plot1 <- melt(plot1,id = 'X.SampleID',variable.name = 'cazyme')
 plot1 <- merge(plot1,map,by = 'X.SampleID')
 
-
+# get right number of colors for plotting
+no_cols <- length(unique(plot1$cazyme))
+#colors_func <- sample(cols_func(no_cols))
+colors_func <- sample(pal, no_cols,replace = T)
+colors_func <- sample(colors(),no_cols)  
 
 #change the order
 plot1$UserName <- factor(plot1$UserName, levels = ord_factor)
@@ -101,7 +106,7 @@ cazyme_plot <- ggplot(data = plot1, aes(x=StudyDayNo, y = value, fill=cazyme)) +
   scale_fill_manual(values = colors_func) +
   scale_x_discrete(drop = FALSE) +
   theme_classic() +
-  theme(strip.text.x = element_blank(),
+  theme(strip.text.x = element_text(angle = 0, size = 9, face = "italic"),
         axis.text.x = element_text(angle = 45, hjust = 1),
         axis.text.y = element_text(size = 9),
         axis.title = element_text(size = 9),
