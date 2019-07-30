@@ -19,6 +19,7 @@ rownames(food_L2) <- gsub(".*;L2_",'',rownames(food_L2))
 
 load("./data/cazymes_to_keep.RData")
 cazyme <- read.table('./data/Cazyme_total2.txt',sep='\t',header = T,row.names = 1)
+cazyme <- read.table('./data/Cazyme_total_try.txt',sep='\t',header = T,row.names = 1)
 cazyme <- cazyme[cazymes_to_keep,]
 
 cazyme <- cazyme[-grep('Other',rownames(cazyme)),]
@@ -79,6 +80,7 @@ for(i in unique(food_c$UserName)){
 }
 
 save(cazyme_food_list,file = './data/cazyme_food_cor.RData')
+save(cazyme_food_list,file = './data/cazyme_food_cor_try.RData')
 
 load('./data/cazyme_food_cor.RData')
 sigs <- lapply(cazyme_food_list, function(x) subset(x, fdr_p <= 0.1))
@@ -142,6 +144,7 @@ allsigs$food <- gsub("Beef", "Meats", allsigs$food)
 allsigs$food <- gsub("Fruits_and_juices_baby_food", "Fruits", allsigs$food)
 
 
+write.csv(allsigs,"./data/network/food_cazyme_cor_try.csv",row.names = F,quote = F)
 
 # load colors
 source(file = "G:/Dan_Lab/dietstudy_analyses-master/lib/colors/UserNameColors.R")
@@ -173,7 +176,7 @@ names(UserNameColors) <- gsub("MCTs", "", names(UserNameColors))
 
 require(ggplot2)
 myplot <- ggplot(data = allsigs, aes(x = coef, y = id, size = -log(fdr_p), color = cazy_cat)) +
-  geom_point(alpha = 0.8) +
+  geom_point(alpha = 0.2) +
   #geom_point(alpha = 0.8, color = "darkgrey", pch = 21) +
   facet_grid(food~bin, scales = "free", space = "free_y")+
   scale_color_manual(values = as.character(sample(UserNameColors,6))) +
@@ -195,7 +198,7 @@ myplot <- ggplot(data = allsigs, aes(x = coef, y = id, size = -log(fdr_p), color
 
 myplot
 
-ggsave('./result/food_cor3.pdf',height = 12,width = 10,limitsize = F)
+ggsave('./result/food_cor3.pdf',height = 10,width = 10,limitsize = F)
 
 myplot <- ggplot(data = allsigs, aes(x = coef, y = cazyme, size = -log(fdr_p), color = id)) +
   geom_point(alpha = 0.8) +

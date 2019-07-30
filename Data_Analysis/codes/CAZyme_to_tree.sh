@@ -4,6 +4,7 @@
 for f in ./*.txt
 do
 name=`basename $f .txt`
+echo $name
 biom convert -i $f -o $name.biom --to-json --table-type "OTU table" --process-obs-metadata=taxonomy
 done
 

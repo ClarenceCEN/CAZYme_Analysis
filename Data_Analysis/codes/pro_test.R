@@ -142,7 +142,7 @@ food_cazyme_leg <- get_legend(food_cazyme)
 
 food_cazyme + theme(legend.position = "none")
 
-ggsave('./result/pro_test.pdf')
+ggsave('./result/pro_test_try.pdf')
 
 
 # make pcoas 
@@ -195,5 +195,5 @@ nutr_cazyme_leg <- get_legend(nutr_cazyme)
 
 nutr_cazyme + theme(legend.position = "none")
 
-ggsave('./result/pro_test_nutr.pdf')
+ggsave('./result/pro_test_nutr_try.pdf')
 

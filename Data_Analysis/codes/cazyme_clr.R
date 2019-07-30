@@ -8,6 +8,7 @@ setwd('G:/Dan_Lab/codes/CAZyme/CAZYme_Analysis/Data_Analysis/')
 #clr of cazyme data
 
 cazyme <- read.table('./data/Cazyme_total2.txt',sep='\t',header = T,row.names = 1)
+cazyme <- read.table('./data/Cazyme_total_try.txt',sep='\t',header = T,row.names = 1)
 map <- read.table("./maps/SampleID_map.txt", sep = "\t", header = T, comment = "")
 
 cazyme <- as.data.frame(t(sweep(cazyme,2,colSums(cazyme),'/')))
@@ -30,6 +31,7 @@ myimpR = impRZilr(cazyme_mean, maxit = 3, method = "lm", dl = rep(0.00000000001,
 
 cazyme_mean_clr <- cenLR(myimpR$x)$x
 rownames(cazyme_mean_clr) <- rownames(cazyme_mean)
+save(cazyme_mean_clr, file = "data/cazyme_mean_clr_try.RData")
 
 cazymes_to_keep <- colnames(cazyme_mean)
 save(cazymes_to_keep,file='./data/cazymes_to_keep.RData')
