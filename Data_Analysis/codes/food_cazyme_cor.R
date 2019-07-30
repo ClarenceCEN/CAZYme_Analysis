@@ -47,8 +47,6 @@ food_c <- rownames_to_column(food_c,var='X.SampleID')
 food_c <- merge(food_c,map[c('X.SampleID','UserName')],by='X.SampleID')
 
 cazyme_food_list <- list()
-food_list <- list()
-cazyme_list <- list()
 
 for(i in unique(food_c$UserName)){
   print(i)
@@ -83,7 +81,7 @@ save(cazyme_food_list,file = './data/cazyme_food_cor.RData')
 save(cazyme_food_list,file = './data/cazyme_food_cor_try.RData')
 
 load('./data/cazyme_food_cor.RData')
-sigs <- lapply(cazyme_food_list, function(x) subset(x, fdr_p <= 0.1))
+sigs <- lapply(cazyme_food_list, function(x) subset(x, fdr_p <= 0.2))
 allsigs <- do.call("rbind", sigs)
 
 allsigs$cazy_cat <- ifelse(grepl('AA',allsigs$cazyme),'AA',
@@ -199,7 +197,7 @@ myplot <- ggplot(data = allsigs, aes(x = coef, y = food, size = -log(fdr_p), col
 
 myplot
 
-ggsave('./result/food_cor4.pdf',height = 8,width = 10,limitsize = F)
+ggsave('./result/food_cor4.pdf',height = 10,width = 10,limitsize = F)
 
 myplot <- ggplot(data = allsigs, aes(x = coef, y = id, size = -log(fdr_p), color = cazy_cat)) +
   geom_point(alpha = 0.5) +
@@ -251,4 +249,4 @@ myplot <- ggplot(data = allsigs, aes(x = coef, y = cazyme, size = -log(fdr_p), c
 
 myplot
 
-ggsave('./result/food_cor.pdf',height = 15,width = 8,limitsize = F)
+ggsave('./result/food_cor.pdf',height = 18,width = 8,limitsize = F)
