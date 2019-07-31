@@ -62,7 +62,40 @@ allsigs$food <- gsub("Fruits_and_juices_baby_food", "Fruits", allsigs$food)
 
 #for network
 allsigs$pairs <- paste0(allsigs$food,'_',allsigs$cazyme)
+allsigs <- arrange(allsigs,allsigs$fdr_p)
+allsigs$detect_dup <- paste0(allsigs$food,'_',allsigs$cazyme,"_",allsigs$id)
+allsigs <- allsigs[!duplicated(allsigs$detect_dup),]
+
 write.csv(allsigs,"./data/network/food_cazyme_cor_0.2.csv",row.names = F,quote = F)
+
+cazyme_cate <- c()
+food_cazyme_pair <- c()
+allsigs <- mutate_if(allsigs,is.factor,as.character)
+for(i in unique(allsigs$pairs)){
+  print(i)
+  temp_cazyme <- allsigs[allsigs$pairs==i,'cazy_cat'][1]
+  food_cazyme_pair <- c(food_cazyme_pair,i)
+  cazyme_cate <- c(cazyme_cate,temp_cazyme)
+  print(temp_cazyme)
+  if(length(food_cazyme_pair)!=length(cazyme_cate)){
+    break()
+  }
+}
+
+subjects <- c()
+subjects_type <- c()
+for(i in unique(allsigs$id)){
+  print(i)
+  subjects <- c(subjects,i)
+  subjects_type <- c(subjects_type,"subjects")
+
+}
+
+nodes <- c(food_cazyme_pair,subjects)
+nodes_type <- c(cazyme_cate,subjects_type)
+
+output.node <- data.frame(nodes=nodes, type=nodes_type)
+write.table(output.node, "./data/network/output_node.txt", quote=FALSE, sep="\t", row.names=FALSE)
 
 
 
