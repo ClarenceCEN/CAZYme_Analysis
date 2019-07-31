@@ -249,4 +249,4 @@ myplot <- ggplot(data = allsigs, aes(x = coef, y = cazyme, size = -log(fdr_p), c
 
 myplot
 
-ggsave('./result/food_cor.pdf',height = 8,width = 8,limitsize = F)
+ggsave('./result/food_cor.pdf',height = 6,width = 8,limitsize = F)
