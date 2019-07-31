@@ -1,0 +1,238 @@
+food,cazyme,coef,id,fdr_p,cazy_cat,bin,pairs
+Citrus_fruit_juices,CBM12,1,MCTs05,0,CBM,Positive (+/+ or -/-),Citrus_fruit_juices_CBM12
+Pancakes,CBM12,1,MCTs05,0,CBM,Positive (+/+ or -/-),Pancakes_CBM12
+White_potatoes_baked_and_boiled,CBM22,-0.885023678948292,MCTs13,0.0457057738729482,CBM,Negative (+/-),White_potatoes_baked_and_boiled_CBM22
+White_potatoes_baked_and_boiled,CBM32,-0.894742349923693,MCTs13,0.0410949929926875,CBM,Negative (+/-),White_potatoes_baked_and_boiled_CBM32
+White_potatoes_baked_and_boiled,CE3,-0.884215969336355,MCTs13,0.0457057738729482,CE,Negative (+/-),White_potatoes_baked_and_boiled_CE3
+White_potatoes_baked_and_boiled,GH10,-0.920670718462285,MCTs13,0.023061665752309,GH,Negative (+/-),White_potatoes_baked_and_boiled_GH10
+White_potatoes_baked_and_boiled,GH105,-0.927725666496479,MCTs13,0.0215269829675437,GH,Negative (+/-),White_potatoes_baked_and_boiled_GH105
+White_potatoes_baked_and_boiled,GH106,-0.900176511814775,MCTs13,0.0410949929926875,GH,Negative (+/-),White_potatoes_baked_and_boiled_GH106
+White_potatoes_baked_and_boiled,GH110,-0.896939155114832,MCTs13,0.0410949929926875,GH,Negative (+/-),White_potatoes_baked_and_boiled_GH110
+White_potatoes_baked_and_boiled,GH115,-0.883441865925274,MCTs13,0.0457057738729482,GH,Negative (+/-),White_potatoes_baked_and_boiled_GH115
+White_potatoes_baked_and_boiled,GH127,-0.944055944055944,MCTs13,0.0172485410729145,GH,Negative (+/-),White_potatoes_baked_and_boiled_GH127
+White_potatoes_baked_and_boiled,GH130,-0.887724762865468,MCTs13,0.0457057738729482,GH,Negative (+/-),White_potatoes_baked_and_boiled_GH130
+White_potatoes_baked_and_boiled,GH137,-0.890509400852677,MCTs13,0.043997705717497,GH,Negative (+/-),White_potatoes_baked_and_boiled_GH137
+White_potatoes_baked_and_boiled,GH141,-0.885395978291316,MCTs13,0.0457057738729482,GH,Negative (+/-),White_potatoes_baked_and_boiled_GH141
+White_potatoes_baked_and_boiled,GH142,-0.920670718462285,MCTs13,0.023061665752309,GH,Negative (+/-),White_potatoes_baked_and_boiled_GH142
+White_potatoes_baked_and_boiled,GH24,-0.885023678948292,MCTs13,0.0457057738729482,GH,Negative (+/-),White_potatoes_baked_and_boiled_GH24
+White_potatoes_baked_and_boiled,GH28,-0.895104895104895,MCTs13,0.0410949929926875,GH,Negative (+/-),White_potatoes_baked_and_boiled_GH28
+White_potatoes_baked_and_boiled,GH29,-0.935202835231692,MCTs13,0.0172485410729145,GH,Negative (+/-),White_potatoes_baked_and_boiled_GH29
+White_potatoes_baked_and_boiled,GH30,-0.903351747465305,MCTs13,0.0401825979498423,GH,Negative (+/-),White_potatoes_baked_and_boiled_GH30
+White_potatoes_baked_and_boiled,GH31,-0.916083916083916,MCTs13,0.0243230356002171,GH,Negative (+/-),White_potatoes_baked_and_boiled_GH31
+White_potatoes_baked_and_boiled,GH33,-0.918779540562285,MCTs13,0.023061665752309,GH,Negative (+/-),White_potatoes_baked_and_boiled_GH33
+White_potatoes_baked_and_boiled,GH51,-0.893171247131392,MCTs13,0.0411407370161611,GH,Negative (+/-),White_potatoes_baked_and_boiled_GH51
+White_potatoes_baked_and_boiled,GH63,-0.937062937062937,MCTs13,0.0172485410729145,GH,Negative (+/-),White_potatoes_baked_and_boiled_GH63
+White_potatoes_baked_and_boiled,GH67,-0.894388375309078,MCTs13,0.0410949929926875,GH,Negative (+/-),White_potatoes_baked_and_boiled_GH67
+White_potatoes_baked_and_boiled,GH78,-0.935202835231692,MCTs13,0.0172485410729145,GH,Negative (+/-),White_potatoes_baked_and_boiled_GH78
+White_potatoes_baked_and_boiled,GH89,-0.899505874359704,MCTs13,0.0410949929926875,GH,Negative (+/-),White_potatoes_baked_and_boiled_GH89
+White_potatoes_baked_and_boiled,GH97,-0.909090909090909,MCTs13,0.0325987073194187,GH,Negative (+/-),White_potatoes_baked_and_boiled_GH97
+White_potatoes_baked_and_boiled,GT20,-0.926321491685705,MCTs13,0.0215269829675437,GT,Negative (+/-),White_potatoes_baked_and_boiled_GT20
+Dried_beans,CBM16,0.778606814399008,MCTs16,0.0370719889246931,CBM,Positive (+/+ or -/-),Dried_beans_CBM16
+Nut_butters,CBM44,0.779422863405995,MCTs16,0.0368942779421003,CBM,Positive (+/+ or -/-),Nut_butters_CBM44
+Egg_dishes_made_with_whole_eggs,CBM44,0.779422863405995,MCTs16,0.0368942779421003,CBM,Positive (+/+ or -/-),Egg_dishes_made_with_whole_eggs_CBM44
+Table_fats,CBM26,-0.826018171019405,MCTs16,0.0155173714197563,CBM,Negative (+/-),Table_fats_CBM26
+Chewing_gums,CBM44,0.779422863405995,MCTs16,0.0368942779421003,CBM,Positive (+/+ or -/-),Chewing_gums_CBM44
+Darkgreen_nonleafy_vegetables,CBM44,0.779422863405995,MCTs16,0.0368942779421003,CBM,Positive (+/+ or -/-),Darkgreen_nonleafy_vegetables_CBM44
+Carrots,CBM20,0.799333913681644,MCTs16,0.026552070569691,CBM,Positive (+/+ or -/-),Carrots_CBM20
+Carrots,CBM22,0.778023970213849,MCTs16,0.0371069941325413,CBM,Positive (+/+ or -/-),Carrots_CBM22
+Carrots,CBM30,0.845079340008434,MCTs16,0.0119439449911679,CBM,Positive (+/+ or -/-),Carrots_CBM30
+Carrots,CBM32,0.775692892404829,MCTs16,0.0386037886781062,CBM,Positive (+/+ or -/-),Carrots_CBM32
+Carrots,CBM48,0.877930148733182,MCTs16,0.00846226309295483,CBM,Positive (+/+ or -/-),Carrots_CBM48
+Carrots,CBM50,0.792105198556016,MCTs16,0.0299749238788545,CBM,Positive (+/+ or -/-),Carrots_CBM50
+Carrots,CBM6,0.866789615512434,MCTs16,0.00846226309295483,CBM,Positive (+/+ or -/-),Carrots_CBM6
+Carrots,CBM66,0.84920038280378,MCTs16,0.0110984581913433,CBM,Positive (+/+ or -/-),Carrots_CBM66
+Carrots,CBM67,0.79427676287102,MCTs16,0.0288774103733073,CBM,Positive (+/+ or -/-),Carrots_CBM67
+Carrots,CBM9,0.788535531005919,MCTs16,0.0319060416077319,CBM,Positive (+/+ or -/-),Carrots_CBM9
+Carrots,CE1,0.832142857142857,MCTs16,0.0137874383720427,CE,Positive (+/+ or -/-),Carrots_CE1
+Carrots,CE10,0.854334568132508,MCTs16,0.00958979914872885,CE,Positive (+/+ or -/-),Carrots_CE10
+Carrots,CE11,0.837210641945129,MCTs16,0.0129049914537969,CE,Positive (+/+ or -/-),Carrots_CE11
+Carrots,CE12,0.8535658484916,MCTs16,0.00958979914872885,CE,Positive (+/+ or -/-),Carrots_CE12
+Carrots,CE14,0.872988874506887,MCTs16,0.00846226309295483,CE,Positive (+/+ or -/-),Carrots_CE14
+Carrots,CE15,0.804432311967772,MCTs16,0.0241159975202376,CE,Positive (+/+ or -/-),Carrots_CE15
+Carrots,CE3,0.81932152566425,MCTs16,0.0175148523144559,CE,Positive (+/+ or -/-),Carrots_CE3
+Carrots,CE4,0.888293473560369,MCTs16,0.00699574191788399,CE,Positive (+/+ or -/-),Carrots_CE4
+Carrots,CE6,0.76703001652394,MCTs16,0.0461636240779059,CE,Positive (+/+ or -/-),Carrots_CE6
+Carrots,CE7,0.795704035833246,MCTs16,0.0280618168110888,CE,Positive (+/+ or -/-),Carrots_CE7
+Carrots,CE8,0.840227627008444,MCTs16,0.0123433645480549,CE,Positive (+/+ or -/-),Carrots_CE8
+Carrots,CE9,0.782142857142857,MCTs16,0.0363776938843267,CE,Positive (+/+ or -/-),Carrots_CE9
+Carrots,GH10,0.78922121732131,MCTs16,0.031744809521211,GH,Positive (+/+ or -/-),Carrots_GH10
+Carrots,GH105,0.854334568132508,MCTs16,0.00958979914872885,GH,Positive (+/+ or -/-),Carrots_GH105
+Carrots,GH106,0.827524905952618,MCTs16,0.0150041265926057,GH,Positive (+/+ or -/-),Carrots_GH106
+Carrots,GH108,0.787763895922857,MCTs16,0.0319060416077319,GH,Positive (+/+ or -/-),Carrots_GH108
+Carrots,GH109,0.821110437292338,MCTs16,0.0169579589711814,GH,Positive (+/+ or -/-),Carrots_GH109
+Carrots,GH110,0.847944111713656,MCTs16,0.0110984581913433,GH,Positive (+/+ or -/-),Carrots_GH110
+Carrots,GH115,0.840036081636566,MCTs16,0.0123433645480549,GH,Positive (+/+ or -/-),Carrots_GH115
+Carrots,GH116,0.847675695831363,MCTs16,0.0110984581913433,GH,Positive (+/+ or -/-),Carrots_GH116
+Carrots,GH125,0.801432409383371,MCTs16,0.0256745706639697,GH,Positive (+/+ or -/-),Carrots_GH125
+Carrots,GH127,0.892857142857143,MCTs16,0.00699574191788399,GH,Positive (+/+ or -/-),Carrots_GH127
+Carrots,GH13,0.842857142857143,MCTs16,0.0123433645480549,GH,Positive (+/+ or -/-),Carrots_GH13
+Carrots,GH130,0.792857142857143,MCTs16,0.0297056854388541,GH,Positive (+/+ or -/-),Carrots_GH130
+Carrots,GH133,0.886906939620025,MCTs16,0.00699574191788399,GH,Positive (+/+ or -/-),Carrots_GH133
+Carrots,GH137,0.797854586127196,MCTs16,0.0270452616950409,GH,Positive (+/+ or -/-),Carrots_GH137
+Carrots,GH139,0.814357963784289,MCTs16,0.0196261145268402,GH,Positive (+/+ or -/-),Carrots_GH139
+Carrots,GH140,0.798927932960734,MCTs16,0.026552070569691,GH,Positive (+/+ or -/-),Carrots_GH140
+Carrots,GH141,0.892478851002154,MCTs16,0.00699574191788399,GH,Positive (+/+ or -/-),Carrots_GH141
+Carrots,GH142,0.896063103415818,MCTs16,0.00699574191788399,GH,Positive (+/+ or -/-),Carrots_GH142
+Carrots,GH143,0.82227404523476,MCTs16,0.0169579589711814,GH,Positive (+/+ or -/-),Carrots_GH143
+Carrots,GH144,0.835714285714286,MCTs16,0.0129049914537969,GH,Positive (+/+ or -/-),Carrots_GH144
+Carrots,GH145,0.807864487020698,MCTs16,0.0226865836076393,GH,Positive (+/+ or -/-),Carrots_GH145
+Carrots,GH15,0.806884856056373,MCTs16,0.0226865836076393,GH,Positive (+/+ or -/-),Carrots_GH15
+Carrots,GH18,0.789285714285714,MCTs16,0.031744809521211,GH,Positive (+/+ or -/-),Carrots_GH18
+Carrots,GH2,0.860714285714286,MCTs16,0.00956668227191742,GH,Positive (+/+ or -/-),Carrots_GH2
+Carrots,GH20,0.853571428571429,MCTs16,0.00958979914872885,GH,Positive (+/+ or -/-),Carrots_GH20
+Carrots,GH24,0.893554211730523,MCTs16,0.00699574191788399,GH,Positive (+/+ or -/-),Carrots_GH24
+Carrots,GH26,0.771428571428571,MCTs16,0.042507329262977,GH,Positive (+/+ or -/-),Carrots_GH26
+Carrots,GH28,0.839285714285714,MCTs16,0.0123905764162564,GH,Positive (+/+ or -/-),Carrots_GH28
+Carrots,GH29,0.822899348920426,MCTs16,0.0169579589711814,GH,Positive (+/+ or -/-),Carrots_GH29
+Carrots,GH3,0.871428571428571,MCTs16,0.00846226309295483,GH,Positive (+/+ or -/-),Carrots_GH3
+Carrots,GH30,0.813226419456676,MCTs16,0.0200343796586958,GH,Positive (+/+ or -/-),Carrots_GH30
+Carrots,GH31,0.867857142857143,MCTs16,0.00846226309295483,GH,Positive (+/+ or -/-),Carrots_GH31
+Carrots,GH32,0.76923200007779,MCTs16,0.0440836465161785,GH,Positive (+/+ or -/-),Carrots_GH32
+Carrots,GH33,0.820793802728889,MCTs16,0.0169579589711814,GH,Positive (+/+ or -/-),Carrots_GH33
+Carrots,GH35,0.808588055895723,MCTs16,0.0226865836076393,GH,Positive (+/+ or -/-),Carrots_GH35
+Carrots,GH36,0.807142857142857,MCTs16,0.0226865836076393,GH,Positive (+/+ or -/-),Carrots_GH36
+Carrots,GH38,0.803942022207155,MCTs16,0.0241309633591243,GH,Positive (+/+ or -/-),Carrots_GH38
+Carrots,GH42,0.86225540473836,MCTs16,0.00940913015623358,GH,Positive (+/+ or -/-),Carrots_GH42
+Carrots,GH43,0.885714285714286,MCTs16,0.00699574191788399,GH,Positive (+/+ or -/-),Carrots_GH43
+Carrots,GH5,0.835714285714286,MCTs16,0.0129049914537969,GH,Positive (+/+ or -/-),Carrots_GH5
+Carrots,GH51,0.857909189756493,MCTs16,0.00956668227191742,GH,Positive (+/+ or -/-),Carrots_GH51
+Carrots,GH53,0.834380807012326,MCTs16,0.0132604051936251,GH,Positive (+/+ or -/-),Carrots_GH53
+Carrots,GH55,0.867622139622623,MCTs16,0.00846226309295483,GH,Positive (+/+ or -/-),Carrots_GH55
+Carrots,GH57,0.787827371427948,MCTs16,0.0319060416077319,GH,Positive (+/+ or -/-),Carrots_GH57
+Carrots,GH63,0.835714285714286,MCTs16,0.0129049914537969,GH,Positive (+/+ or -/-),Carrots_GH63
+Carrots,GH66,0.77778277376493,MCTs16,0.0371069941325413,GH,Positive (+/+ or -/-),Carrots_GH66
+Carrots,GH67,0.840036081636566,MCTs16,0.0123433645480549,GH,Positive (+/+ or -/-),Carrots_GH67
+Carrots,GH73,0.873332636561932,MCTs16,0.00846226309295483,GH,Positive (+/+ or -/-),Carrots_GH73
+Carrots,GH76,0.807142857142857,MCTs16,0.0226865836076393,GH,Positive (+/+ or -/-),Carrots_GH76
+Carrots,GH77,0.853571428571429,MCTs16,0.00958979914872885,GH,Positive (+/+ or -/-),Carrots_GH77
+Carrots,GH78,0.867857142857143,MCTs16,0.00846226309295483,GH,Positive (+/+ or -/-),Carrots_GH78
+Carrots,GH84,0.827962307556215,MCTs16,0.0150041265926057,GH,Positive (+/+ or -/-),Carrots_GH84
+Carrots,GH88,0.832142857142857,MCTs16,0.0137874383720427,GH,Positive (+/+ or -/-),Carrots_GH88
+Carrots,GH89,0.892666902415854,MCTs16,0.00699574191788399,GH,Positive (+/+ or -/-),Carrots_GH89
+Carrots,GH9,0.8,MCTs16,0.0264308371066452,GH,Positive (+/+ or -/-),Carrots_GH9
+Carrots,GH92,0.871428571428571,MCTs16,0.00846226309295483,GH,Positive (+/+ or -/-),Carrots_GH92
+Carrots,GH95,0.831099527576603,MCTs16,0.0140237389895822,GH,Positive (+/+ or -/-),Carrots_GH95
+Carrots,GH97,0.858677581482184,MCTs16,0.00956668227191742,GH,Positive (+/+ or -/-),Carrots_GH97
+Carrots,GT14,0.779185448977916,MCTs16,0.0368942779421003,GT,Positive (+/+ or -/-),Carrots_GT14
+Carrots,GT19,0.885511255903502,MCTs16,0.00699574191788399,GT,Positive (+/+ or -/-),Carrots_GT19
+Carrots,GT2,0.840036081636566,MCTs16,0.0123433645480549,GT,Positive (+/+ or -/-),Carrots_GT2
+Carrots,GT20,0.785991563628541,MCTs16,0.0331334657361967,GT,Positive (+/+ or -/-),Carrots_GT20
+Carrots,GT26,0.84126406390932,MCTs16,0.0123433645480549,GT,Positive (+/+ or -/-),Carrots_GT26
+Carrots,GT27,0.881144230312398,MCTs16,0.00794348579658651,GT,Positive (+/+ or -/-),Carrots_GT27
+Carrots,GT28,0.797139030751601,MCTs16,0.0272589461900635,GT,Positive (+/+ or -/-),Carrots_GT28
+Carrots,GT3,0.775511549168401,MCTs16,0.0386037886781062,GT,Positive (+/+ or -/-),Carrots_GT3
+Carrots,GT30,0.763994968365834,MCTs16,0.0493334540607217,GT,Positive (+/+ or -/-),Carrots_GT30
+Carrots,GT35,0.821428571428571,MCTs16,0.0169579589711814,GT,Positive (+/+ or -/-),Carrots_GT35
+Carrots,GT4,0.857909189756493,MCTs16,0.00956668227191742,GT,Positive (+/+ or -/-),Carrots_GT4
+Carrots,GT51,0.828707883850972,MCTs16,0.014966796807092,GT,Positive (+/+ or -/-),Carrots_GT51
+Carrots,GT83,0.863271122192471,MCTs16,0.00940913015623358,GT,Positive (+/+ or -/-),Carrots_GT83
+Carrots,GT9,0.781754381474405,MCTs16,0.0363776938843267,GT,Positive (+/+ or -/-),Carrots_GT9
+Carrots,PL11,0.816801041080661,MCTs16,0.0184173141069669,PL,Positive (+/+ or -/-),Carrots_PL11
+Carrots,PL26,0.817209550315225,MCTs16,0.0184173141069669,PL,Positive (+/+ or -/-),Carrots_PL26
+Carrots,PL8,0.769514463575903,MCTs16,0.0440836465161785,PL,Positive (+/+ or -/-),Carrots_PL8
+Citrus_fruits,CBM48,0.89123355639458,MCTs20,0.0428619049771879,CBM,Positive (+/+ or -/-),Citrus_fruits_CBM48
+Citrus_fruits,CBM67,0.892806785432636,MCTs20,0.0428619049771879,CBM,Positive (+/+ or -/-),Citrus_fruits_CBM67
+Fruit_juices_excluding_citrus,CBM6,0.887933639834664,MCTs20,0.0428619049771879,CBM,Positive (+/+ or -/-),Fruit_juices_excluding_citrus_CBM6
+Berries,CBM30,-0.888563773664086,MCTs20,0.0428619049771879,CBM,Negative (+/-),Berries_CBM30
+Readytoeat_cereals,CE11,0.8896686147897,MCTs20,0.0428619049771879,CE,Positive (+/+ or -/-),Readytoeat_cereals_CE11
+Readytoeat_cereals,CE4,0.916083916083916,MCTs20,0.0428619049771879,CE,Positive (+/+ or -/-),Readytoeat_cereals_CE4
+Readytoeat_cereals,GH13,0.895104895104895,MCTs20,0.0428619049771879,GH,Positive (+/+ or -/-),Readytoeat_cereals_GH13
+Readytoeat_cereals,GH23,0.888111888111888,MCTs20,0.0428619049771879,GH,Positive (+/+ or -/-),Readytoeat_cereals_GH23
+Readytoeat_cereals,GH28,0.912831465370457,MCTs20,0.0428619049771879,GH,Positive (+/+ or -/-),Readytoeat_cereals_GH28
+Readytoeat_cereals,GH57,0.882663350106316,MCTs20,0.0490734754070229,GH,Positive (+/+ or -/-),Readytoeat_cereals_GH57
+Readytoeat_cereals,GH77,0.888111888111888,MCTs20,0.0428619049771879,GH,Positive (+/+ or -/-),Readytoeat_cereals_GH77
+Readytoeat_cereals,GT28,0.8896686147897,MCTs20,0.0428619049771879,GT,Positive (+/+ or -/-),Readytoeat_cereals_GT28
+Readytoeat_cereals,GT35,0.881118881118881,MCTs20,0.0490734754070229,GT,Positive (+/+ or -/-),Readytoeat_cereals_GT35
+Readytoeat_cereals,GT51,0.8896686147897,MCTs20,0.0428619049771879,GT,Positive (+/+ or -/-),Readytoeat_cereals_GT51
+Pastas,CBM4,0.899220931866461,MCTs20,0.0428619049771879,CBM,Positive (+/+ or -/-),Pastas_CBM4
+Breadrolls_NFS,GT5,-0.891773653410134,MCTs20,0.0428619049771879,GT,Negative (+/-),Breadrolls_NFS_GT5
+Ground_beef_beef_patties_beef_meatballs,GT5,-0.891773653410134,MCTs20,0.0428619049771879,GT,Negative (+/-),Ground_beef_beef_patties_beef_meatballs_GT5
+Sweet_dairy_cream,CBM30,-0.899184057811465,MCTs20,0.0428619049771879,CBM,Negative (+/-),Sweet_dairy_cream_CBM30
+Milk_fluid,CE11,0.924694938206617,MCTs20,0.0428619049771879,CE,Positive (+/+ or -/-),Milk_fluid_CE11
+Milk_fluid,GH13,0.881118881118881,MCTs20,0.0490734754070229,GH,Positive (+/+ or -/-),Milk_fluid_GH13
+Milk_fluid,GH137,0.881107260091997,MCTs20,0.0490734754070229,GH,Positive (+/+ or -/-),Milk_fluid_GH137
+Milk_fluid,GH16,0.913285045616969,MCTs20,0.0428619049771879,GH,Positive (+/+ or -/-),Milk_fluid_GH16
+Milk_fluid,GH23,0.909090909090909,MCTs20,0.0428619049771879,GH,Positive (+/+ or -/-),Milk_fluid_GH23
+Milk_fluid,GH28,0.9591861882213,MCTs20,0.00775869498149176,GH,Positive (+/+ or -/-),Milk_fluid_GH28
+Milk_fluid,GH77,0.895104895104895,MCTs20,0.0428619049771879,GH,Positive (+/+ or -/-),Milk_fluid_GH77
+Milk_fluid,GT30,0.893171247131392,MCTs20,0.0428619049771879,GT,Positive (+/+ or -/-),Milk_fluid_GT30
+Milk_fluid,GT51,0.924694938206617,MCTs20,0.0428619049771879,GT,Positive (+/+ or -/-),Milk_fluid_GT51
+Syrups_honey_molasses_sweet_toppings,CE11,-0.903010876196022,MCTs20,0.0428619049771879,CE,Negative (+/-),Syrups_honey_molasses_sweet_toppings_CE11
+Tomatoes_raw,GT5,-0.891773653410134,MCTs20,0.0428619049771879,GT,Negative (+/-),Tomatoes_raw_GT5
+Regular_salad_dressings,CBM20,-0.834603283197056,MCTs22,0.0365429760076113,CBM,Negative (+/-),Regular_salad_dressings_CBM20
+Regular_salad_dressings,CBM9,-0.813561310158668,MCTs22,0.0365429760076113,CBM,Negative (+/-),Regular_salad_dressings_CBM9
+Regular_salad_dressings,CE10,-0.791176470588235,MCTs22,0.0377202885238742,CE,Negative (+/-),Regular_salad_dressings_CE10
+Regular_salad_dressings,CE12,-0.794690224977185,MCTs22,0.0377202885238742,CE,Negative (+/-),Regular_salad_dressings_CE12
+Regular_salad_dressings,CE14,-0.879884243052037,MCTs22,0.0365429760076113,CE,Negative (+/-),Regular_salad_dressings_CE14
+Regular_salad_dressings,CE3,-0.793230531157838,MCTs22,0.0377202885238742,CE,Negative (+/-),Regular_salad_dressings_CE3
+Regular_salad_dressings,CE6,-0.794095860267586,MCTs22,0.0377202885238742,CE,Negative (+/-),Regular_salad_dressings_CE6
+Regular_salad_dressings,CE7,-0.852097360928364,MCTs22,0.0365429760076113,CE,Negative (+/-),Regular_salad_dressings_CE7
+Regular_salad_dressings,CE8,-0.805313238289739,MCTs22,0.0365429760076113,CE,Negative (+/-),Regular_salad_dressings_CE8
+Regular_salad_dressings,CE9,-0.800588884879154,MCTs22,0.0368249720725647,CE,Negative (+/-),Regular_salad_dressings_CE9
+Regular_salad_dressings,GH106,-0.818852139888409,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH106
+Regular_salad_dressings,GH109,-0.794117647058823,MCTs22,0.0377202885238742,GH,Negative (+/-),Regular_salad_dressings_GH109
+Regular_salad_dressings,GH115,-0.777042152970944,MCTs22,0.0475923647700072,GH,Negative (+/-),Regular_salad_dressings_GH115
+Regular_salad_dressings,GH123,-0.785872177436522,MCTs22,0.0404315184331927,GH,Negative (+/-),Regular_salad_dressings_GH123
+Regular_salad_dressings,GH125,-0.806475567856206,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH125
+Regular_salad_dressings,GH13,-0.801179072121033,MCTs22,0.0368249720725647,GH,Negative (+/-),Regular_salad_dressings_GH13
+Regular_salad_dressings,GH130,-0.830022299764417,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH130
+Regular_salad_dressings,GH133,-0.804124583415596,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH133
+Regular_salad_dressings,GH139,-0.791735986222623,MCTs22,0.0377202885238742,GH,Negative (+/-),Regular_salad_dressings_GH139
+Regular_salad_dressings,GH141,-0.826573893170756,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH141
+Regular_salad_dressings,GH142,-0.849127291319002,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH142
+Regular_salad_dressings,GH144,-0.812961117299284,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH144
+Regular_salad_dressings,GH145,-0.784084451094948,MCTs22,0.0420260256174416,GH,Negative (+/-),Regular_salad_dressings_GH145
+Regular_salad_dressings,GH15,-0.802702429646289,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH15
+Regular_salad_dressings,GH18,-0.810015606004721,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH18
+Regular_salad_dressings,GH2,-0.794117647058823,MCTs22,0.0377202885238742,GH,Negative (+/-),Regular_salad_dressings_GH2
+Regular_salad_dressings,GH20,-0.817647058823529,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH20
+Regular_salad_dressings,GH23,-0.837142797409644,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH23
+Regular_salad_dressings,GH24,-0.833714040590144,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH24
+Regular_salad_dressings,GH26,-0.809418909344733,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH26
+Regular_salad_dressings,GH28,-0.808823529411765,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH28
+Regular_salad_dressings,GH29,-0.810015606004721,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH29
+Regular_salad_dressings,GH3,-0.811764705882353,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH3
+Regular_salad_dressings,GH31,-0.841795665718522,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH31
+Regular_salad_dressings,GH33,-0.788815518925049,MCTs22,0.0392865077669989,GH,Negative (+/-),Regular_salad_dressings_GH33
+Regular_salad_dressings,GH35,-0.815035153111854,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH35
+Regular_salad_dressings,GH36,-0.823529411764706,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH36
+Regular_salad_dressings,GH38,-0.787924271295501,MCTs22,0.0396270810243926,GH,Negative (+/-),Regular_salad_dressings_GH38
+Regular_salad_dressings,GH43,-0.811764705882353,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH43
+Regular_salad_dressings,GH5,-0.781136765188576,MCTs22,0.0439377258176926,GH,Negative (+/-),Regular_salad_dressings_GH5
+Regular_salad_dressings,GH51,-0.826470588235294,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH51
+Regular_salad_dressings,GH53,-0.790258866845342,MCTs22,0.0381877249921279,GH,Negative (+/-),Regular_salad_dressings_GH53
+Regular_salad_dressings,GH57,-0.82032489553569,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH57
+Regular_salad_dressings,GH63,-0.834437311997206,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH63
+Regular_salad_dressings,GH65,-0.823270406830253,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH65
+Regular_salad_dressings,GH66,-0.78703213700132,MCTs22,0.0396270810243926,GH,Negative (+/-),Regular_salad_dressings_GH66
+Regular_salad_dressings,GH67,-0.798233560826471,MCTs22,0.0377202885238742,GH,Negative (+/-),Regular_salad_dressings_GH67
+Regular_salad_dressings,GH73,-0.843888985892191,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH73
+Regular_salad_dressings,GH76,-0.806475567856206,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH76
+Regular_salad_dressings,GH77,-0.811764705882353,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH77
+Regular_salad_dressings,GH78,-0.814705882352941,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH78
+Regular_salad_dressings,GH84,-0.77916284966332,MCTs22,0.0458942484474614,GH,Negative (+/-),Regular_salad_dressings_GH84
+Regular_salad_dressings,GH88,-0.821797651182972,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH88
+Regular_salad_dressings,GH9,-0.835294117647059,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH9
+Regular_salad_dressings,GH92,-0.823529411764706,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH92
+Regular_salad_dressings,GH94,-0.78703213700132,MCTs22,0.0396270810243926,GH,Negative (+/-),Regular_salad_dressings_GH94
+Regular_salad_dressings,GH97,-0.83590898274147,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH97
+Regular_salad_dressings,GH99,-0.80913978129911,MCTs22,0.0365429760076113,GH,Negative (+/-),Regular_salad_dressings_GH99
+Regular_salad_dressings,GT14,-0.838382091644624,MCTs22,0.0365429760076113,GT,Negative (+/-),Regular_salad_dressings_GT14
+Regular_salad_dressings,GT19,-0.804718252439552,MCTs22,0.0365429760076113,GT,Negative (+/-),Regular_salad_dressings_GT19
+Regular_salad_dressings,GT2,-0.797058823529412,MCTs22,0.0377202885238742,GT,Negative (+/-),Regular_salad_dressings_GT2
+Regular_salad_dressings,GT27,-0.792038844251996,MCTs22,0.0377202885238742,GT,Negative (+/-),Regular_salad_dressings_GT27
+Regular_salad_dressings,GT28,-0.805597339062877,MCTs22,0.0365429760076113,GT,Negative (+/-),Regular_salad_dressings_GT28
+Regular_salad_dressings,GT35,-0.794702201902101,MCTs22,0.0377202885238742,GT,Negative (+/-),Regular_salad_dressings_GT35
+Regular_salad_dressings,PL10,-0.776964792449813,MCTs22,0.0475923647700072,PL,Negative (+/-),Regular_salad_dressings_PL10
+Regular_salad_dressings,PL11,-0.832965641252943,MCTs22,0.0365429760076113,PL,Negative (+/-),Regular_salad_dressings_PL11
+Regular_salad_dressings,PL15,-0.802140176346291,MCTs22,0.0365429760076113,PL,Negative (+/-),Regular_salad_dressings_PL15
+Regular_salad_dressings,PL26,-0.797349037673622,MCTs22,0.0377202885238742,PL,Negative (+/-),Regular_salad_dressings_PL26
+Regular_salad_dressings,PL8,-0.807665938345924,MCTs22,0.0365429760076113,PL,Negative (+/-),Regular_salad_dressings_PL8
+Citrus_fruits,CBM37,-0.796798068780375,MCTs22,0.0377202885238742,CBM,Negative (+/-),Citrus_fruits_CBM37
+Mixtures_of_fruits_and_nonfruit_items,GH137,-0.804561731060406,MCTs22,0.0365429760076113,GH,Negative (+/-),Mixtures_of_fruits_and_nonfruit_items_GH137
+Mixtures_mainly_grain_pasta_or_bread,GH112,0.781396150581656,MCTs22,0.0439377258176926,GH,Positive (+/+ or -/-),Mixtures_mainly_grain_pasta_or_bread_GH112
+Mixtures_mainly_grain_pasta_or_bread,GH25,0.80295749622302,MCTs22,0.0365429760076113,GH,Positive (+/+ or -/-),Mixtures_mainly_grain_pasta_or_bread_GH25
+Darkgreen_nonleafy_vegetables,GH137,0.792398755643147,MCTs22,0.0377202885238742,GH,Positive (+/+ or -/-),Darkgreen_nonleafy_vegetables_GH137
+Darkgreen_nonleafy_vegetables,GT30,0.791433973616143,MCTs22,0.0377202885238742,GT,Positive (+/+ or -/-),Darkgreen_nonleafy_vegetables_GT30
+Darkgreen_nonleafy_vegetables,GT83,0.781136765188576,MCTs22,0.0439377258176926,GT,Positive (+/+ or -/-),Darkgreen_nonleafy_vegetables_GT83
+Bacon_salt_pork,GH8,0.87761676179056,MCTs33,0.0343960221091218,GH,Positive (+/+ or -/-),Bacon_salt_pork_GH8
