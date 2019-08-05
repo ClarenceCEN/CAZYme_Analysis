@@ -41,7 +41,9 @@ nutr_dist <- dist(t(nutr_n))
 
 setwd('G:/Dan_Lab/codes/CAZyme/CAZYme_Analysis/Data_Analysis/')
 load('./data/cazyme_mean_clr.RData')
+load('./data/cazyme_median_clr.RData')
 cazyme_pro <- as.data.frame(t(cazyme_mean_clr))
+cazyme_pro <- as.data.frame(t(cazyme_mean))
 cazyme_pro <- cazyme_pro[,colnames(cazyme_pro)%in%colnames(food_un)]
 cazyme_dist <- dist(t(cazyme_pro))
 
@@ -142,7 +144,7 @@ food_cazyme_leg <- get_legend(food_cazyme)
 
 food_cazyme + theme(legend.position = "none")
 
-ggsave('./result/pro_test_try.pdf')
+ggsave('./result/pro_test_selected.pdf')
 
 
 # make pcoas 
@@ -197,3 +199,61 @@ nutr_cazyme + theme(legend.position = "none")
 
 ggsave('./result/pro_test_nutr_try.pdf')
 
+# Import the beta diversity table from grains_beta (weighted or unweighted)
+setwd("G:/Dan_Lab/dietstudy_analyses-master/")
+food_beta <- read.table(file="data/diet/fiber/grains_data/grains_beta/unweighted_unifrac_grains_fiber.txt")
+cazyme_pro <- cazyme_pro[,colnames(cazyme_pro)%in%colnames(food_beta)]
+food_dist <- as.dist(food_beta)
+cazyme_dist <- dist(t(cazyme_pro))
+
+
+pcoa_f <- as.data.frame(pcoa(food_dist)$vectors)
+pcoa_c <- as.data.frame(pcoa(cazyme_dist)$vectors)
+
+# procrustes
+pro <- procrustes(pcoa_f, pcoa_c)
+pro_test <- protest(pcoa_f, pcoa_c, perm = 999)
+mantel_test <- mantel(food_dist,cazyme_dist,method = 'spearman')
+
+eigen <- sqrt(pro$svd$d)
+percent_var <- signif(eigen/sum(eigen), 4)*100
+
+beta_pro <- data.frame(pro$X)
+trans_pro <- data.frame(pro$Yrot)
+beta_pro$UserName <- rownames(beta_pro)
+beta_pro$type <- "Food (Unweighted Unifrac)"
+trans_pro$UserName <- rownames(trans_pro)
+trans_pro$type <- "Cazyme (Aitchison's)"
+
+colnames(trans_pro) <- colnames(beta_pro)
+
+pval <- signif(pro_test$signif, 1)
+
+plot <- rbind(beta_pro, trans_pro)
+
+food_cazyme <- ggplot(plot) +
+  geom_point(size = 3, alpha=0.75, aes(x = Axis.1, y = Axis.2, color = type)) +
+  scale_color_manual(values = c("#ff0f17", "#ffb405")) +
+  theme_classic() +
+  geom_line(aes(x= Axis.1, y=Axis.2, group=UserName), col = "darkgrey", alpha = 0.6) +
+  theme(panel.background = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        legend.title = element_blank(),
+        legend.text = element_text(size=9),
+        legend.position = 'bottom',
+        axis.text = element_text(size=4),
+        axis.title = element_text(size=9),
+        aspect.ratio = 1) +
+  guides(color = guide_legend(ncol = 1)) +
+  annotate("text", x = 0.3, y = -0.27, label = paste0("p-value=",pval), size = 2) +
+  xlab(paste0("PC 1 [",percent_var[1],"%]")) +
+  ylab(paste0("PC 2 [",percent_var[2],"%]")) 
+
+
+food_cazyme_leg <- get_legend(food_cazyme)
+
+
+food_cazyme + theme(legend.position = "none")
+
+ggsave('./result/pro_test_try.pdf')

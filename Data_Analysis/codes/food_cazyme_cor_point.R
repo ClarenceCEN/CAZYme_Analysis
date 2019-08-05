@@ -78,6 +78,15 @@ for(i in cazyme_set){
   }
 }
 
+select_cazymes <- c()
+for(i in cazyme_set){
+  temp_data = allsigs[allsigs$pairs==i,]
+  if(length(unique(temp_data$bin))==1 && length(unique(temp_data$id))>1){
+    print(i)
+    select_cazymes <- c(select_cazymes,i)
+  }
+}
+
 selected_data <- allsigs[allsigs$pairs%in%select_cazymes,]
 
 selected_food_df <- list()
@@ -195,7 +204,31 @@ ggsave("./result/linear_plots/L2_food/Cereals_not_cooked_or_NS_as_to_cooked_GH51
        width = 5,height = 5)
 
 
+#Quick_breads_GH137
+plot7 <- subset(selected_plot,selected_plot$food=='Quick_breads')
+plot7 <- filter(plot7,plot7$cazyme=='GH137')
 
+g <- ggplot(plot7,aes(x=weight,y=count))+geom_point(aes(fill=UserName),alpha=0.5,size=4,shape=21)+
+  facet_grid(.~UserName,scales = "free") +theme_classic() +
+  stat_smooth(method = lm,color="black",size=1,se=FALSE)+
+  scale_fill_manual(values = UserNameColors) +
+  ylab('GH137') + xlab("Quick_breads")
+g
+ggsave("./result/linear_plots/L2_food/Quick_breads_GH137.pdf",
+       width = 5,height = 5)
+
+#Nonalcoholic_beverages_GT51
+plot8 <- subset(selected_plot,selected_plot$food=='Nonalcoholic_beverages')
+plot8 <- filter(plot8,plot8$cazyme=='GT51')
+
+g <- ggplot(plot8,aes(x=weight,y=count))+geom_point(aes(fill=UserName),alpha=0.5,size=4,shape=21)+
+  facet_grid(.~UserName,scales = "free") +theme_classic() +
+  stat_smooth(method = lm,color="black",size=1,se=FALSE)+
+  scale_fill_manual(values = UserNameColors) +
+  ylab('GT51') + xlab("Nonalcoholic_beverages")
+g
+ggsave("./result/linear_plots/L2_food/Nonalcoholic_beverages_GT51.pdf",
+       width = 5,height = 5)
 
 #L3
 setwd('G:/Dan_Lab/codes/CAZyme/CAZYme_Analysis/Data_Analysis/')

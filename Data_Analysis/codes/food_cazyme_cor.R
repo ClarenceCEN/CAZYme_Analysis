@@ -20,7 +20,7 @@ rownames(food_L2) <- gsub(".*;L2_",'',rownames(food_L2))
 load("./data/cazymes_to_keep.RData")
 cazyme <- read.table('./data/Cazyme_total2.txt',sep='\t',header = T,row.names = 1)
 #cazyme <- read.table('./data/Cazyme_total_try.txt',sep='\t',header = T,row.names = 1)
-cazyme <- cazyme[cazymes_to_keep,]
+cazyme <- cazyme[cazyme_to_keep,]
 
 cazyme <- cazyme[-grep('Other',rownames(cazyme)),]
 rownames(cazyme) <- gsub(".*;L4_",'',rownames(cazyme))
@@ -59,7 +59,8 @@ for(i in unique(food_c$UserName)){
   temp_food <- food_c[food_c$UserName==i,!colnames(food_c)%in%c('X.SampleID','UserName')]
   temp_cazyme <- cazyme_c[cazyme_c$UserName==i,!colnames(cazyme_c)%in%c('X.SampleID','UserName')]
   temp_cor_r <- corr.test(temp_food,temp_cazyme,adjust = 'fdr',method = 'spearman')$r
-  temp_cor_p <- corr.test(temp_food,temp_cazyme,adjust = 'fdr',method = 'spearman')$p
+  temp_cor_p <- corr.test(temp_food,temp_cazyme,adjust = 'none',method = 'spearman')$p
+  temp_cor_fdr <- corr.test(temp_food,temp_cazyme,adjust = 'fdr',method = 'spearman')$p
   for(a in 1:nrow(temp_cor_p)){
     #print(a)
     for (b in 1:ncol(temp_cor_p)){
@@ -68,12 +69,13 @@ for(i in unique(food_c$UserName)){
         fdr_v <- c(fdr_v,temp_cor_p[a,b])
         food_v <- c(food_v,colnames(temp_food)[a])
         cazyme_v <- c(cazyme_v,colnames(temp_cazyme)[b])
+        p_v <- c(p_v,temp_cor_p[a,b])
         id <- c(id,i)
       }
     }
   }
   #fdr_v <- p.adjust(p_v,method = 'fdr')
-  temp_cor_df <- data.frame(food=food_v,cazyme=cazyme_v,coef=coef_v,id=id,fdr_p=fdr_v)
+  temp_cor_df <- data.frame(food=food_v,cazyme=cazyme_v,coef=coef_v,id=id,fdr_p=fdr_v,p=p_v)
   cazyme_food_list[[i]] <- temp_cor_df
 }
 
@@ -81,7 +83,8 @@ save(cazyme_food_list,file = './data/cazyme_food_cor.RData')
 #save(cazyme_food_list,file = './data/cazyme_food_cor_try.RData')
 
 load('./data/cazyme_food_cor.RData')
-sigs <- lapply(cazyme_food_list, function(x) subset(x, fdr_p <= 0.2))
+sigs <- lapply(cazyme_food_list, function(x) subset(x, fdr_p <= 0.3))
+sigs <- lapply(cazyme_food_list, function(x) subset(x, p <= 0.05))
 allsigs <- do.call("rbind", sigs)
 
 allsigs$cazy_cat <- ifelse(grepl('AA',allsigs$cazyme),'AA',
@@ -249,4 +252,4 @@ myplot <- ggplot(data = allsigs, aes(x = coef, y = cazyme, size = -log(fdr_p), c
 
 myplot
 
-ggsave('./result/food_cor.pdf',height = 6,width = 8,limitsize = F)
+ggsave('./result/food_cor_selected_0.05.pdf',height = 17,width = 8,limitsize = F)
