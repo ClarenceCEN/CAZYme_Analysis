@@ -42,7 +42,7 @@ save(cazyme_to_keep,file='./data/cazymes_to_keep_0801.RData')
 cazyme <- cazyme[cazyme_to_keep,]*1.0
 cazyme_trans <- t(cazyme)
 cazyme_trans <- cazyme_trans[rowSums(cazyme_trans)!=0,]
-cazyme_trans <- sweep(cazyme_trans,1,rowSums(cazyme_trans),'/')
+cazyme_trans <- as.data.frame(sweep(cazyme_trans,1,rowSums(cazyme_trans),'/'))
 
 
 cazyme_filter <- rownames_to_column(cazyme_trans,var = 'X.SampleID')
@@ -54,4 +54,5 @@ cazyme_trans_imp <- myimpR$x
 cazyme_trans_clr <- cenLR(cazyme_trans_imp)$x
 
 cazyme_mean <- aggregate(cazyme_trans_clr,by=list(cazyme_filter$UserName),FUN=mean)
+cazyme_mean <- aggregate(cazyme_trans,by=list(cazyme_filter$UserName),FUN=mean)
 rownames(cazyme_mean) <- cazyme_mean$Group.1;cazyme_mean <- cazyme_mean[-1]
