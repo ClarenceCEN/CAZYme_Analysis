@@ -309,7 +309,7 @@ save(cazyme_food_list,file = './data/cazyme_food_cor_L3.RData')
 #save(cazyme_food_list,file = './data/cazyme_food_cor_try_L3.RData')
 
 load('./data/cazyme_food_cor_L3.RData')
-sigs <- lapply(cazyme_food_list, function(x) subset(x, fdr_p <= 0.2))
+sigs <- lapply(cazyme_food_list, function(x) subset(x, fdr_p <= 0.001))
 allsigs <- do.call("rbind", sigs)
 
 allsigs$cazy_cat <- ifelse(grepl('AA',allsigs$cazyme),'AA',
@@ -326,10 +326,21 @@ allsigs$pairs <- paste0(allsigs$food,'_',allsigs$cazyme)
 cazyme_set <- as.character(unique(allsigs$pairs))
 
 
+#different
 select_cazymes <- c()
 for(i in cazyme_set){
   temp_data = allsigs[allsigs$pairs==i,]
   if(length(unique(temp_data$bin))>1){
+    print(i)
+    select_cazymes <- c(select_cazymes,i)
+  }
+}
+
+#same
+select_cazymes <- c()
+for(i in cazyme_set){
+  temp_data = allsigs[allsigs$pairs==i,]
+  if(length(unique(temp_data$bin))==1 && length(unique(temp_data$id))>1){
     print(i)
     select_cazymes <- c(select_cazymes,i)
   }
@@ -345,7 +356,10 @@ for(i in unique(selected_data$pairs)){
 }
 
 food_c$UserName <- as.character(food_c$UserName)
-cazyme_c$UserName <- as.character(cazyme_c$UserName)
+#cazyme_c$UserName <- as.character(cazyme_c$UserName)
+cazyme_points <- cazyme_c[,!colnames(cazyme_c)%in%c("UserName","X.SampleID")]
+cazyme_points <- sweep(cazyme_points,1,rowSums(cazyme_points),'/')
+cazyme_points$UserName <- cazyme_c$UserName
 
 selected_food <- list()
 selected_food <- lapply(selected_food_df,function(x){
@@ -355,7 +369,7 @@ selected_food <- lapply(selected_food_df,function(x){
 
 selected_cazyme <- list()
 selected_cazyme <- lapply(selected_food_df,function(x){
-  cazyme_c[cazyme_c$UserName%in%as.character(x$id),colnames(cazyme_c)%in%c("UserName",as.character(x$cazyme))] %>%
+  cazyme_points[cazyme_points$UserName%in%as.character(x$id),colnames(cazyme_points)%in%c("UserName",as.character(x$cazyme))] %>%
     melt(id.vars = 'UserName',variable.name = 'cazyme',value.name = 'count')
 })
 
@@ -370,43 +384,44 @@ selected_plot <- selected_plot[,names(selected_plot)!='UserName1']
 selected_plot <- mutate_if(selected_plot,is.factor,as.character)
 unique(selected_plot$food)
 
-#Carrots_GH137
-plot1 <- subset(selected_plot,selected_plot$food=='Carrots')
-plot1 <- filter(plot1,plot1$cazyme=='GH137')
+#same
+#Dried_beans_mixtures_GH65
+plot1 <- subset(selected_plot,selected_plot$food=='Dried_beans_mixtures')
+plot1 <- filter(plot1,plot1$cazyme=='GH65')
 
 g <- ggplot(plot1,aes(x=weight,y=count))+geom_point(aes(fill=UserName),alpha=0.5,size=4,shape=21)+
   facet_grid(~UserName,scales = 'free') +theme_classic() +
   stat_smooth(method = lm,color="black",size=1,se=FALSE)+
   scale_fill_manual(values = UserNameColors) +
-  ylab('GH137') + xlab("Carrots")
+  ylab('GH65') + xlab("Dried_beans_mixtures")
 g
-ggsave("./result/linear_plots/L3_food/Carrots_GH137.pdf",
+ggsave("./result/linear_plots/L3_ind/Dried_beans_mixtures_GH65.pdf",
        width = 5,height = 5)
 
-#Citrus_fruits_CBM48
-plot2 <- subset(selected_plot,selected_plot$food=='Citrus_fruits')
-plot2 <- filter(plot2,plot2$cazyme=='CBM48')
+#Frankfurters_sausages_lunchmeats_meat_spreads_PL11
+plot2 <- subset(selected_plot,selected_plot$food=='Frankfurters_sausages_lunchmeats_meat_spreads')
+plot2 <- filter(plot2,plot2$cazyme=='PL11')
 
 g <- ggplot(plot2,aes(x=weight,y=count))+geom_point(aes(fill=UserName),alpha=0.5,size=4,shape=21)+
   facet_grid(~UserName,scales = 'free') +theme_classic() +
   stat_smooth(method = lm,color="black",size=1,se=FALSE)+
   scale_fill_manual(values = UserNameColors) +
-  ylab('CBM48') + xlab("Citrus_fruits")
+  ylab('PL11') + xlab("Frankfurters_sausages_lunchmeats_meat_spreads")
 g
-ggsave("./result/linear_plots/L3_food/Citrus_fruits_CBM48.pdf",
+ggsave("./result/linear_plots/L3_ind/Frankfurters_sausages_lunchmeats_meat_spreads_PL11.pdf",
        width = 5,height = 5)
 
-#Citrus_fruits_GT5
-plot3 <- subset(selected_plot,selected_plot$food=='Citrus_fruits')
-plot3 <- filter(plot3,plot3$cazyme=='GT5')
+#Darkgreen_nonleafy_vegetables_GH5
+plot3 <- subset(selected_plot,selected_plot$food=='Darkgreen_nonleafy_vegetables')
+plot3 <- filter(plot3,plot3$cazyme=='GH5')
 
 g <- ggplot(plot3,aes(x=weight,y=count))+geom_point(aes(fill=UserName),alpha=0.5,size=4,shape=21)+
   facet_grid(~UserName,scales = 'free') +theme_classic() +
   stat_smooth(method = lm,color="black",size=1,se=FALSE)+
   scale_fill_manual(values = UserNameColors) +
-  ylab('GT5') + xlab("Citrus_fruits")
+  ylab('GH5') + xlab("Darkgreen_nonleafy_vegetables") +ylim(0,0.05)
 g
-ggsave("./result/linear_plots/L3_food/Citrus_fruits_GT5.pdf",
+ggsave("./result/linear_plots/L3_ind/Darkgreen_nonleafy_vegetables_GH5.pdf",
        width = 5,height = 5)
 
 
