@@ -49,9 +49,9 @@ food_c <- as.data.frame(t(food_L2))
 food_c <- rownames_to_column(food_c,var='X.SampleID')
 food_c <- merge(food_c,map[c('X.SampleID','UserName')],by='X.SampleID')
 
+load("./data/cazyme_food_cor_ind.RData")
 
-
-sigs <- lapply(cazyme_food_list, function(x) subset(x, fdr_p <= 0.001))
+sigs <- lapply(cazyme_food_list, function(x) subset(x, fdr_p <= 0.2))
 allsigs <- do.call("rbind", sigs)
 
 allsigs$cazy_cat <- ifelse(grepl('AA',allsigs$cazyme),'AA',
@@ -71,7 +71,7 @@ cazyme_set <- as.character(unique(allsigs$pairs))
 select_cazymes <- c()
 for(i in cazyme_set){
   temp_data = allsigs[allsigs$pairs==i,]
-  if(length(unique(temp_data$bin))>1){
+  if(length(unique(temp_data$bin))>1&& length(unique(temp_data$id))>1){
     print(i)
     select_cazymes <- c(select_cazymes,i)
   }
@@ -293,7 +293,7 @@ for(i in unique(food_c$UserName)){
     for (b in 1:ncol(temp_cor_p)){
       if(!is.na(temp_cor_p[a,b])){
         coef_v <- c(coef_v,temp_cor_r[a,b])
-        fdr_v <- c(fdr_v,temp_cor_p[a,b])
+        fdr_v <- c(fdr_v,temp_cor_fdr[a,b])
         food_v <- c(food_v,colnames(temp_food)[a])
         cazyme_v <- c(cazyme_v,colnames(temp_cazyme)[b])
         p_v <- c(p_v,temp_cor_p[a,b])
@@ -305,11 +305,11 @@ for(i in unique(food_c$UserName)){
   temp_cor_df <- data.frame(food=food_v,cazyme=cazyme_v,coef=coef_v,id=id,fdr_p=fdr_v,p=p_v)
   cazyme_food_list[[i]] <- temp_cor_df
 }
-save(cazyme_food_list,file = './data/cazyme_food_cor_L3.RData')
+save(cazyme_food_list,file = './data/cazyme_food_cor_ind_L3.RData')
 #save(cazyme_food_list,file = './data/cazyme_food_cor_try_L3.RData')
 
-load('./data/cazyme_food_cor_L3.RData')
-sigs <- lapply(cazyme_food_list, function(x) subset(x, fdr_p <= 0.001))
+load('./data/cazyme_food_cor_indL3.RData')
+sigs <- lapply(cazyme_food_list, function(x) subset(x, fdr_p <= 0.2))
 allsigs <- do.call("rbind", sigs)
 
 allsigs$cazy_cat <- ifelse(grepl('AA',allsigs$cazyme),'AA',
@@ -385,17 +385,17 @@ selected_plot <- mutate_if(selected_plot,is.factor,as.character)
 unique(selected_plot$food)
 
 #same
-#Dried_beans_mixtures_GH65
-plot1 <- subset(selected_plot,selected_plot$food=='Dried_beans_mixtures')
-plot1 <- filter(plot1,plot1$cazyme=='GH65')
+#Darkgreen_nonleafy_vegetables_GH5
+plot1 <- subset(selected_plot,selected_plot$food=='Darkgreen_nonleafy_vegetables')
+plot1 <- filter(plot1,plot1$cazyme=='GH5')
 
 g <- ggplot(plot1,aes(x=weight,y=count))+geom_point(aes(fill=UserName),alpha=0.5,size=4,shape=21)+
   facet_grid(~UserName,scales = 'free') +theme_classic() +
   stat_smooth(method = lm,color="black",size=1,se=FALSE)+
   scale_fill_manual(values = UserNameColors) +
-  ylab('GH65') + xlab("Dried_beans_mixtures")
+  ylab('GH5') + xlab("Darkgreen_nonleafy_vegetables") + ylim(c(0,0.05))
 g
-ggsave("./result/linear_plots/L3_ind/Dried_beans_mixtures_GH65.pdf",
+ggsave("./result/linear_plots/L3_ind/Darkgreen_nonleafy_vegetables_GH5.pdf",
        width = 5,height = 5)
 
 #Frankfurters_sausages_lunchmeats_meat_spreads_PL11
