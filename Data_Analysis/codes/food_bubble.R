@@ -36,16 +36,16 @@ samples <- intersect(colnames(cazyme),colnames(food_L2))
 cazyme <- cazyme[samples]
 food_L2 <- food_L2[samples]
 
-cazyme_c <- as.data.frame(t(cazyme))
-cazyme_c <- rownames_to_column(cazyme_c,var = 'X.SampleID')
-cazyme_c <- merge(cazyme_c,map[c('X.SampleID','UserName')],by='X.SampleID')
+#cazyme_c <- as.data.frame(t(cazyme))
+#cazyme_c <- rownames_to_column(cazyme_c,var = 'X.SampleID')
+#cazyme_c <- merge(cazyme_c,map[c('X.SampleID','UserName')],by='X.SampleID')
 
 food_c <- as.data.frame(t(food_L2))
 food_c <- rownames_to_column(food_c,var='X.SampleID')
 food_c <- merge(food_c,map[c('X.SampleID','UserName')],by='X.SampleID')
 
 cazyme_food_list <- list()
-
+load('./data/cazy_list_clr.RData')
 
 for(i in unique(food_c$UserName)){
   print(i)
@@ -61,6 +61,7 @@ for(i in unique(food_c$UserName)){
   temp_cazyme <- temp_cazyme[temp_cazyme$X.SampleID%in%food_c[food_c$UserName==i,'X.SampleID'],]
   temp_cazyme <- temp_cazyme[,!colnames(temp_cazyme)=='X.SampleID']
   temp_food <- temp_food[,colSums(temp_food)!=0]
+
   #temp_cazyme_pre <- temp_cazyme
   #temp_cazyme <- sweep(temp_cazyme,1,rowSums(temp_cazyme),'/')
   #temp_cazyme_pre[temp_cazyme_pre>=1] <- 1
@@ -87,7 +88,7 @@ for(i in unique(food_c$UserName)){
   cazyme_food_list[[i]] <- temp_cor_df
 }
 
-save(cazyme_food_list,file = "./data/cazyme_food_cor_ind.RData")
+save(cazyme_food_list,file = "./data/cazyme_food_cor_ind_0808.RData")
 
 
 sigs <- lapply(cazyme_food_list, function(x) subset(x, fdr_p <= 0.2))
@@ -183,57 +184,9 @@ names(UserNameColors) <- gsub("MCTs", "", names(UserNameColors))
 pal <- rev(c("#ff40f2", "#ff0000", "#008c4b", "#00138c", "#8c235b", "#ffbfbf", "#8c7723", "#468c75", "#8091ff", "#ff80c4", "#8c3123", "#fff2bf", "#40fff2", "#69698c", "#ff0044", "#ff9180", "#e5ff80", "#bffbff", "#5940ff", "#8c696e", "#8c7369", "#858c69", "#40d9ff", "#c480ff", "#ff8c40", "#4b8c00", "#23698c", "#69238c", "#8c4b00", "#bfffbf", "#004b8c", "#eabfff", "#ffc480", "#40ff59", "#80c4ff", "#ffd940" ))
 
 require(ggplot2)
-myplot <- ggplot(data = allsigs, aes(x = coef, y = food, size = -log(fdr_p), color = cazy_cat)) +
-  geom_point(alpha = 0.5) +
-  #geom_point(alpha = 0.8, color = "darkgrey", pch = 21) +
-  facet_grid(id~bin, scales = "free", space = "free_y")+
-  scale_color_manual(values = as.character(sample(pal,6))) +
-  theme_classic() +
-  guides(color = guide_legend(nrow = 10, title = "Cazyme Catgory", title.position = "top"),
-         size = guide_legend(title.position = "top", title = "-log(FDR p-value)")) +
-  theme(legend.position = "right",
-        axis.text.y = element_text(size = 12, color = "black"),
-        axis.text.x = element_text(size = 10, color = "black"),
-        panel.grid.major = element_line(colour = "lightgrey"),
-        strip.text = element_text(size = 10, color = "black"),
-        axis.title = element_text(size = 12),
-        legend.text = element_text(size = 7),
-        legend.title = element_text(size = 8)) +
-  ylab("Food") +
-  xlab("Spearman correlation") +
-  scale_x_continuous(trans = "reverse") 
 
 
-myplot
-
-ggsave('./result/food_cor4.pdf',height = 10,width = 10,limitsize = F)
-
-myplot <- ggplot(data = allsigs, aes(x = coef, y = id, size = -log(fdr_p), color = cazy_cat)) +
-  geom_point(alpha = 0.5) +
-  #geom_point(alpha = 0.8, color = "darkgrey", pch = 21) +
-  facet_grid(food~bin, scales = "free", space = "free_y")+
-  scale_color_manual(values = as.character(sample(pal,6))) +
-  theme_classic() +
-  guides(color = guide_legend(nrow = 10, title = "Cazyme Catgory", title.position = "top"),
-         size = guide_legend(title.position = "top", title = "-log(FDR p-value)")) +
-  theme(legend.position = "right",
-        axis.text.y = element_text(size = 12, color = "black"),
-        axis.text.x = element_text(size = 10, color = "black"),
-        panel.grid.major = element_line(colour = "lightgrey"),
-        strip.text = element_text(size = 10, color = "black"),
-        axis.title = element_text(size = 12),
-        legend.text = element_text(size = 7),
-        legend.title = element_text(size = 8)) +
-  ylab("Subject") +
-  xlab("Spearman correlation") +
-  scale_x_continuous(trans = "reverse") 
-
-
-myplot
-
-ggsave('./result/food_cor3.pdf',height = 12,width = 10,limitsize = F)
-
-
+allsigs <- allsigs[allsigs$fdr_p>0.00001,]
 
 myplot <- ggplot(data = allsigs, aes(x = coef, y = cazyme, size = -log(fdr_p), color = id)) +
   geom_point(alpha = 0.6) +
@@ -258,4 +211,4 @@ myplot <- ggplot(data = allsigs, aes(x = coef, y = cazyme, size = -log(fdr_p), c
 
 myplot
 
-ggsave('./result/food_cor_imp_ind_fdr0.2.pdf',height = 17,width = 8,limitsize = F)
+ggsave('./result/food_cor_imp_ind_fdr0.3.pdf',height = 20,width = 8,limitsize = F)
