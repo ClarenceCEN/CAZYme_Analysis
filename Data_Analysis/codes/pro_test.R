@@ -40,19 +40,51 @@ nutr_dist <- dist(t(nutr_n))
 
 
 setwd('G:/Dan_Lab/codes/CAZyme/CAZYme_Analysis/Data_Analysis/')
-load('./data/cazyme_mean_clr.RData')
-load('./data/cazyme_median_clr.RData')
-cazyme_pro <- as.data.frame(t(cazyme_mean_clr))
-cazyme_pro <- as.data.frame(t(cazyme_mean))
-cazyme_pro <- cazyme_pro[,colnames(cazyme_pro)%in%colnames(food_un)]
-cazyme_dist <- dist(t(cazyme_pro))
+
+cazyme <- read.table('./data/Cazyme_total2.txt',sep='\t',header = T,row.names = 1)
+cazyme <- cazyme[,!colnames(cazyme)%in%soylent]
 
 
-load('./data/cazyme_clr.RData')
-cazyme_all <- t(cazyme_cleaned)
-cazyme_all <- as.data.frame(cazyme_clr_trans)
-cazyme_all <- cazyme_all[,!colnames(cazyme_all)%in%soylent]
-cazyme_all_dist <- dist(t(cazyme_all))
+map <- read.table("./maps/SampleID_map.txt", sep = "\t", header = T, comment = "")
+cazyme_filter <- as.data.frame(t(cazyme))
+cazyme_filter <- rownames_to_column(cazyme_filter,var = 'X.SampleID')
+cazyme_filter <- merge(cazyme_filter,map[c('X.SampleID','UserName','StudyDayNo')],by = 'X.SampleID')
+
+cazyme_filter <- cazyme_filter[,-grep('Other',colnames(cazyme_filter))]
+colnames(cazyme_filter) <- gsub(".*;L4_",'',colnames(cazyme_filter))
+
+
+#jaccard
+cazyme_count <- cazyme_filter[,!colnames(cazyme_filter)%in%c('X.SampleID','StudyDayNo','UserName')]
+cazyme_count[cazyme_count>0] <- 1
+cazyme_present <- aggregate(cazyme_count,by = list(cazyme_filter$UserName),FUN = sum)
+rownames(cazyme_present) <- cazyme_present$Group.1;cazyme_present <- cazyme_present[-1]
+cazyme_present[cazyme_present<3] <- 0
+cazyme_present[cazyme_present>=2] <- 1
+
+
+cazyme_dist <- vegdist(cazyme_present,method = 'jaccard')
+cazyme_dist <- dist(cazyme_present)
+
+#Aitchison
+load('./data/cazy_list_clr.RData')
+cazyme_mean_list <- list()
+for(i in names(cazyme_list_clr)){
+  temp <- cazyme_list_clr[[i]]
+  temp <- select(temp,-X.SampleID)
+  temp$UserName <- i
+  temp_mean <- aggregate(temp[,colnames(temp)!='UserName'],by=list(temp$UserName),FUN=mean)
+  temp_mean_long <- melt(temp_mean, id.vars='Group.1',variable.name = 'cazyme',value.name = 'relative_abundance_clr')
+  cazyme_mean_list[[i]] <- temp_mean_long
+}
+cazyme_mean <- do.call('rbind',cazyme_mean_list) %>% mutate_if(is.factor,as.character)
+cazyme_mean <- dcast(cazyme_mean,Group.1~cazyme)
+cazyme_mean[is.na(cazyme_mean)] <- 0
+cazyme_mean <- cazyme_mean[!cazyme_mean$Group.1%in%c("MCTs11", "MCTs12"),]
+cazyme_dist <- dist(cazyme_mean[-1])
+
+
+
 
 # make pcoa
 cazyme_all_pcoa <- data.frame(pcoa(cazyme_all_dist)$vectors)

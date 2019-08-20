@@ -7,7 +7,9 @@ require(reshape2)
 setwd('G:/Dan_Lab/codes/CAZyme/CAZYme_Analysis/Data_Analysis/')
 
 food <- read.table('./data/masterdecaydiet.txt',header = T)
+food_fil <- read.delim('./data/dhydrt.txt',header = T, sep='\t');food_fil <- food_fil[-1]
 food$taxonomy <- as.character(food$taxonomy)
+food_fil$taxonomy <- as.character(food_fil$taxonomy)
 
 split <- strsplit(food$taxonomy,";") 
 
@@ -15,6 +17,15 @@ foodStrings <- sapply(split,function(x) paste(x[1:2],collapse=";"))
 for (i in 1:7) taxaStrings = gsub("(;[A-z]__$)?(;NA$)?","",foodStrings,perl=T) # clean tips
 food_L2 <- rowsum(food[-ncol(food)],foodStrings) 
 rownames(food_L2) <- gsub(".*;L2_",'',rownames(food_L2))
+
+split <- strsplit(food_fil$taxonomy,";") 
+
+foodStrings <- sapply(split,function(x) paste(x[1:2],collapse=";"))
+for (i in 1:7) taxaStrings = gsub("(;[A-z]__$)?(;NA$)?","",foodStrings,perl=T) # clean tips
+food_fil_L2 <- rowsum(food_fil[-ncol(food_fil)],foodStrings) 
+rownames(food_fil_L2) <- gsub(".*;L2_",'',rownames(food_fil_L2))
+food_fil_L2 <- food_fil_L2[,colnames(food_fil_L2)%in%colnames(food_L2)]
+
 #rownames(food_L2) = sapply(strsplit(food$taxonomy,";"),function(x) paste(x[1:2],collapse=";"));
 
 cazyme <- read.table('./data/Cazyme_total2.txt',sep='\t',header = T,row.names = 1)
@@ -31,11 +42,12 @@ soylent <- as.character(soylent$X.SampleID)
 
 cazyme <- cazyme[,!colnames(cazyme)%in%soylent]
 food_L2 <- food_L2[,!colnames(food_L2)%in%soylent]
+food_fil_L2 <- food_fil_L2[,!colnames(food_fil_L2)%in%soylent]
 
 samples <- intersect(colnames(cazyme),colnames(food_L2))
 cazyme <- cazyme[samples]
 food_L2 <- food_L2[samples]
-
+food_fil_L2 <- food_fil_L2[samples]
 #cazyme_c <- as.data.frame(t(cazyme))
 #cazyme_c <- rownames_to_column(cazyme_c,var = 'X.SampleID')
 #cazyme_c <- merge(cazyme_c,map[c('X.SampleID','UserName')],by='X.SampleID')
@@ -44,8 +56,30 @@ food_c <- as.data.frame(t(food_L2))
 food_c <- rownames_to_column(food_c,var='X.SampleID')
 food_c <- merge(food_c,map[c('X.SampleID','UserName')],by='X.SampleID')
 
+food_f <- as.data.frame(t(food_fil_L2))
+food_f <- rownames_to_column(food_f,var='X.SampleID')
+food_f <- merge(food_f,map[c('X.SampleID','UserName')],by='X.SampleID')
+
+food_to_keep <- list()
+for(i in unique(food_f$UserName)){
+  temp_food <- food_f[food_f$UserName==i,!colnames(food_f)%in%c('X.SampleID','UserName')]
+  temp_food_name <- colnames(temp_food)
+  temp_food_p <- temp_food
+  temp_food_p[temp_food_p>0] <- 1
+  days <- 0.25*nrow(temp_food)
+  a <- temp_food_p[1:days,]
+  a_days <- sapply(a,sum)
+  a_days <- which(a_days>1)
+  b_days <- sapply(temp_food_p,sum)
+  b_days <- which(b_days>2)
+  temp_food_name <- temp_food_name[intersect(a_days,b_days)]
+  food_to_keep[[i]] <- temp_food_name
+}
+
+
 cazyme_food_list <- list()
 load('./data/cazy_list_clr.RData')
+load('./data/cazy_list_clr_2.RData')
 
 for(i in unique(food_c$UserName)){
   print(i)
@@ -56,12 +90,15 @@ for(i in unique(food_c$UserName)){
   p_v <- c()
   id <- c()
   temp_food <- food_c[food_c$UserName==i,!colnames(food_c)%in%c('X.SampleID','UserName')]
+  temp_food <- temp_food[food_to_keep[[i]]]
   #temp_cazyme <- cazyme_c[cazyme_c$UserName==i,!colnames(cazyme_c)%in%c('X.SampleID','UserName')]
   temp_cazyme <- cazyme_list_clr[[i]]
   temp_cazyme <- temp_cazyme[temp_cazyme$X.SampleID%in%food_c[food_c$UserName==i,'X.SampleID'],]
   temp_cazyme <- temp_cazyme[,!colnames(temp_cazyme)=='X.SampleID']
   temp_food <- temp_food[,colSums(temp_food)!=0]
-
+  if(ncol(temp_food)==0){
+    next
+  }
   #temp_cazyme_pre <- temp_cazyme
   #temp_cazyme <- sweep(temp_cazyme,1,rowSums(temp_cazyme),'/')
   #temp_cazyme_pre[temp_cazyme_pre>=1] <- 1
@@ -88,7 +125,7 @@ for(i in unique(food_c$UserName)){
   cazyme_food_list[[i]] <- temp_cor_df
 }
 
-save(cazyme_food_list,file = "./data/cazyme_food_cor_ind_0808.RData")
+save(cazyme_food_list,file = "./data/cazyme_food_cor_ind_0815.RData")
 
 
 sigs <- lapply(cazyme_food_list, function(x) subset(x, fdr_p <= 0.2))
@@ -188,14 +225,15 @@ require(ggplot2)
 
 allsigs <- allsigs[allsigs$fdr_p>0.00001,]
 
-myplot <- ggplot(data = allsigs, aes(x = coef, y = cazyme, size = -log(fdr_p), color = id)) +
-  geom_point(alpha = 0.6) +
+myplot <- ggplot(data = allsigs, aes(x = coef, y = cazyme, size = coef, color = id)) +
+  geom_point(aes(alpha=-log(fdr_p))) +
   #geom_point(alpha = 0.8, color = "darkgrey", pch = 21) +
   facet_grid(food~bin, scales = "free", space = "free_y")+
   scale_color_manual(values = UserNameColors) +
   theme_classic() +
   guides(color = guide_legend(nrow = 10, title = "Subject", title.position = "top"),
-         size = guide_legend(title.position = "top", title = "-log(FDR p-value)")) +
+         size = guide_legend(title.position = "top", title = "coef"),
+         alpha = guide_legend(title.position = "top", title = "-log(FDR p-value)")) +
   theme(legend.position = "right",
         axis.text.y = element_blank(),
         axis.text.x = element_text(size = 9, color = "black"),
@@ -211,4 +249,5 @@ myplot <- ggplot(data = allsigs, aes(x = coef, y = cazyme, size = -log(fdr_p), c
 
 myplot
 
-ggsave('./result/food_cor_imp_ind_fdr0.3.pdf',height = 20,width = 8,limitsize = F)
+ggsave('./result/food_cor_imp_ind_fdr0.2.pdf',height = 20,width = 8,limitsize = F)
+
