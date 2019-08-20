@@ -17,6 +17,10 @@ foodStrings <- sapply(split,function(x) paste(x[1:2],collapse=";"))
 for (i in 1:7) taxaStrings = gsub("(;[A-z]__$)?(;NA$)?","",foodStrings,perl=T) # clean tips
 food_L2 <- rowsum(food[-ncol(food)],foodStrings) 
 rownames(food_L2) <- gsub(".*;L2_",'',rownames(food_L2))
+rownames(food_L2) <- paste0('food_',rownames(food_L2))
+food_L2 <- as.data.frame(t(food_L2))
+
+
 
 soylent <- map[map$UserName %in% c("MCTs11", "MCTs12"),]
 soylentIDs <- droplevels(soylent$X.SampleID)
@@ -49,15 +53,20 @@ for(i in unique(all_cazyme$UserName)){
   #temp_sampleid
   temp_data$X.SampleID.x <- dat[[i]]$X.SampleID.x
   temp_data$X.SampleID.y <- dat[[i]]$X.SampleID.y
-  temp_data$X.SampleID.x <- temp_data$X.SampleID.x[temp_data$X.SampleID.x%in%all_cazyme$X.SampleID]
-  temp_data$X.SampleID.y <- temp_data$X.SampleID.y[temp_data$X.SampleID.y%in%all_cazyme$X.SampleID]
-  temp_cazyme.x <- all_cazyme[all_cazyme$X.SampleID%in%dat[[i]]$X.SampleID.x,] %>% select(-UserName,-StudyDayNo,-X.SampleID)
-  temp_cazyme.y <- all_cazyme[all_cazyme$X.SampleID%in%dat[[i]]$X.SampleID.y,] %>% select(-UserName,-StudyDayNo,-X.SampleID)
+  interested_X.SampleID <- Reduce(base::intersect,list(v1=temp_data$X.SampleID.y,
+                                                       v2=temp_data$X.SampleID.x,
+                                                       v3=all_cazyme$X.SampleID,
+                                                       v4=rownames(food_L2)))
+  temp_data$X.SampleID.x <- temp_data$X.SampleID.x[temp_data$X.SampleID.x%in%interested_X.SampleID]
+  temp_data$X.SampleID.y <- temp_data$X.SampleID.y[temp_data$X.SampleID.y%in%interested_X.SampleID]
+  temp_cazyme.x <- all_cazyme[all_cazyme$X.SampleID%in%interested_X.SampleID,] %>% select(-UserName,-StudyDayNo,-X.SampleID)
+  temp_cazyme.y <- all_cazyme[all_cazyme$X.SampleID%in%interested_X.SampleID,] %>% select(-UserName,-StudyDayNo,-X.SampleID)
   colnames(temp_cazyme.y) <- paste0(colnames(temp_cazyme.x),'.y')
   colnames(temp_cazyme.x) <- paste0(colnames(temp_cazyme.x),'.x')
-  temp_cazymepc <- cazymepc[rownames(cazymepc)%in%temp_data$X.SampleID.x,][1:5]
+  temp_cazymepc <- cazymepc[rownames(cazymepc)%in%interested_X.SampleID,][1:5]
   colnames(temp_cazymepc) <- paste0('cazyme.',colnames(temp_cazymepc))
-  temp_data <- cbind(temp_data,temp_cazyme.x,temp_cazyme.y,temp_cazymepc)
+  temp_food <- food_L2[rownames(food_L2)%in%interested_X.SampleID,]
+  temp_data <- cbind(temp_data,temp_cazyme.x,temp_cazyme.y,temp_cazymepc,temp_food)
   if(nrow(temp_data)==0){
     next()
   }
