@@ -8,6 +8,19 @@ setwd('G:/Dan_Lab/codes/CAZyme/CAZYme_Analysis/Data_Analysis/')
 map <- read.table("./maps/SampleID_map.txt", sep = "\t", header = T, comment = "")
 load(file = './data/cazy_list_clr_2.RData')
 
+food <- read.table('./data/masterdecaydiet.txt',header = T)
+food$taxonomy <- as.character(food$taxonomy)
+
+split <- strsplit(food$taxonomy,";") 
+
+foodStrings <- sapply(split,function(x) paste(x[1:2],collapse=";"))
+for (i in 1:7) taxaStrings = gsub("(;[A-z]__$)?(;NA$)?","",foodStrings,perl=T) # clean tips
+food_L2 <- rowsum(food[-ncol(food)],foodStrings) 
+rownames(food_L2) <- gsub(".*;L2_",'',rownames(food_L2))
+
+soylent <- map[map$UserName %in% c("MCTs11", "MCTs12"),]
+soylentIDs <- droplevels(soylent$X.SampleID)
+
 cazyme_to_keep <- colnames(cazyme_list_clr[['MCTs01']])
 for(i in names(cazyme_list_clr)){
   print(i)
@@ -23,7 +36,11 @@ all_cazyme <- do.call('rbind',all_cazyme)
 all_cazyme <- dcast(all_cazyme,X.SampleID~cazyme,value.var = 'relative_abundance')
 all_cazyme <- all_cazyme[,cazyme_to_keep]
 all_cazyme <- merge(all_cazyme,map[c('X.SampleID','UserName','StudyDayNo')],by='X.SampleID')
+all_cazyme <- all_cazyme[!all_cazyme$X.SampleID%in%soylentIDs,]
 
+cazyme_dist <- dist(select(all_cazyme,-UserName,-StudyDayNo,-X.SampleID))
+cazymepc <- as.data.frame(pcoa(cazyme_dist)$vectors)
+rownames(cazymepc) <- all_cazyme$X.SampleID
 
 cazyme_predict_dat <- list()
 for(i in unique(all_cazyme$UserName)){
@@ -38,7 +55,9 @@ for(i in unique(all_cazyme$UserName)){
   temp_cazyme.y <- all_cazyme[all_cazyme$X.SampleID%in%dat[[i]]$X.SampleID.y,] %>% select(-UserName,-StudyDayNo,-X.SampleID)
   colnames(temp_cazyme.y) <- paste0(colnames(temp_cazyme.x),'.y')
   colnames(temp_cazyme.x) <- paste0(colnames(temp_cazyme.x),'.x')
-  temp_data <- cbind(temp_data,temp_cazyme.x,temp_cazyme.y)
+  temp_cazymepc <- cazymepc[rownames(cazymepc)%in%temp_data$X.SampleID.x,][1:5]
+  colnames(temp_cazymepc) <- paste0('cazyme.',colnames(temp_cazymepc))
+  temp_data <- cbind(temp_data,temp_cazyme.x,temp_cazyme.y,temp_cazymepc)
   if(nrow(temp_data)==0){
     next()
   }
