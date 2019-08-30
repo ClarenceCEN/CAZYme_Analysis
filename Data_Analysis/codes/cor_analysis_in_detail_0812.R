@@ -5,7 +5,7 @@ require(reshape2)
 require(dplyr)
 require(ggplot2)
 
-load("./data/cazyme_food_cor_ind_0808.RData")
+load("./data/cazyme_food_cor_ind_0815.RData")
 load('./data/cazy_list_clr.RData')
 load("./data/food_daily_L2.RData")
 
@@ -32,7 +32,7 @@ g <- ggplot(id_count,aes(x=reorder(id,desc(freq)),y=freq,fill=id)) + geom_bar(st
   geom_text(aes(label=freq),vjust=-0.2) +
   theme(axis.title.x = element_blank())
 g
-ggsave('./result/cor_id_bar.jpg',width = 10,height = 6)
+ggsave('./result/cor_id_bar.jpg',width = 12,height = 6)
 
 cazyme_count <- as.data.frame(table(cazyme_food_cor$cazyme))
 colnames(cazyme_count) <- c('cazyme','freq')

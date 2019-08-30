@@ -28,6 +28,21 @@ food <- read.delim("data/diet/processed_food/dhydrt.smry.no.soy.txt", row = 1)
 food <- food[,colnames(food) %in% colnames(food_un)]
 no_tree_dist <- dist(t(food))
 
+
+##############taxonomy############
+# load taxonomy collapsed for each person
+tax <- read.delim("data/microbiome/processed_average/UN_tax_CLR_mean_norm_s.txt", row = 1) # updates from reviewer comments
+# drop soylents
+tax <- tax[,colnames(tax) %in% colnames(food_un)]
+
+# make taxonomy distance matrix
+tax_dist <- dist(t(tax))
+
+
+
+
+
+
 ###############nutrients############
 # load nutrition data
 nutr <- read.delim("data/diet/processed_nutr/nutr_65_smry_no_soy.txt", row = 1)
@@ -67,7 +82,7 @@ cazyme_dist <- vegdist(cazyme_present,method = 'jaccard')
 cazyme_dist <- dist(cazyme_present)
 
 #Aitchison
-load('./data/cazy_list_clr.RData')
+load('./data/cazy_list_clr_2.RData')
 cazyme_mean_list <- list()
 for(i in names(cazyme_list_clr)){
   temp <- cazyme_list_clr[[i]]
@@ -81,7 +96,8 @@ cazyme_mean <- do.call('rbind',cazyme_mean_list) %>% mutate_if(is.factor,as.char
 cazyme_mean <- dcast(cazyme_mean,Group.1~cazyme)
 cazyme_mean[is.na(cazyme_mean)] <- 0
 cazyme_mean <- cazyme_mean[!cazyme_mean$Group.1%in%c("MCTs11", "MCTs12"),]
-cazyme_dist <- dist(cazyme_mean[-1])
+rownames(cazyme_mean) <- cazyme_mean$Group.1;cazyme_mean <- cazyme_mean[-1]
+cazyme_dist <- dist(cazyme_mean)
 
 
 
@@ -177,6 +193,61 @@ food_cazyme_leg <- get_legend(food_cazyme)
 food_cazyme + theme(legend.position = "none")
 
 ggsave('./result/pro_test_selected.pdf')
+
+
+#### MAKE 2E #####
+
+# make pcoas 
+pcoa_t <- as.data.frame(pcoa(tax_dist)$vectors)
+pcoa_c <- as.data.frame(pcoa(cazyme_dist)$vectors)
+
+# procrustes
+pro <- procrustes(pcoa_t, pcoa_c)
+pro_test <- protest(pcoa_t, pcoa_c, perm = 999)
+mantel_test <- mantel(food_dist,cazyme_dist,method = 'spearman')
+
+eigen <- sqrt(pro$svd$d)
+percent_var <- signif(eigen/sum(eigen), 4)*100
+
+beta_pro <- data.frame(pro$X)
+trans_pro <- data.frame(pro$Yrot)
+beta_pro$UserName <- rownames(beta_pro)
+beta_pro$type <- "Taxonomy (Aitchison's)"
+trans_pro$UserName <- rownames(trans_pro)
+trans_pro$type <- "Cazyme (Aitchison's)"
+
+colnames(trans_pro) <- colnames(beta_pro)
+
+pval <- signif(pro_test$signif, 1)
+
+plot <- rbind(beta_pro, trans_pro)
+
+food_cazyme <- ggplot(plot) +
+  geom_point(size = 3, alpha=0.75, aes(x = Axis.1, y = Axis.2, color = type)) +
+  scale_color_manual(values = c("#ff0f17", "#6699ff")) +
+  theme_classic() +
+  geom_line(aes(x= Axis.1, y=Axis.2, group=UserName), col = "darkgrey", alpha = 0.6) +
+  theme(panel.background = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        legend.title = element_blank(),
+        legend.text = element_text(size=9),
+        legend.position = 'bottom',
+        axis.text = element_text(size=4),
+        axis.title = element_text(size=9),
+        aspect.ratio = 1) +
+  guides(color = guide_legend(ncol = 1)) +
+  annotate("text", x = 0.4, y = -0.27, label = paste0("p-value=",pval), size = 5) +
+  xlab(paste0("PC 1 [",percent_var[1],"%]")) +
+  ylab(paste0("PC 2 [",percent_var[2],"%]")) 
+
+
+food_cazyme_leg <- get_legend(food_cazyme)
+
+
+food_cazyme + theme(legend.position = "none")
+
+ggsave('./result/pro_cazyme_tax.pdf')
 
 
 # make pcoas 

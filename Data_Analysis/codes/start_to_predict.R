@@ -1,7 +1,9 @@
 require(reshape2)
 require(randomForest)
 require(pheatmap)
-
+require(dplyr)
+require(ape)
+require(e1071)
 
 setwd("G:/Dan_Lab/dietstudy_analyses-master/")
 load(file = "data/test_personal_diet_dat.Rdata")
@@ -33,6 +35,7 @@ for(i in names(cazyme_list_clr)){
   cazyme_to_keep <- base::intersect(cazyme_to_keep,colnames(cazyme_list_clr[[i]]))
 }
 cazyme_to_keep <- setdiff(cazyme_to_keep,'X.SampleID')
+save(cazyme_to_keep,file='./data/cazyme_to_keep_for_pred.RData')
 
 all_cazyme <- lapply(cazyme_list_clr, function(x){
   y <- melt(x,id.vars='X.SampleID',variable.name = 'cazyme',value.name='relative_abundance')
@@ -51,7 +54,7 @@ rownames(cazymepc) <- all_cazyme$X.SampleID
 
 cazyme_predict_dat <- list()
 for(i in unique(all_cazyme$UserName)){
-  print(i)
+
   temp_data <- NULL
   #temp_sampleid
   temp_data$X.SampleID.x <- dat[[i]]$X.SampleID.x
@@ -73,45 +76,49 @@ for(i in unique(all_cazyme$UserName)){
   if(nrow(temp_data)<=5){
     next()
   }
+  print(i)
   cazyme_predict_dat[[i]] <- temp_data
 }
 
 
 save(cazyme_predict_dat,file = './data/cazyme_predict_list.RData')
 
-cazyme_rf_importance <- list()
-for(i in names(cazyme_predict_dat)){
-  print(i)
-  today.cazymes <- paste0(cazyme_to_keep,'.x')
-  tomorrow.cazymes <- paste0(cazyme_to_keep,'.y')
-  
-  rf.importance.list <- list()
-  for(j in seq_along(tomorrow.cazymes)){
-    today.cazyme <- today.cazymes[j]
-    tomorrow.cazyme <- tomorrow.cazymes[j]
-    cazyme.features <- c("cazyme.Axis.1","cazyme.Axis.2", "cazyme.Axis.3", "cazyme.Axis.4", "cazyme.Axis.5")
-    food.features <- colnames(food_L2)
-    
-    predictor.feats <- cazyme_predict_dat[[i]][,c(cazyme.features,food.features)]
-    result.cazyme.tomorrow <- cazyme_predict_dat[[i]][tomorrow.cazyme]
-    
-    rf.formula <- as.formula(paste0(tomorrow.cazyme,'~',paste(cazyme.features,collapse = '+'),'+',
-                                    paste(food.features,collapse = '+')))
-    
-    model <- randomForest(rf.formula,data = cazyme_predict_dat[[i]],importance=TRUE)
-    rf.importance <- as.data.frame(model$importanceSD)
-    colnames(rf.importance) <- paste0(gsub('.y','',tomorrow.cazyme))
-    rf.importance.list[[tomorrow.cazyme]] <- rf.importance
-  }
-  rf.importance.sub <- do.call('cbind',rf.importance.list)
-  rf.importance.sub[is.na(rf.importance.sub)] <- 0
-  cazyme_rf_importance[[i]] <- rf.importance.sub
-}
+load(file = './data/cazyme_predict_list.RData')
 
-cazyme_rf_importance.all <- do.call('cbind',cazyme_rf_importance)
-cazyme_rf_importance.all <- cazyme_rf_importance.all[apply(cazyme_rf_importance.all,1,sd)!=0,]
-
-apply(cazyme_rf_importance.all,1,sd)!=0
+# cazyme_rf_importance <- list()
+# for(i in names(cazyme_predict_dat)){
+#   print(i)
+#   today.cazymes <- paste0(cazyme_to_keep,'.x')
+#   tomorrow.cazymes <- paste0(cazyme_to_keep,'.y')
+#   
+#   rf.importance.list <- list()
+#   for(j in seq_along(tomorrow.cazymes)){
+#     today.cazyme <- today.cazymes[j]
+#     tomorrow.cazyme <- tomorrow.cazymes[j]
+#     cazyme.features <- c("cazyme.Axis.1","cazyme.Axis.2", "cazyme.Axis.3", "cazyme.Axis.4", "cazyme.Axis.5")
+#     food.features <- colnames(food_L2)
+#     
+#     predictor.feats <- cazyme_predict_dat[[i]][,c(cazyme.features,food.features)]
+#     result.cazyme.tomorrow <- cazyme_predict_dat[[i]][tomorrow.cazyme]
+#     
+#     rf.formula <- as.formula(paste0(tomorrow.cazyme,'~',paste(cazyme.features,collapse = '+'),'+',
+#                                     paste(food.features,collapse = '+')))
+#     
+#     model <- randomForest(rf.formula,data = cazyme_predict_dat[[i]],importance=TRUE)
+# 
+#     rf.importance <- as.data.frame(model$importanceSD)
+#     colnames(rf.importance) <- paste0(gsub('.y','',tomorrow.cazyme))
+#     rf.importance.list[[tomorrow.cazyme]] <- rf.importance
+#   }
+#   rf.importance.sub <- do.call('cbind',rf.importance.list)
+#   rf.importance.sub[is.na(rf.importance.sub)] <- 0
+#   cazyme_rf_importance[[i]] <- rf.importance.sub
+# }
+# 
+# cazyme_rf_importance.all <- do.call('cbind',cazyme_rf_importance)
+# cazyme_rf_importance.all <- cazyme_rf_importance.all[apply(cazyme_rf_importance.all,1,sd)!=0,]
+# 
+# apply(cazyme_rf_importance.all,1,sd)!=0
 
 pdf(file = './result/import_try.pdf',width = 50,height = 5)
 pheatmap(cazyme_rf_importance.all,scale = 'row')
@@ -119,13 +126,16 @@ dev.off()
 
 
 #average for each subject
+set.seed(666)
 cazyme_rf_importance <- list()
+cazyme_rf_importance_person <- list()
 for(i in names(cazyme_predict_dat)){
   print(i)
   today.cazymes <- paste0(cazyme_to_keep,'.x')
   tomorrow.cazymes <- paste0(cazyme_to_keep,'.y')
   
   rf.importance.list <- list()
+  #rf.importance.person.list <- list()
   for(j in seq_along(tomorrow.cazymes)){
     today.cazyme <- today.cazymes[j]
     tomorrow.cazyme <- tomorrow.cazymes[j]
@@ -137,15 +147,17 @@ for(i in names(cazyme_predict_dat)){
     
     rf.formula <- as.formula(paste0(tomorrow.cazyme,'~',paste(cazyme.features,collapse = '+'),'+',
                                     paste(food.features,collapse = '+')))
-    
-    model <- randomForest(rf.formula,data = cazyme_predict_dat[[i]],importance=TRUE,ntree=200)
-    rf.importance <- as.data.frame(model$importanceSD)
+    a <- cazyme_predict_dat[[i]]
+    model <- randomForest(rf.formula,data = cazyme_predict_dat[[i]],importance=F,ntree=800)
+    rf.importance <- as.data.frame(model$importance)
     colnames(rf.importance) <- paste0(gsub('.y','',tomorrow.cazyme))
     rf.importance.list[[tomorrow.cazyme]] <- rf.importance
   }
   rf.importance.sub <- do.call('cbind',rf.importance.list)
   rf.importance.sub[is.na(rf.importance.sub)] <- 0
+  cazyme_rf_importance_person[[i]] <- rf.importance.sub
   rf.importance.sub <- as.data.frame(rowMeans(rf.importance.sub))
+  
   #colnames(rf.importance.sub) <- paste0(i,'.avg.importance')
   colnames(rf.importance.sub) <- i
   cazyme_rf_importance[[i]] <- rf.importance.sub
@@ -155,8 +167,34 @@ cazyme_rf_importance.all <- do.call('cbind',cazyme_rf_importance)
 cazyme_rf_importance.all <- cazyme_rf_importance.all[apply(cazyme_rf_importance.all,1,sd)!=0,]
 rownames(cazyme_rf_importance.all) <- gsub('food_','',rownames(cazyme_rf_importance.all))
 
-pdf(file = './result/import_try.pdf',width = 10,height = 8)
+anno_food <- as.data.frame(rownames(cazyme_rf_importance.all))
+rownames(anno_food) <- rownames(cazyme_rf_importance.all)
+colnames(anno_food) <- 'category'
+anno_food$category <- gsub('cazyme.Axis.*','cazyme',anno_food$category)
+
+food_name <- food$taxonomy
+
+  for(j in seq_along(anno_food$category)){
+    if(sum(grepl(anno_food$category[j],food_name))>0){
+      #anno_food_name <- c(anno_food_name,sample(food_name[grepl(anno_food$category[j],food_name)],1))
+      anno_food$category[j] <- sample(food_name[grepl(anno_food$category[j],food_name)],1)
+    }
+  }
+
+anno_food$category <- gsub(';L2.*','',anno_food$category)
+anno_food$category <- gsub('L1_','',anno_food$category)
+
+
+
+
+pdf(file = './result/import_try_add_group.pdf',width = 15,height = 8)
 pheatmap(cazyme_rf_importance.all,scale = 'row', color=colorRampPalette(c("green","black","red"))(100),
-         border_color = NA)
+         border_color = NA, annotation_row = anno_food, cluster_rows = F)
 dev.off()
+
+pdf(file = './result/import_try_add_group_col.pdf',width = 15,height = 8)
+pheatmap(cazyme_rf_importance.all,scale = 'column', color=colorRampPalette(c("green","black","red"))(100),
+         border_color = NA, annotation_row = anno_food, cluster_rows = T)
+dev.off()
+
 

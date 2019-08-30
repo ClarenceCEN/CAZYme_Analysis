@@ -69,7 +69,7 @@ for(i in unique(food_f$UserName)){
   days <- 0.25*nrow(temp_food)
   a <- temp_food_p[1:days,]
   a_days <- sapply(a,sum)
-  a_days <- which(a_days>1)
+  a_days <- which(a_days>floor(days/2))
   b_days <- sapply(temp_food_p,sum)
   b_days <- which(b_days>2)
   temp_food_name <- temp_food_name[intersect(a_days,b_days)]
@@ -127,7 +127,7 @@ for(i in unique(food_c$UserName)){
 
 save(cazyme_food_list,file = "./data/cazyme_food_cor_ind_0815.RData")
 
-
+load(file = './data/cazyme_food_cor_ind_0815.RData')
 sigs <- lapply(cazyme_food_list, function(x) subset(x, fdr_p <= 0.2))
 allsigs <- do.call("rbind", sigs)
 
@@ -225,15 +225,23 @@ require(ggplot2)
 
 allsigs <- allsigs[allsigs$fdr_p>0.00001,]
 
-myplot <- ggplot(data = allsigs, aes(x = coef, y = cazyme, size = coef, color = id)) +
-  geom_point(aes(alpha=-log(fdr_p))) +
+allsigs_food.count <- as.data.frame(table(allsigs$food))
+colnames(allsigs_food.count)[1] <- 'food'
+allsigs <- merge(allsigs,allsigs_food.count,by='food')
+allsigs <- allsigs[allsigs$Freq>4,]
+
+myplot <- ggplot(data = allsigs, aes(x = coef, y = cazyme, size = -log(fdr_p), color = id)) +
+  #geom_point(aes(alpha=abs(coef))) +
   #geom_point(alpha = 0.8, color = "darkgrey", pch = 21) +
+  geom_point() +
   facet_grid(food~bin, scales = "free", space = "free_y")+
   scale_color_manual(values = UserNameColors) +
+  scale_size_area(max_size = 9,) +
   theme_classic() +
-  guides(color = guide_legend(nrow = 10, title = "Subject", title.position = "top"),
-         size = guide_legend(title.position = "top", title = "coef"),
-         alpha = guide_legend(title.position = "top", title = "-log(FDR p-value)")) +
+  guides(color = guide_legend(nrow = 10, title = "Subject", title.position = "top")
+         #size = guide_legend(title.position = "top", title = "coef")#,
+         #alpha = guide_legend(title.position = "top", title = "-log(FDR p-value)")
+         ) +
   theme(legend.position = "right",
         axis.text.y = element_blank(),
         axis.text.x = element_text(size = 9, color = "black"),
@@ -249,5 +257,33 @@ myplot <- ggplot(data = allsigs, aes(x = coef, y = cazyme, size = coef, color = 
 
 myplot
 
-ggsave('./result/food_cor_imp_ind_fdr0.2.pdf',height = 20,width = 8,limitsize = F)
+ggsave('./result/food_cor_imp_ind_fdr0.2.pdf',height = 10,width = 8,limitsize = F)
 
+myplot <- ggplot(data = allsigs, aes(x = coef, y = cazy_cat, size = -log(fdr_p), color = id)) +
+  geom_point(aes(alpha=abs(coef))) +
+  #geom_point(alpha = 0.8, color = "darkgrey", pch = 21) +
+  #geom_point() +
+  facet_grid(food~bin, scales = "free", space = "free_y")+
+  scale_color_manual(values = UserNameColors) +
+  scale_size_area(max_size = 10) +
+  theme_classic() +
+  guides(color = guide_legend(nrow = 10, title = "Subject", title.position = "top"),
+         size = guide_legend(title.position = "top", title = "-log(FDR p-value)"),
+         alpha = guide_legend(title.position = "top", title = "coef")
+  ) +
+  theme(legend.position = "right",
+        axis.text.y = element_text(size = 15, color = "black"),
+        axis.text.x = element_text(size = 9, color = "black"),
+        panel.grid.major = element_line(colour = "lightgrey"),
+        strip.text = element_text(size = 10, color = "black"),
+        axis.title = element_text(size = 12),
+        legend.text = element_text(size = 7),
+        legend.title = element_text(size = 8)) +
+  ylab("Cazyme") +
+  xlab("Spearman correlation") +
+  scale_x_continuous(trans = "reverse")
+
+
+myplot
+
+ggsave('./result/food_cor_cat_imp_ind_fdr0.2.pdf',height = 10,width = 8,limitsize = F)
