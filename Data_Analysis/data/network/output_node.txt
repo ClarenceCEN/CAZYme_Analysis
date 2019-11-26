@@ -1,676 +1,169 @@
 nodes	type
-Fruits_CBM12	CBM
-Grains_CBM12	CBM
-Nuts_PL1	PL
-Legumes_GT32	GT
-Fruits_CBM13	CBM
-Fruits_CBM34	CBM
-Fruits_GH137	GH
-Fruits_GT8	GT
-Fruits_PL12	PL
-Fruits_PL13	PL
-Fruits_PL22	PL
-Fruits_CBM37	CBM
-Fruits_CBM4	CBM
-Fruits_CBM40	CBM
-Fruits_CBM57	CBM
-Fruits_CE14	CE
-Fruits_GH10	GH
-Fruits_GH108	GH
-Fruits_GH133	GH
-Fruits_GH139	GH
-Fruits_GH141	GH
-Fruits_GH144	GH
-Fruits_GH26	GH
-Fruits_GH51	GH
-Fruits_GH65	GH
-Fruits_GH67	GH
-Fruits_GH8	GH
-Fruits_GH88	GH
-Fruits_GH89	GH
-Fruits_PL10	PL
-Fruits_PL11	PL
-Fruits_PL26	PL
-Fruits_PL8	PL
-Grains_CBM40	CBM
-Grains_CE4	CE
-Grains_GH57	GH
-Grains_GH74	GH
-Grains_PL13	PL
-Grains_CBM20	CBM
-Grains_CBM22	CBM
-Grains_CBM32	CBM
-Grains_CBM37	CBM
-Grains_CBM48	CBM
-Grains_CBM50	CBM
-Grains_CBM61	CBM
-Grains_CBM62	CBM
-Grains_CBM66	CBM
-Grains_CE11	CE
+Eggs_CBM50	CBM
+Meats_CE4	CE
 Grains_CE12	CE
-Grains_CE14	CE
-Grains_CE2	CE
-Grains_CE7	CE
-Grains_CE8	CE
-Grains_CE9	CE
-Grains_GH1	GH
-Grains_GH10	GH
-Grains_GH105	GH
-Grains_GH106	GH
-Grains_GH109	GH
-Grains_GH110	GH
-Grains_GH115	GH
-Grains_GH125	GH
-Grains_GH127	GH
-Grains_GH13	GH
-Grains_GH130	GH
-Grains_GH133	GH
-Grains_GH138	GH
-Grains_GH139	GH
-Grains_GH140	GH
-Grains_GH141	GH
-Grains_GH142	GH
-Grains_GH143	GH
-Grains_GH144	GH
-Grains_GH145	GH
-Grains_GH15	GH
-Grains_GH18	GH
-Grains_GH2	GH
-Grains_GH20	GH
-Grains_GH23	GH
-Grains_GH24	GH
-Grains_GH25	GH
-Grains_GH27	GH
-Grains_GH28	GH
-Grains_GH29	GH
-Grains_GH3	GH
-Grains_GH30	GH
-Grains_GH31	GH
-Grains_GH32	GH
-Grains_GH33	GH
-Grains_GH35	GH
-Grains_GH36	GH
-Grains_GH38	GH
-Grains_GH42	GH
-Grains_GH43	GH
-Grains_GH5	GH
-Grains_GH51	GH
 Grains_GH53	GH
-Grains_GH55	GH
-Grains_GH63	GH
-Grains_GH65	GH
-Grains_GH67	GH
-Grains_GH73	GH
-Grains_GH76	GH
-Grains_GH77	GH
-Grains_GH78	GH
-Grains_GH89	GH
-Grains_GH92	GH
-Grains_GH94	GH
 Grains_GH95	GH
-Grains_GH97	GH
-Grains_GH99	GH
-Grains_GT14	GT
-Grains_GT19	GT
-Grains_GT2	GT
-Grains_GT21	GT
-Grains_GT27	GT
-Grains_GT35	GT
-Grains_GT4	GT
-Grains_GT51	GT
-Grains_GT83	GT
-Grains_PL10	PL
-Grains_PL22	PL
-Grains_PL26	PL
-Grains_PL27	PL
-Grains_PL8	PL
-Grains_CBM4	CBM
-Grains_CBM57	CBM
-Grains_GH117	GH
-Grains_GH137	GH
-Grains_PL11	PL
-Grains_GH16	GH
-Meats_CBM57	CBM
-Meats_CBM22	CBM
-Meats_CBM37	CBM
-Meats_CBM4	CBM
-Meats_CBM40	CBM
-Meats_CBM6	CBM
-Meats_CBM61	CBM
-Meats_CBM9	CBM
-Meats_CE11	CE
-Meats_CE14	CE
-Meats_CE15	CE
-Meats_CE3	CE
-Meats_CE6	CE
-Meats_CE7	CE
-Meats_CE8	CE
-Meats_GH10	GH
-Meats_GH105	GH
-Meats_GH108	GH
-Meats_GH110	GH
-Meats_GH115	GH
-Meats_GH117	GH
-Meats_GH125	GH
-Meats_GH127	GH
-Meats_GH137	GH
-Meats_GH138	GH
-Meats_GH139	GH
-Meats_GH141	GH
-Meats_GH142	GH
-Meats_GH144	GH
-Meats_GH15	GH
-Meats_GH16	GH
-Meats_GH2	GH
-Meats_GH26	GH
-Meats_GH28	GH
-Meats_GH29	GH
-Meats_GH3	GH
-Meats_GH30	GH
-Meats_GH35	GH
-Meats_GH36	GH
-Meats_GH42	GH
-Meats_GH43	GH
-Meats_GH5	GH
-Meats_GH51	GH
-Meats_GH53	GH
-Meats_GH55	GH
-Meats_GH63	GH
-Meats_GH65	GH
-Meats_GH66	GH
-Meats_GH67	GH
-Meats_GH73	GH
-Meats_GH8	GH
-Meats_GH84	GH
-Meats_GH88	GH
-Meats_GH89	GH
-Meats_GH9	GH
-Meats_GH95	GH
-Meats_GH97	GH
-Meats_GT19	GT
-Meats_GT30	GT
-Meats_GT51	GT
-Meats_PL10	PL
-Meats_PL11	PL
-Meats_PL12	PL
-Meats_PL13	PL
-Meats_PL22	PL
-Meats_PL26	PL
-Meats_PL27	PL
-Meats_PL8	PL
-Sweets and Beverages_GH143	GH
-Vegetables_GT8	GT
-Fats_GH117	GH
-Nuts_CBM16	CBM
-Nuts_CBM44	CBM
-Nuts_CBM57	CBM
-Nuts_GH53	GH
-Eggs_CBM16	CBM
-Eggs_CBM44	CBM
-Eggs_CBM57	CBM
-Eggs_GH53	GH
-Eggs_CBM58	CBM
-Fats_CBM26	CBM
-Grains_CBM13	CBM
-Grains_CBM16	CBM
-Grains_GT26	GT
-Meats_CBM16	CBM
-Meats_CBM44	CBM
-Sweets and Beverages_CBM16	CBM
-Sweets and Beverages_CBM48	CBM
-Sweets and Beverages_CBM6	CBM
-Sweets and Beverages_CBM66	CBM
-Sweets and Beverages_CE8	CE
-Sweets and Beverages_GH38	GH
-Sweets and Beverages_GH55	GH
-Sweets and Beverages_GT51	GT
-Sweets and Beverages_GH116	GH
-Sweets and Beverages_GH24	GH
-Sweets and Beverages_GH95	GH
-Vegetables_CBM16	CBM
-Vegetables_CBM20	CBM
-Vegetables_CBM22	CBM
-Vegetables_CBM30	CBM
-Vegetables_CBM32	CBM
-Vegetables_CBM35	CBM
-Vegetables_CBM40	CBM
-Vegetables_CBM48	CBM
-Vegetables_CBM50	CBM
-Vegetables_CBM57	CBM
-Vegetables_CBM6	CBM
-Vegetables_CBM66	CBM
-Vegetables_CBM67	CBM
-Vegetables_CBM9	CBM
-Vegetables_AA6	AA
-Vegetables_CE1	CE
-Vegetables_CE10	CE
-Vegetables_CE11	CE
-Vegetables_CE12	CE
-Vegetables_CE14	CE
-Vegetables_CE15	CE
-Vegetables_CE3	CE
-Vegetables_CE4	CE
-Vegetables_CE6	CE
-Vegetables_CE7	CE
-Vegetables_CE8	CE
-Vegetables_CE9	CE
-Vegetables_GH10	GH
-Vegetables_GH105	GH
-Vegetables_GH106	GH
-Vegetables_GH108	GH
-Vegetables_GH109	GH
-Vegetables_GH110	GH
-Vegetables_GH115	GH
-Vegetables_GH116	GH
-Vegetables_GH123	GH
-Vegetables_GH125	GH
-Vegetables_GH127	GH
-Vegetables_GH13	GH
-Vegetables_GH130	GH
-Vegetables_GH133	GH
-Vegetables_GH137	GH
-Vegetables_GH138	GH
-Vegetables_GH139	GH
-Vegetables_GH140	GH
-Vegetables_GH141	GH
-Vegetables_GH142	GH
-Vegetables_GH143	GH
-Vegetables_GH144	GH
-Vegetables_GH145	GH
-Vegetables_GH15	GH
-Vegetables_GH18	GH
-Vegetables_GH2	GH
-Vegetables_GH20	GH
-Vegetables_GH23	GH
-Vegetables_GH24	GH
-Vegetables_GH25	GH
-Vegetables_GH26	GH
-Vegetables_GH28	GH
-Vegetables_GH29	GH
-Vegetables_GH3	GH
-Vegetables_GH30	GH
-Vegetables_GH31	GH
-Vegetables_GH32	GH
-Vegetables_GH33	GH
-Vegetables_GH35	GH
-Vegetables_GH36	GH
-Vegetables_GH38	GH
-Vegetables_GH39	GH
-Vegetables_GH42	GH
-Vegetables_GH43	GH
-Vegetables_GH5	GH
-Vegetables_GH51	GH
-Vegetables_GH53	GH
-Vegetables_GH55	GH
-Vegetables_GH57	GH
-Vegetables_GH63	GH
-Vegetables_GH65	GH
-Vegetables_GH66	GH
-Vegetables_GH67	GH
-Vegetables_GH73	GH
-Vegetables_GH74	GH
-Vegetables_GH76	GH
-Vegetables_GH77	GH
-Vegetables_GH78	GH
-Vegetables_GH84	GH
-Vegetables_GH88	GH
-Vegetables_GH89	GH
-Vegetables_GH9	GH
-Vegetables_GH92	GH
-Vegetables_GH95	GH
-Vegetables_GH97	GH
-Vegetables_GT14	GT
-Vegetables_GT19	GT
-Vegetables_GT2	GT
-Vegetables_GT20	GT
+Sweets and Beverages_GH106	GH
 Vegetables_GT26	GT
-Vegetables_GT27	GT
-Vegetables_GT28	GT
-Vegetables_GT3	GT
-Vegetables_GT30	GT
-Vegetables_GT35	GT
-Vegetables_GT4	GT
-Vegetables_GT5	GT
-Vegetables_GT51	GT
-Vegetables_GT83	GT
-Vegetables_GT9	GT
-Vegetables_PL10	PL
-Vegetables_PL11	PL
-Vegetables_PL26	PL
-Vegetables_PL8	PL
-Vegetables_CBM44	CBM
-Legumes_GT5	GT
-Eggs_CBM35	CBM
-Eggs_CE15	CE
-Eggs_CE3	CE
-Eggs_GH125	GH
-Eggs_GH136	GH
-Eggs_GH15	GH
-Eggs_GH2	GH
-Eggs_GH24	GH
-Eggs_GH29	GH
-Eggs_GH35	GH
-Eggs_GH5	GH
-Eggs_GH51	GH
-Eggs_GH63	GH
-Eggs_GH76	GH
-Eggs_GH84	GH
-Eggs_GH92	GH
-Eggs_GT14	GT
-Eggs_GT90	GT
-Eggs_PL11	PL
-Oils_GT26	GT
-Fruits_CBM35	CBM
-Fruits_CBM48	CBM
-Fruits_CBM50	CBM
-Fruits_CBM67	CBM
-Fruits_CE1	CE
-Fruits_CE10	CE
-Fruits_CE11	CE
-Fruits_CE12	CE
-Fruits_CE15	CE
-Fruits_CE3	CE
-Fruits_CE4	CE
-Fruits_GH106	GH
-Fruits_GH109	GH
-Fruits_GH115	GH
-Fruits_GH123	GH
-Fruits_GH125	GH
-Fruits_GH127	GH
-Fruits_GH13	GH
-Fruits_GH130	GH
-Fruits_GH145	GH
-Fruits_GH15	GH
-Fruits_GH18	GH
-Fruits_GH2	GH
-Fruits_GH20	GH
-Fruits_GH23	GH
-Fruits_GH28	GH
-Fruits_GH29	GH
-Fruits_GH3	GH
-Fruits_GH30	GH
-Fruits_GH31	GH
-Fruits_GH36	GH
-Fruits_GH5	GH
-Fruits_GH57	GH
-Fruits_GH63	GH
-Fruits_GH73	GH
-Fruits_GH76	GH
-Fruits_GH77	GH
-Fruits_GH78	GH
-Fruits_GH9	GH
-Fruits_GH92	GH
-Fruits_GH94	GH
-Fruits_GH97	GH
-Fruits_GT14	GT
-Fruits_GT19	GT
-Fruits_GT2	GT
-Fruits_GT27	GT
-Fruits_GT28	GT
-Fruits_GT3	GT
-Fruits_GT30	GT
-Fruits_GT35	GT
-Fruits_GT4	GT
-Fruits_GT5	GT
-Fruits_GT51	GT
-Fruits_GT9	GT
-Fruits_GT90	GT
-Fruits_PL9	PL
-Fruits_CBM44	CBM
-Fruits_CBM6	CBM
-Fruits_CE9	CE
-Fruits_GH27	GH
-Fruits_GH35	GH
-Fruits_GH42	GH
-Fruits_GH95	GH
-Grains_CBM35	CBM
-Grains_CBM67	CBM
-Grains_AA6	AA
-Grains_CE1	CE
-Grains_CE10	CE
-Grains_CE15	CE
+Grains_GH28	GH
+Meats_GH138	GH
+Vegetables_GH125	GH
+Grains_GH94	GH
+Grains_GH51	GH
+Fruits_GT94	GT
+Sweets and Beverages_GH10	GH
+Sweets and Beverages_GH130	GH
+Grains_GT3	GT
+Grains_CBM20	CBM
+Grains_GH57	GH
+Grains_PL22	PL
+Legumes_AA6	AA
+Grains_CBM66	CBM
+Grains_GH2	GH
+Grains_GH5	GH
+Grains_GH76	GH
+Grains_GH142	GH
+Grains_GH67	GH
+Grains_GH110	GH
+Grains_GH43	GH
+Grains_PL11	PL
+Vegetables_GH92	GH
+Sweets and Beverages_GH95	GH
+Sweets and Beverages_CBM20	CBM
+Sweets and Beverages_GH92	GH
+Vegetables_CE9	CE
+Grains_GH38	GH
+Sweets and Beverages_GH112	GH
+Sweets and Beverages_GH125	GH
+Sweets and Beverages_GH57	GH
+Grains_GH113	GH
+Milks_CBM48	CBM
+Grains_CE9	CE
+Grains_GT5	GT
+Grains_GH130	GH
+Grains_GH18	GH
+Grains_GH35	GH
+Grains_CE7	CE
+Grains_GT30	GT
+Grains_GH89	GH
+Fruits_GH126	GH
+Grains_CE11	CE
+Grains_GH42	GH
+Grains_GT35	GT
+Sweets and Beverages_GH88	GH
+Grains_GH1	GH
+Grains_GH25	GH
+Sweets and Beverages_GH1	GH
+Milks_GH9	GH
+Grains_GH145	GH
+Milks_CBM20	CBM
+Grains_GH123	GH
+Fruits_GH117	GH
+Milks_GH33	GH
+Vegetables_GH139	GH
+Vegetables_GH143	GH
+Vegetables_GH42	GH
+Vegetables_GH116	GH
+Grains_GH27	GH
 Grains_CE3	CE
 Grains_GH112	GH
-Grains_GH123	GH
 Grains_GH136	GH
-Grains_GH84	GH
-Grains_GH88	GH
-Grains_GH9	GH
-Grains_GT28	GT
-Grains_GT3	GT
-Grains_GT30	GT
-Grains_GT9	GT
-Grains_GT90	GT
-Grains_PL9	PL
-Grains_GH108	GH
-Meats_GH136	GH
-Meats_GH24	GH
-Meats_GH76	GH
-Meats_GT5	GT
-Meats_CBM48	CBM
-Meats_GH106	GH
-Meats_GH133	GH
-Meats_GT4	GT
-Meats_GT90	GT
-Milks_CBM30	CBM
-Milks_CE7	CE
-Milks_GT26	GT
-Sweets and Beverages_GH67	GH
-Sweets and Beverages_GT26	GT
-Sweets and Beverages_CBM20	CBM
-Sweets and Beverages_CBM35	CBM
-Sweets and Beverages_CBM67	CBM
-Sweets and Beverages_CE11	CE
-Sweets and Beverages_CE12	CE
-Sweets and Beverages_GH105	GH
-Sweets and Beverages_GH123	GH
-Sweets and Beverages_GH127	GH
-Sweets and Beverages_GH136	GH
-Sweets and Beverages_GH137	GH
-Sweets and Beverages_GH145	GH
-Sweets and Beverages_GH16	GH
-Sweets and Beverages_GH23	GH
-Sweets and Beverages_GH28	GH
-Sweets and Beverages_GH29	GH
-Sweets and Beverages_GH57	GH
-Sweets and Beverages_GH84	GH
-Sweets and Beverages_GH89	GH
-Sweets and Beverages_GT30	GT
-Sweets and Beverages_GT4	GT
-Sweets and Beverages_GT90	GT
-Sweets and Beverages_PL1	PL
-Sweets and Beverages_PL10	PL
-Sweets and Beverages_PL11	PL
-Sweets and Beverages_PL26	PL
-Sweets and Beverages_CBM32	CBM
-Sweets and Beverages_CBM50	CBM
-Sweets and Beverages_AA6	AA
-Sweets and Beverages_CE1	CE
-Sweets and Beverages_CE10	CE
-Sweets and Beverages_CE15	CE
-Sweets and Beverages_CE3	CE
-Sweets and Beverages_CE4	CE
-Sweets and Beverages_GH109	GH
-Sweets and Beverages_GH110	GH
-Sweets and Beverages_GH115	GH
-Sweets and Beverages_GH125	GH
-Sweets and Beverages_GH13	GH
-Sweets and Beverages_GH130	GH
-Sweets and Beverages_GH18	GH
-Sweets and Beverages_GH2	GH
-Sweets and Beverages_GH20	GH
-Sweets and Beverages_GH27	GH
-Sweets and Beverages_GH3	GH
-Sweets and Beverages_GH30	GH
-Sweets and Beverages_GH31	GH
-Sweets and Beverages_GH32	GH
-Sweets and Beverages_GH35	GH
-Sweets and Beverages_GH36	GH
-Sweets and Beverages_GH42	GH
-Sweets and Beverages_GH5	GH
-Sweets and Beverages_GH51	GH
-Sweets and Beverages_GH63	GH
-Sweets and Beverages_GH73	GH
-Sweets and Beverages_GH76	GH
-Sweets and Beverages_GH77	GH
-Sweets and Beverages_GH78	GH
-Sweets and Beverages_GH88	GH
-Sweets and Beverages_GH92	GH
-Sweets and Beverages_GH97	GH
-Sweets and Beverages_GT2	GT
-Sweets and Beverages_GT27	GT
-Sweets and Beverages_GT28	GT
-Sweets and Beverages_GT35	GT
-Sweets and Beverages_PL9	PL
-Vegetables_CBM4	CBM
-Vegetables_GH94	GH
-Vegetables_GT90	GT
-Vegetables_GH1	GH
+Grains_GH106	GH
+Grains_GH109	GH
+Grains_GH32	GH
+Grains_GH78	GH
+Grains_GH26	GH
+Vegetables_CE4	CE
+Meats_GH36	GH
+Vegetables_CE2	CE
 Vegetables_PL15	PL
-Legumes_CBM46	CBM
-Eggs_GH140	GH
-Eggs_GH142	GH
-Eggs_GT28	GT
-Eggs_PL1	PL
-Eggs_PL15	PL
-Eggs_PL6	PL
-Fats_CBM37	CBM
-Fats_CBM50	CBM
-Fats_CBM20	CBM
-Fats_CBM22	CBM
-Fats_CBM30	CBM
-Fats_CBM32	CBM
-Fats_CBM48	CBM
-Fats_CBM57	CBM
-Fats_CBM62	CBM
-Fats_CBM66	CBM
-Fats_CBM67	CBM
-Fats_CBM72	CBM
-Fats_CBM9	CBM
-Fats_AA6	AA
-Fats_CE1	CE
-Fats_CE10	CE
-Fats_CE11	CE
-Fats_CE12	CE
-Fats_CE14	CE
-Fats_CE15	CE
-Fats_CE3	CE
-Fats_CE4	CE
-Fats_CE6	CE
-Fats_CE7	CE
-Fats_CE8	CE
-Fats_CE9	CE
-Fats_GH10	GH
-Fats_GH105	GH
-Fats_GH106	GH
-Fats_GH109	GH
-Fats_GH110	GH
-Fats_GH115	GH
-Fats_GH116	GH
-Fats_GH123	GH
-Fats_GH125	GH
-Fats_GH127	GH
-Fats_GH13	GH
-Fats_GH130	GH
-Fats_GH133	GH
-Fats_GH138	GH
-Fats_GH139	GH
-Fats_GH140	GH
-Fats_GH141	GH
-Fats_GH142	GH
-Fats_GH144	GH
-Fats_GH145	GH
-Fats_GH15	GH
-Fats_GH18	GH
-Fats_GH2	GH
-Fats_GH20	GH
-Fats_GH23	GH
-Fats_GH24	GH
-Fats_GH26	GH
-Fats_GH27	GH
-Fats_GH28	GH
-Fats_GH29	GH
-Fats_GH3	GH
-Fats_GH30	GH
-Fats_GH31	GH
-Fats_GH32	GH
-Fats_GH33	GH
-Fats_GH35	GH
-Fats_GH36	GH
-Fats_GH38	GH
-Fats_GH42	GH
-Fats_GH43	GH
-Fats_GH5	GH
-Fats_GH51	GH
-Fats_GH53	GH
-Fats_GH57	GH
-Fats_GH63	GH
-Fats_GH65	GH
-Fats_GH66	GH
-Fats_GH67	GH
-Fats_GH73	GH
-Fats_GH76	GH
-Fats_GH77	GH
-Fats_GH78	GH
-Fats_GH84	GH
-Fats_GH88	GH
-Fats_GH89	GH
-Fats_GH9	GH
-Fats_GH92	GH
-Fats_GH94	GH
-Fats_GH95	GH
-Fats_GH97	GH
-Fats_GH99	GH
-Fats_GT101	GT
-Fats_GT14	GT
-Fats_GT19	GT
-Fats_GT2	GT
-Fats_GT27	GT
-Fats_GT28	GT
-Fats_GT3	GT
-Fats_GT30	GT
-Fats_GT35	GT
-Fats_GT4	GT
-Fats_GT5	GT
-Fats_GT51	GT
-Fats_GT83	GT
-Fats_GT9	GT
-Fats_GT90	GT
-Fats_PL1	PL
+Grains_CBM48	CBM
+Grains_GT9	GT
+Fruits_PL26	PL
+Grains_PL26	PL
+Vegetables_PL1	PL
 Fats_PL10	PL
-Fats_PL11	PL
-Fats_PL12	PL
-Fats_PL15	PL
-Fats_PL22	PL
-Fats_PL26	PL
-Fats_PL6	PL
-Fats_PL8	PL
-Fats_PL9	PL
-Grains_GH39	GH
-Grains_GT5	GT
-Grains_PL12	PL
-Meats_CBM51	CBM
-Milks_CBM51	CBM
-Grains_GH4	GH
-Meats_CBM12	CBM
-Meats_GH25	GH
-Meats_GT2	GT
-Meats_GT28	GT
-Sweets and Beverages_CBM12	CBM
-Sweets and Beverages_CBM58	CBM
-Sweets and Beverages_CE14	CE
-Sweets and Beverages_GH141	GH
+Oils_CBM34	CBM
+Grains_GH24	GH
+Milks_CBM6	CBM
+Meats_AA6	AA
+Milks_GH13	GH
+Milks_GH133	GH
+Milks_GH89	GH
+Sweets and Beverages_GH24	GH
+Sweets and Beverages_GT35	GT
+Sweets and Beverages_GT19	GT
+Milks_GH84	GH
+Milks_GH85	GH
+Grains_GH10	GH
+Fruits_GH30	GH
+Fruits_GH77	GH
+Fruits_GH53	GH
+Grains_GH143	GH
+Grains_GH55	GH
+Sweets and Beverages_GH137	GH
+Vegetables_CE3	CE
+Grains_GH115	GH
+Grains_GH133	GH
+Sweets and Beverages_AA6	AA
+Grains_CE14	CE
+Eggs_PL9	PL
+Sweets and Beverages_CE1	CE
+Sweets and Beverages_GT4	GT
+Vegetables_GH4	GH
+Grains_GH92	GH
+Grains_CBM57	CBM
+Grains_GH88	GH
+Grains_GH77	GH
+Meats_GH65	GH
+Milks_GT30	GT
+Nuts_GH116	GH
+Fruits_GH140	GH
+Fruits_GH31	GH
+Fruits_GH97	GH
+Meats_GH117	GH
+Meats_GH125	GH
+Meats_GH77	GH
+Fats_PL1	PL
+Sweets and Beverages_GH25	GH
+Sweets and Beverages_GH113	GH
+Vegetables_GH112	GH
+Grains_CBM50	CBM
+Meats_CBM50	CBM
 Sweets and Beverages_GH144	GH
-Sweets and Beverages_GH53	GH
-Vegetables_CBM58	CBM
-Grains_PL15	PL
-Meats_CBM67	CBM
-MCTs05	subjects
-MCTs09	subjects
-MCTs10	subjects
-MCTs16	subjects
+Sweets and Beverages_GH28	GH
+Vegetables_GH130	GH
+Eggs_CBM9	CBM
+Eggs_CE4	CE
+Milks_GT14	GT
+Sweets and Beverages_GT2	GT
+Grains_CBM6	CBM
+Grains_PL27	PL
+Nuts_GH31	GH
+Nuts_GH32	GH
+Grains_GT83	GT
+Milks_GH31	GH
+Milks_CE1	CE
+Milks_GH5	GH
+Meats_GH24	GH
+Grains_GT94	GT
+Fats_GH76	GH
+MCTs37	subjects
+MCTs32	subjects
 MCTs20	subjects
-MCTs22	subjects
-MCTs29	subjects
-MCTs33	subjects
+MCTs23	subjects
+MCTs18	subjects
 MCTs34	subjects
+MCTs07	subjects
+MCTs16	subjects
+MCTs13	subjects
+MCTs14	subjects
+MCTs35	subjects
+MCTs27	subjects
+MCTs33	subjects
+MCTs19	subjects
+MCTs36	subjects
+MCTs24	subjects
+MCTs03	subjects
+MCTs15	subjects

@@ -57,7 +57,7 @@ ggsave('./result/cor_cazyme_bar.jpg',width = 6,height = 6)
 #for network
 cazyme_food_cor$bin <- ifelse(cazyme_food_cor$coef < 0, "Negative (+/-)", 
                       ifelse(cazyme_food_cor$coef > 0, "Positive (+/+ or -/-)", "NA"))
-cazyme_food_cor <- filter(cazyme_food_cor,fdr_p<0.1)
+cazyme_food_cor <- filter(cazyme_food_cor,fdr_p<0.2)
 cazyme_food_cor$food <- gsub("Dry_Beans_Peas_Other_Legumes_Nuts_and_Seeds", "Legumes", cazyme_food_cor$food)
 cazyme_food_cor$food <- gsub("Fats_Oils_and_Salad_Dressings", "Fats", cazyme_food_cor$food)
 cazyme_food_cor$food <- gsub("Grain_Product", "Grains", cazyme_food_cor$food)
@@ -105,4 +105,4 @@ cazyme_food_cor$food <- gsub("Cheeses", "Milks", cazyme_food_cor$food)
 cazyme_food_cor$food <- gsub("Beef", "Meats", cazyme_food_cor$food)
 cazyme_food_cor$food <- gsub("Fruits_and_juices_baby_food", "Fruits", cazyme_food_cor$food)
 
-write.table(cazyme_food_cor,'./data/cor_network_L2.txt',sep = '\t',quote = F,row.names = F)
+write.table(cazyme_food_cor,'./data/cor_network_L1_1016.txt',sep = '\t',quote = F,row.names = F)

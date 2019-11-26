@@ -1,4 +1,6 @@
 load('./data/cazyme_food_cor.RData')
+load('./data/cazyme_food_cor_ind_0815.RData')
+
 sigs <- lapply(cazyme_food_list, function(x) subset(x, fdr_p <= 0.2))
 allsigs <- do.call("rbind", sigs)
 
