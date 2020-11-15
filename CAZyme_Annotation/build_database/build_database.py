@@ -11,31 +11,6 @@ def make_agr_parser():
     parser.add_argument('--multi',help='Whether keep multiple blast results?',default=False,const=True,nargs='?')
     return parser
 
-'''
-def find_value_recursive(cazy_dict,cazyme):
-    global flag
-    global levels
-    flag = 0
-    levels = cazyme
-    for key,value in cazy_dict.items():
-        if isinstance(value,dict):
-            global n
-            n += 1
-            find_value_recursive(value, cazyme)
-            if flag == 1:
-                n -= 1
-                levels =  'L'+str(n)+'_'+key+';'+levels
-                return levels
-            else:
-                n -= 1
-        elif cazyme == value:
-            n += 1
-            flag = 1
-            levels =  'L'+str(n)+'_'+key+';'+'L'+str(n+1)+'_'+levels
-            global n_level
-            n_level = n+1
-            return
-'''
 
 def build_database(table,seq,output,level,flag):
     tab_file = pd.read_csv(table, sep='\t', header=None)
@@ -48,13 +23,6 @@ def build_database(table,seq,output,level,flag):
 
     with open(seq, 'r') as f:
         dna_seq_file = f.read()
-
-    #CAZYme_family = {'CAZyme':{'Enzyme_Classes':{'GlycosylTransferases':'GT',
-    #          'GlycosideHydrolases':'GH',
-    #          'CarbohydrateEsterases':'CE',
-    #          'PolysaccharideLyases':'PL',
-    #          'AuxiliaryActivities':'AA'},
-    #          'Associated_Modules':{'Carbohydrate-BindingModules':'CBM'}}}
 
     basename = os.path.splitext(os.path.basename(seq))[0]
 
@@ -128,18 +96,6 @@ def build_database(table,seq,output,level,flag):
                 #continue   #Shall we continue?
                 cazy_tax = 'L1_Others;Others;Others;Others'
 
-
-            '''
-            # method 1    
-            cazy_prefix = find_value_recursive(CAZYme_family,cazy_cat)
-            cazy_tax = cazy_prefix+cazy_num
-            if cazy_cat == 'GH' and int(cazy_num) in [5,13,30,43]:
-                try:
-                    cazy_sub_num = re.search(name_pattern,family).group(3)
-                except:
-                    print('%s%s had no sub family.'%(cazy_cat,cazy_num))
-                cazy_tax = cazy_tax+';L'+str(n_level+1)+'_'+family
-            '''
 
             #print(cazy_tax)
             #print('\n')
