@@ -37,9 +37,7 @@ def build_database(table,seq,output,level,flag):
 
     with open(output_fasta,'w') as f:
         for i in range(0, tab_file.shape[0]):
-            # global n,n_level
-            # n = 0
-            # n_level = 0
+
             family = tab_file.iloc[i]['Family_HMM'].replace('.hmm', '')
             query_id = tab_file.iloc[i]['Query_ID']  # query gene name
             aa_start = tab_file.iloc[i]['Query_start']

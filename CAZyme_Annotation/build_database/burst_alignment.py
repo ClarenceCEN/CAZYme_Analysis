@@ -8,10 +8,10 @@ import pandas as pd
 def make_arg_parser():
     parser = argparse.ArgumentParser(description='This is the commandline interface for burst_alignment',
                                      usage='burst_alignment v0.0.1 -i <input> -o <output> ...')
-    parser.add_argument('-i', '--input', help='Set the directory path of the fasta directory', required=True)
-    parser.add_argument('-d', '--database', help='Set the directory path of the database directory', required=True)
+    parser.add_argument('-i', '--input', help='Set the path of the fasta directory', required=True)
+    parser.add_argument('-d', '--database', help='Set the path of the database directory', required=True)
     parser.add_argument('-t', '--tax', help='Set the directory path of the taxonomy tab-limited files', required=True)
-    parser.add_argument('-o', '--output', help='Set the directory path of the output of b6 files', default=os.getcwd())
+    parser.add_argument('-o', '--output', help='Set the path of the output of b6 files', default=os.getcwd())
     parser.add_argument('--mapping_file', '-m', help='mapping file, required', required=True, type=str)
     parser.add_argument('--username', '-u', help='column name for usernames', required=True, type=str)
     parser.add_argument('--sampleid', '-id', help='column name for samples', required=True, type=str)

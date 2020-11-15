@@ -1,4 +1,9 @@
 #!/bin/bash
+###Step 1 Shi7
+
+###Step 2 Concatenate sequence by subject.
+
+###Step 3 Run Spades
 
 #go to the assembled fasta directory
 
@@ -9,6 +14,7 @@ do
 mv $f ${f/_scaffolds.fasta/.fasta}
 done
 
+#Step 4 Protein prediction
 #The protein prediction part.
 #I used GeneMark.
 for file in ./.fasta
@@ -17,13 +23,13 @@ name=`basename $file .fasta`
 perl /plus/work/soft/genemark_suite_linux_64/gmsuite/gmsn.pl --prok --format GFF --fnn --faa $name.fasta
 done
 
-
 python3 modify_header.py   #change the header of faa and fnn files.
 
-
+#Step 5 Annotate the sequences
 #download the hmm-parser.sh
 cd /project/flatiron2/cen/cazy_database
 
+#Cazyme Annotation
 for file in ./*_modified.faa
 do
 name=`basename $file .faa`
@@ -44,6 +50,7 @@ do
 mv $f ./modified/${f/_modified/}
 done
 
+###Step 6 Prepare files for building reference database for BURST
 cd /project/flatiron2/cen/
 
 python3 build_database.py -i /project/flatiron2/cen/cazy_database/modified -o /project/flatiron2/cen/cazy_database/output/ -l /project/flatiron2/cen/cazy_database/cazy_level_tab.txt
@@ -51,6 +58,7 @@ python3 build_database.py -i /project/flatiron2/cen/cazy_database/modified -o /p
 mkdir /project/flatiron2/cen/burst_database
 cd /project/flatiron2/cen/burst_database
 
+###Step 7 Build BURST database file
 for file in /project/flatiron2/cen/cazy_database/output/*.tax;
 do
 name=`basename $file .tax`
@@ -61,6 +69,7 @@ done
 
 mkdir /project/flatiron2/cen/burst_output
 cd /project/flatiron2/cen/
+
 
 python3 burst_alignment.py -i /project/flatiron2/cen/dietstudy -o /project/flatiron2/cen/burst_output -d /project/flatiron2/cen/burst_database -t /project/flatiron2/cen/cazy_database/output/ -m /project/flatiron2/cen/dietstudy/food_map.txt -u UserName -id SampleID
 
